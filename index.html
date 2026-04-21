@@ -14,10 +14,13 @@
 <button onclick="login()">Login</button>
 
 <script type="module">
+
+// Firebase imports
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
 from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
 
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyDHpc9lN_y8c2TaOXfed5ayOzEjYbN5ur4",
   authDomain: "nova-areena.firebaseapp.com",
@@ -27,26 +30,38 @@ const firebaseConfig = {
   appId: "1:888991377297:web:2c1addf7e3344b1e385c30"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+// Signup function
 window.signup = function () {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
   createUserWithEmailAndPassword(auth, email, password)
-    .then(() => alert("Signup Success ✅"))
-    .catch((error) => alert(error.message));
-}
+    .then(() => {
+      alert("Signup Success ✅");
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+};
 
+// Login function
 window.login = function () {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
   signInWithEmailAndPassword(auth, email, password)
-    .then(() => alert("Login Success ✅"))
-    .catch((error) => alert(error.message));
-}
+    .then(() => {
+      alert("Login Success ✅");
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+};
+
 </script>
 
 </body>
