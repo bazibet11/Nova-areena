@@ -13,42 +13,40 @@
 <button onclick="signup()">Sign Up</button>
 <button onclick="login()">Login</button>
 
-<!-- Firebase Scripts -->
-<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
 
-<script>
 const firebaseConfig = {
-  apiKey: "PASTE_YOUR_API_KEY",
-  authDomain: "PASTE_YOUR_AUTH_DOMAIN",
-  projectId: "PASTE_YOUR_PROJECT_ID",
-  storageBucket: "PASTE_YOUR_STORAGE_BUCKET",
-  messagingSenderId: "PASTE_YOUR_SENDER_ID",
-  appId: "PASTE_YOUR_APP_ID"
+  apiKey: "AIzaSyDHpc9lN_y8c2TaOXfed5ayOzEjYbN5ur4",
+  authDomain: "nova-areena.firebaseapp.com",
+  projectId: "nova-areena",
+  storageBucket: "nova-areena.firebasestorage.app",
+  messagingSenderId: "888991377297",
+  appId: "1:888991377297:web:9f049d040121c538385c30"
 };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-// Signup
-function signup() {
+window.signup = function () {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  firebase.auth().createUserWithEmailAndPassword(email, password)
+  createUserWithEmailAndPassword(auth, email, password)
     .then(() => alert("Signup Successful ✅"))
     .catch((error) => alert(error.message));
-}
+};
 
-// Login
-function login() {
+window.login = function () {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  firebase.auth().signInWithEmailAndPassword(email, password)
+  signInWithEmailAndPassword(auth, email, password)
     .then(() => alert("Login Successful ✅"))
     .catch((error) => alert(error.message));
-}
+};
 </script>
 
 </body>
