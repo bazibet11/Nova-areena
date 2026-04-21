@@ -5,19 +5,50 @@
 </head>
 <body>
 
-<h2>Login</h2>
+<h2>Login / Signup</h2>
 
-<input type="email" id="email">
-<input type="password" id="password">
+<input type="email" id="email" placeholder="Enter Email"><br><br>
+<input type="password" id="password" placeholder="Enter Password"><br><br>
 
 <button onclick="signup()">Sign Up</button>
 <button onclick="login()">Login</button>
 
+<!-- Firebase Scripts -->
 <script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js"></script>
 
 <script>
-// firebaseConfig paste here
+const firebaseConfig = {
+  apiKey: "PASTE_YOUR_API_KEY",
+  authDomain: "PASTE_YOUR_AUTH_DOMAIN",
+  projectId: "PASTE_YOUR_PROJECT_ID",
+  storageBucket: "PASTE_YOUR_STORAGE_BUCKET",
+  messagingSenderId: "PASTE_YOUR_SENDER_ID",
+  appId: "PASTE_YOUR_APP_ID"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+// Signup
+function signup() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(() => alert("Signup Successful ✅"))
+    .catch((error) => alert(error.message));
+}
+
+// Login
+function login() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(() => alert("Login Successful ✅"))
+    .catch((error) => alert(error.message));
+}
 </script>
 
 </body>
