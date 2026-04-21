@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Nova Areena</title>
+  <title>Login / Signup</title>
 </head>
-
 <body>
 
 <h2>Login / Signup</h2>
@@ -13,8 +12,6 @@
 
 <button onclick="signup()">Sign Up</button>
 <button onclick="login()">Login</button>
-
-</body>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
@@ -27,7 +24,7 @@ const firebaseConfig = {
   projectId: "nova-areena",
   storageBucket: "nova-areena.firebasestorage.app",
   messagingSenderId: "888991377297",
-  appId: "1:888991377297:web:9f049d040121c538385c30"
+  appId: "1:888991377297:web:2c1addf7e3344b1e385c30"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -38,18 +35,19 @@ window.signup = function () {
   const password = document.getElementById("password").value;
 
   createUserWithEmailAndPassword(auth, email, password)
-    .then(() => alert("Signup Successful ✅"))
+    .then(() => alert("Signup Success ✅"))
     .catch((error) => alert(error.message));
-};
+}
 
 window.login = function () {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
   signInWithEmailAndPassword(auth, email, password)
-    .then(() => alert("Login Successful ✅"))
+    .then(() => alert("Login Success ✅"))
     .catch((error) => alert(error.message));
-};
+}
 </script>
 
+</body>
 </html>
