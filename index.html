@@ -1,216 +1,199 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
 <title>BaziBet</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{
-  margin:0;
-  font-family:Arial;
-  background:#0b1220;
-  color:white;
-  text-align:center;
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(to bottom, #0a0f2c, #000);
+  color: white;
 }
 
-/* BACKGROUND HERO */
-.hero{
-  background:url('https://images.unsplash.com/photo-1605902711622-cfb43c44367f') no-repeat center/cover;
-  padding:80px 20px;
+/* TOP BANNER */
+.top-banner {
+  width: 100%;
+  height: 180px;
+  background: url('https://i.imgur.com/8Km9tLL.jpg') center/cover;
+  border-bottom: 3px solid gold;
 }
 
-/* LOGO */
-.logo{
-  font-size:36px;
-  margin-bottom:20px;
-}
-.logo span{
-  color:gold;
+/* CENTER BOX */
+.container {
+  text-align: center;
+  padding: 20px;
 }
 
-/* INPUT */
-input{
-  width:85%;
-  padding:12px;
-  margin:10px;
-  border-radius:10px;
-  border:1px solid #334155;
-  background:#1e293b;
-  color:white;
+.logo {
+  font-size: 28px;
+  margin: 15px 0;
 }
 
-/* BUTTON */
-button{
-  padding:12px 20px;
-  border:none;
-  border-radius:10px;
-  margin:10px;
-  cursor:pointer;
-  font-weight:bold;
+.logo span {
+  color: gold;
 }
 
-.login-btn{
-  border:2px solid #38bdf8;
-  background:transparent;
-  color:#38bdf8;
+/* BUTTONS */
+.btn {
+  width: 200px;
+  padding: 12px;
+  margin: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-.signup-btn{
-  background:linear-gradient(to right, orange, yellow);
+.login-btn {
+  border: 2px solid white;
+  background: transparent;
+  color: white;
 }
 
-/* BOX */
-.box{
-  display:none;
-  padding:20px;
+.signup-btn {
+  background: linear-gradient(to right, orange, gold);
+  border: none;
+  color: black;
 }
 
-.active{
-  display:block;
+/* FORM */
+.form-box {
+  display: none;
+  margin-top: 20px;
 }
 
-/* CARD STYLE */
-.card{
-  background:#111827;
-  margin:20px;
-  padding:20px;
-  border-radius:15px;
-  box-shadow:0 0 10px rgba(0,0,0,0.5);
+input {
+  width: 80%;
+  padding: 12px;
+  margin: 8px;
+  border-radius: 6px;
+  border: none;
 }
 
-/* FOOTER IMAGE */
-.footer{
-  background:url('https://images.unsplash.com/photo-1511512578047-dfb367046420') no-repeat center/cover;
-  padding:60px 20px;
-  margin-top:40px;
+.submit-btn {
+  background: green;
+  color: white;
+  border: none;
+  padding: 12px;
+  width: 60%;
+  border-radius: 6px;
 }
+
+/* GAMES SECTION */
+.games {
+  margin-top: 30px;
+}
+
+.game-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.game-grid {
+  display: flex;
+  overflow-x: auto;
+}
+
+.game {
+  min-width: 120px;
+  margin: 5px;
+  background: #111;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.game img {
+  width: 100%;
+  border-radius: 8px;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- HOME -->
-<div id="home" class="active">
+<!-- TOP IMAGE -->
+<div class="top-banner"></div>
 
-  <div class="hero">
-    <div class="logo">bazi <span>|</span> bet</div>
-    <button class="login-btn" onclick="showLogin()">Login</button>
-    <button class="signup-btn" onclick="showSignup()">Sign Up</button>
-  </div>
+<div class="container">
 
-  <div class="footer">
-    <h2>🎰 Play & Win Big</h2>
-  </div>
+  <div class="logo">bazi <span>bet</span></div>
 
-</div>
+  <button class="btn login-btn" onclick="showLogin()">Login</button>
+  <button class="btn signup-btn" onclick="showSignup()">Sign Up</button>
 
-<!-- LOGIN -->
-<div id="loginBox" class="box">
-  <div class="card">
+  <!-- LOGIN -->
+  <div class="form-box" id="loginBox">
     <h2>Login</h2>
-    <input id="loginUser" placeholder="Username">
-    <input id="loginPass" type="password" placeholder="Password">
+    <input type="text" placeholder="Username">
+    <input type="password" placeholder="Password">
     <br>
-    <button onclick="login()">Login</button>
-    <br>
-    <button onclick="back()">Back</button>
+    <button class="submit-btn">Login</button>
   </div>
-</div>
 
-<!-- SIGNUP -->
-<div id="signupBox" class="box">
-  <div class="card">
+  <!-- SIGNUP -->
+  <div class="form-box" id="signupBox">
     <h2>Sign Up</h2>
-    <input id="name" placeholder="Full Name">
-    <input id="user" placeholder="Username">
-    <input id="email" placeholder="Email">
-    <input id="pass" type="password" placeholder="Password">
+    <input type="text" placeholder="Full Name">
+    <input type="text" placeholder="Username">
+    <input type="email" placeholder="Email">
+    <input type="password" placeholder="Password">
 
-    <p id="captchaText"></p>
-    <input id="captchaInput" placeholder="Enter Answer">
+    <div id="captcha"></div>
+    <input type="text" placeholder="Enter Answer">
 
     <br>
-    <button onclick="signup()">Create Account</button>
-    <br>
-    <button onclick="back()">Back</button>
+    <button class="submit-btn">Create Account</button>
   </div>
-</div>
 
-<!-- DASHBOARD -->
-<div id="dashboard" class="box">
-  <div class="card">
-    <h2>🎉 Welcome to BaziBet</h2>
-    <p>Now you can play games</p>
-    <button onclick="logout()">Logout</button>
+  <!-- GAMES -->
+  <div class="games">
+    <div class="game-title">🎮 Games</div>
+
+    <div class="game-grid">
+      <div class="game">
+        <img src="https://i.imgur.com/3ZQ3Z6B.jpg">
+        Slots
+      </div>
+
+      <div class="game">
+        <img src="https://i.imgur.com/FxZlV7F.jpg">
+        Casino
+      </div>
+
+      <div class="game">
+        <img src="https://i.imgur.com/9XqQZ6n.jpg">
+        Live Casino
+      </div>
+
+      <div class="game">
+        <img src="https://i.imgur.com/yYQZ6pN.jpg">
+        Jackpot
+      </div>
+    </div>
   </div>
+
 </div>
 
 <script>
-// NAV
 function showLogin(){
-  hideAll();
-  loginBox.classList.add("active");
+  document.getElementById("loginBox").style.display = "block";
+  document.getElementById("signupBox").style.display = "none";
 }
+
 function showSignup(){
-  hideAll();
-  signupBox.classList.add("active");
+  document.getElementById("signupBox").style.display = "block";
+  document.getElementById("loginBox").style.display = "none";
   generateCaptcha();
 }
-function back(){
-  hideAll();
-  home.classList.add("active");
-}
-function hideAll(){
-  home.classList.remove("active");
-  loginBox.classList.remove("active");
-  signupBox.classList.remove("active");
-  dashboard.classList.remove("active");
-}
 
-// CAPTCHA
-let answer=0;
+/* CAPTCHA */
 function generateCaptcha(){
-  let a=Math.floor(Math.random()*10);
-  let b=Math.floor(Math.random()*10);
-  answer=a+b;
-  captchaText.innerText=a+" + "+b+" = ?";
-}
-
-// SIGNUP
-function signup(){
-  let user=document.getElementById("user").value;
-  let pass=document.getElementById("pass").value;
-  let cap=document.getElementById("captchaInput").value;
-
-  if(cap!=answer){
-    alert("Wrong Captcha ❌");
-    generateCaptcha();
-    return;
-  }
-
-  localStorage.setItem(user,pass);
-  alert("Account Created ✅");
-  back();
-}
-
-// LOGIN
-function login(){
-  let user=document.getElementById("loginUser").value;
-  let pass=document.getElementById("loginPass").value;
-
-  let saved=localStorage.getItem(user);
-
-  if(saved==pass){
-    hideAll();
-    dashboard.classList.add("active");
-  }else{
-    alert("Wrong Login ❌");
-  }
-}
-
-// LOGOUT
-function logout(){
-  back();
+  let a = Math.floor(Math.random()*10);
+  let b = Math.floor(Math.random()*10);
+  document.getElementById("captcha").innerHTML = a + " + " + b + " = ?";
 }
 </script>
 
