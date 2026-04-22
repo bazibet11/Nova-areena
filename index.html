@@ -2,66 +2,121 @@
 <html>
 <head>
   <title>Login / Signup</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f2f2f2;
+      font-family: Arial;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 320px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      background: #007bff;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
 </head>
+
 <body>
 
-<h2>Login / Signup</h2>
+<div class="container">
+  <h2>Login / Signup</h2>
 
-<input type="email" id="email" placeholder="Enter Email"><br><br>
-<input type="password" id="password" placeholder="Enter Password"><br><br>
+  <input type="text" id="phone" placeholder="+923001234567">
 
-<button onclick="signup()">Sign Up</button>
-<button onclick="login()">Login</button>
+  <div id="recaptcha-container"></div>
+
+  <button onclick="sendOTP()">Send OTP</button>
+
+  <input type="text" id="otp" placeholder="Enter OTP">
+
+  <button onclick="verifyOTP()">Verify OTP</button>
+</div>
 
 <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+  import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
 
-// Firebase imports
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
-from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+  // ✅ FINAL CONFIG (already filled)
+  const firebaseConfig = {
+    apiKey: "AIzaSyDHpc9LN_v8c2TaOXfed5ay0zEjYbN5ur4",
+    authDomain: "nova-areena.firebaseapp.com",
+    projectId: "nova-areena",
+    appId: "1:888991377297:web:2c1addf7e3344b1e385c30"
+  };
 
-// Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyDHpc9lN_y8c2TaOXfed5ayOzEjYbN5ur4",
-  authDomain: "nova-areena.firebaseapp.com",
-  projectId: "nova-areena",
-  storageBucket: "nova-areena.firebasestorage.app",
-  messagingSenderId: "888991377297",
-  appId: "1:888991377297:web:2c1addf7e3344b1e385c30"
-};
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+  // CAPTCHA setup
+  window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+    size: 'normal'
+  });
 
-// Signup function
-window.signup = function () {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  let confirmationResult;
 
-  createUserWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      alert("Signup Success ✅");
-    })
-    .catch((error) => {
-      alert(error.message);
-    });
-};
+  // Send OTP
+  window.sendOTP = function () {
+    const phoneNumber = document.getElementById("phone").value;
 
-// Login function
-window.login = function () {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+    signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
+      .then((result) => {
+        confirmationResult = result;
+        alert("OTP Sent ✅");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  }
 
-  signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      alert("Login Success ✅");
-    })
-    .catch((error) => {
-      alert(error.message);
-    });
-};
+  // Verify OTP
+  window.verifyOTP = function () {
+    const code = document.getElementById("otp").value;
 
+    confirmationResult.confirm(code)
+      .then(() => {
+        alert("Login Success ✅");
+      })
+      .catch(() => {
+        alert("Wrong OTP ❌");
+      });
+  }
 </script>
 
 </body>
