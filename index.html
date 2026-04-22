@@ -7,32 +7,32 @@
     body {
       margin: 0;
       height: 100vh;
+      background: #0d1117;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #f2f2f2;
       font-family: Arial;
+      color: white;
     }
 
-    .container {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    .box {
+      width: 350px;
+      background: #161b22;
+      padding: 20px;
+      border-radius: 10px;
       text-align: center;
-      width: 320px;
     }
 
-    h2 {
-      margin-bottom: 20px;
-    }
+    h2 { margin-bottom: 15px; }
 
-    input {
+    input, select {
       width: 100%;
       padding: 12px;
-      margin: 10px 0;
+      margin: 8px 0;
       border-radius: 6px;
-      border: 1px solid #ccc;
+      border: 1px solid #30363d;
+      background: #0d1117;
+      color: white;
     }
 
     button {
@@ -41,82 +41,161 @@
       margin-top: 10px;
       border: none;
       border-radius: 6px;
-      background: #007bff;
-      color: white;
-      font-size: 16px;
       cursor: pointer;
+      font-size: 16px;
     }
 
-    button:hover {
-      background: #0056b3;
+    .primary { background: #00c853; color: white; }
+    .secondary { background: #007bff; color: white; }
+
+    .hidden { display: none; }
+
+    .phone-box {
+      display: flex;
+      gap: 5px;
     }
+
+    .phone-box select { width: 30%; }
+    .phone-box input { width: 70%; }
+
+    .checkbox {
+      font-size: 12px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .checkbox input { width: auto; margin-right: 5px; }
   </style>
 </head>
 
 <body>
 
-<div class="container">
-  <h2>Login / Signup</h2>
+<div class="box">
 
-  <input type="text" id="phone" placeholder="+923001234567">
+  <!-- MAIN -->
+  <div id="main">
+    <h2>Welcome</h2>
+    <button class="primary" onclick="showLogin()">Login</button>
+    <button class="secondary" onclick="showSignup()">Sign Up</button>
+  </div>
 
-  <div id="recaptcha-container"></div>
+  <!-- LOGIN -->
+  <div id="login" class="hidden">
+    <h2>Login</h2>
+    <input type="email" id="loginEmail" placeholder="Email">
+    <input type="password" id="loginPassword" placeholder="Password">
+    <button class="primary" onclick="login()">Login</button>
+    <button onclick="back()">Back</button>
+  </div>
 
-  <button onclick="sendOTP()">Send OTP</button>
+  <!-- SIGNUP -->
+  <div id="signup" class="hidden">
+    <h2>Sign Up</h2>
 
-  <input type="text" id="otp" placeholder="Enter OTP">
+    <input type="text" placeholder="Full Name">
+    <input type="text" placeholder="Username">
+    <input type="email" id="email" placeholder="Email">
 
-  <button onclick="verifyOTP()">Verify OTP</button>
+    <select>
+      <option>PKR</option>
+      <option>USD</option>
+    </select>
+
+    <div class="phone-box">
+      <select id="code">
+        <option value="+92">+92</option>
+      </select>
+      <input type="text" id="phone" placeholder="3001234567">
+    </div>
+
+    <div id="recaptcha-container"></div>
+
+    <button class="secondary" onclick="sendOTP()">Send OTP</button>
+
+    <input type="text" id="otp" placeholder="Enter OTP">
+
+    <button class="primary" onclick="verifyOTP()">Verify & Signup</button>
+
+    <div class="checkbox">
+      <input type="checkbox"> I accept Terms & Conditions
+    </div>
+
+    <button onclick="back()">Back</button>
+  </div>
+
 </div>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
-  import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
+  import { 
+    getAuth, 
+    signInWithEmailAndPassword, 
+    RecaptchaVerifier, 
+    signInWithPhoneNumber 
+  } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
 
-  // ✅ FINAL CONFIG (already filled)
+  // 🔥 APNA REAL CONFIG YAHA LAGAO
   const firebaseConfig = {
-    apiKey: "AIzaSyDHpc9LN_v8c2TaOXfed5ay0zEjYbN5ur4",
+    apiKey: "YOUR_API_KEY",
     authDomain: "nova-areena.firebaseapp.com",
     projectId: "nova-areena",
-    appId: "1:888991377297:web:2c1addf7e3344b1e385c30"
+    appId: "YOUR_APP_ID"
   };
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
-  // CAPTCHA setup
-  window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-    size: 'normal'
-  });
+  // UI SWITCH
+  window.showLogin = () => {
+    main.style.display = "none";
+    login.style.display = "block";
+  };
 
+  window.showSignup = () => {
+    main.style.display = "none";
+    signup.style.display = "block";
+
+    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+      size: 'normal'
+    });
+  };
+
+  window.back = () => {
+    login.style.display = "none";
+    signup.style.display = "none";
+    main.style.display = "block";
+  };
+
+  // LOGIN
+  window.login = () => {
+    const email = loginEmail.value;
+    const pass = loginPassword.value;
+
+    signInWithEmailAndPassword(auth, email, pass)
+      .then(() => alert("Login Success ✅"))
+      .catch(e => alert(e.message));
+  };
+
+  // SIGNUP (PHONE OTP)
   let confirmationResult;
 
-  // Send OTP
-  window.sendOTP = function () {
-    const phoneNumber = document.getElementById("phone").value;
+  window.sendOTP = () => {
+    const num = code.value + phone.value;
 
-    signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
-      .then((result) => {
-        confirmationResult = result;
+    signInWithPhoneNumber(auth, num, window.recaptchaVerifier)
+      .then(res => {
+        confirmationResult = res;
         alert("OTP Sent ✅");
       })
-      .catch((error) => {
-        alert(error.message);
-      });
-  }
+      .catch(e => alert(e.message));
+  };
 
-  // Verify OTP
-  window.verifyOTP = function () {
-    const code = document.getElementById("otp").value;
-
-    confirmationResult.confirm(code)
-      .then(() => {
-        alert("Login Success ✅");
-      })
-      .catch(() => {
-        alert("Wrong OTP ❌");
-      });
-  }
+  window.verifyOTP = () => {
+    confirmationResult.confirm(otp.value)
+      .then(() => alert("Signup Success ✅"))
+      .catch(() => alert("Wrong OTP ❌"));
+  };
 </script>
 
 </body>
