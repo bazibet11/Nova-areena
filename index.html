@@ -7,211 +7,169 @@
 
 <style>
 body{
-  margin:0;
-  font-family:Arial;
-  background:#020b1f;
-  color:white;
-  text-align:center;
+    margin:0;
+    font-family: Arial;
+    background:#020b1a;
+    color:white;
+    text-align:center;
 }
 
 /* TOP BANNER */
 .banner{
-  background:url('https://images.unsplash.com/photo-1596838132731-3301c3fd4317?q=80&w=1200') center/cover;
-  padding:50px 20px;
+    width:100%;
+    height:200px;
+    background:url('https://i.imgur.com/8Km9tLL.jpg') center/cover no-repeat;
 }
-.banner h1{
-  font-size:38px;
+
+/* LOGO */
+.logo{
+    font-size:40px;
+    margin-top:15px;
 }
-.banner span{color:#f7c200;}
-.crown{font-size:28px;}
+.logo span{
+    color:gold;
+}
+.crown{
+    font-size:30px;
+}
 
 /* BUTTONS */
 .btn{
-  width:80%;
-  padding:14px;
-  margin:10px auto;
-  border-radius:10px;
-  font-size:18px;
-  display:block;
+    display:block;
+    width:80%;
+    margin:10px auto;
+    padding:12px;
+    border-radius:10px;
+    font-size:18px;
+    border:none;
 }
 .login{
-  border:2px solid white;
-  background:none;
-  color:white;
+    background:transparent;
+    border:2px solid white;
+    color:white;
 }
 .signup{
-  background:#f7c200;
-  border:none;
-  color:black;
-}
-
-/* FORMS */
-.form{
-  display:none;
-  padding:20px;
-}
-input{
-  width:80%;
-  padding:12px;
-  margin:8px;
-  border-radius:8px;
-  border:none;
-}
-
-/* JACKPOT */
-.jackpot{
-  color:#f7c200;
-  font-size:22px;
-  margin:20px 0;
-  text-shadow:0 0 10px gold;
+    background:gold;
+    color:black;
 }
 
 /* GRID */
 .grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-  padding:15px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    padding:15px;
 }
 .card{
-  background:#08142b;
-  border-radius:15px;
-  overflow:hidden;
+    background:#0c1c33;
+    border-radius:15px;
+    overflow:hidden;
 }
 .card img{
-  width:100%;
-  height:120px;
-  object-fit:cover;
+    width:100%;
+    height:120px;
+    object-fit:cover;
 }
 .card p{
-  padding:10px;
+    padding:10px;
+}
+
+/* JACKPOT */
+.jackpot{
+    color:gold;
+    font-size:22px;
+    margin-top:10px;
+}
+
+/* FORM */
+.form{
+    display:none;
+    padding:20px;
+}
+input{
+    width:80%;
+    padding:10px;
+    margin:8px;
+    border-radius:8px;
+    border:none;
 }
 </style>
 </head>
 
 <body>
 
-<!-- TOP -->
-<div class="banner">
-  <h1>BAZI <span>BET</span></h1>
-  <div class="crown">👑</div>
+<div class="banner"></div>
+
+<div class="logo">
+    BAZI <span>BET</span><br>
+    <div class="crown">👑</div>
 </div>
 
-<!-- BUTTONS -->
 <button class="btn login" onclick="showLogin()">Login</button>
 <button class="btn signup" onclick="showSignup()">Sign Up</button>
 
-<!-- LOGIN FORM -->
-<div id="loginForm" class="form">
-  <h2>Login</h2>
-  <input type="text" id="loginUser" placeholder="Username">
-  <input type="password" id="loginPass" placeholder="Password">
-  <button class="btn signup" onclick="login()">Login</button>
-</div>
-
-<!-- SIGNUP FORM -->
-<div id="signupForm" class="form">
-  <h2>Sign Up</h2>
-  <input type="text" id="name" placeholder="Full Name">
-  <input type="text" id="user" placeholder="Username">
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="pass" placeholder="Password">
-
-  <p id="captchaText"></p>
-  <input type="text" id="captchaInput" placeholder="Enter captcha">
-
-  <button class="btn signup" onclick="signup()">Create Account</button>
-</div>
-
-<!-- JACKPOT -->
 <div class="jackpot">💰 GRAND JACKPOT: 1000$ 💰</div>
 
 <!-- GAMES -->
 <div class="grid">
 
-  <div class="card">
-    <img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317">
-    <p>Slots</p>
-  </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317">
+<p>Slots</p>
+</div>
 
-  <div class="card">
-    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420">
-    <p>Casino</p>
-  </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1606167668584-78701c57f13d">
+<p>Casino</p>
+</div>
 
-  <div class="card">
-    <img src="https://images.unsplash.com/photo-1596495578065-6e0763fa1178">
-    <p>Live Casino</p>
-  </div>
+<div class="card">
+<img src="https://i.imgur.com/Z7AzH2c.jpg">
+<p>Live Casino</p>
+</div>
 
-  <div class="card">
-    <img src="https://images.unsplash.com/photo-1606167668584-78701c57f13d">
-    <p>Fortune Games</p>
-  </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db">
+<p>Fortune Games</p>
+</div>
 
-  <!-- 🔥 JILLI GAMES (casino girl added) -->
-  <div class="card">
-    <img src="https://images.unsplash.com/photo-1621961458348-f013d219b50c">
-    <p>Jilli Games</p>
-  </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
+<p>Jilli Games</p>
+</div>
 
-  <div class="card">
-    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e">
-    <p>Tournaments</p>
-  </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2">
+<p>Sports</p>
+</div>
 
 </div>
 
+<!-- LOGIN FORM -->
+<div class="form" id="loginForm">
+<h2>Login</h2>
+<input type="text" placeholder="Username"><br>
+<input type="password" placeholder="Password"><br>
+<button class="btn signup">Login Now</button>
+</div>
+
+<!-- SIGNUP FORM -->
+<div class="form" id="signupForm">
+<h2>Sign Up</h2>
+<input type="text" placeholder="Username"><br>
+<input type="email" placeholder="Email"><br>
+<input type="password" placeholder="Password"><br>
+<button class="btn signup">Create Account</button>
+</div>
+
 <script>
-let captcha="";
-
-function generateCaptcha(){
-  let a=Math.floor(Math.random()*10);
-  let b=Math.floor(Math.random()*10);
-  captcha=a+b;
-  document.getElementById("captchaText").innerText=a+" + "+b+" = ?";
-}
-
-generateCaptcha();
-
 function showLogin(){
-  document.getElementById("loginForm").style.display="block";
-  document.getElementById("signupForm").style.display="none";
+    document.getElementById('loginForm').style.display='block';
+    document.getElementById('signupForm').style.display='none';
 }
-
 function showSignup(){
-  document.getElementById("signupForm").style.display="block";
-  document.getElementById("loginForm").style.display="none";
-}
-
-function signup(){
-  let user=document.getElementById("user").value;
-  let pass=document.getElementById("pass").value;
-  let cap=document.getElementById("captchaInput").value;
-
-  if(cap!=captcha){
-    alert("Wrong Captcha!");
-    return;
-  }
-
-  localStorage.setItem("user",user);
-  localStorage.setItem("pass",pass);
-
-  alert("Account Created!");
-}
-
-function login(){
-  let u=document.getElementById("loginUser").value;
-  let p=document.getElementById("loginPass").value;
-
-  let su=localStorage.getItem("user");
-  let sp=localStorage.getItem("pass");
-
-  if(u==su && p==sp){
-    alert("Login Successful!");
-  }else{
-    alert("Wrong Username or Password");
-  }
+    document.getElementById('signupForm').style.display='block';
+    document.getElementById('loginForm').style.display='none';
 }
 </script>
 
