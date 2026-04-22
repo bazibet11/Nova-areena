@@ -2,160 +2,181 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nova Areena</title>
-
-<!-- Firebase -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-// 🔥 APNI CONFIG DALO (jo screenshot me hai)
-const firebaseConfig = {
-  apiKey: "YAHAN_API_KEY",
-  authDomain: "nova-areena.firebaseapp.com",
-  projectId: "nova-areena",
-  storageBucket: "nova-areena.appspot.com",
-  messagingSenderId: "888991377297",
-  appId: "1:888991377297:web:xxxx"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-// SIGNUP
-window.signup = function () {
-  let email = document.getElementById("email").value;
-  let pass = document.getElementById("password").value;
-
-  createUserWithEmailAndPassword(auth, email, pass)
-    .then(() => {
-      alert("Account Created ✅");
-      showLogin();
-    })
-    .catch(e => alert(e.message));
-};
-
-// LOGIN
-window.login = function () {
-  let email = document.getElementById("lemail").value;
-  let pass = document.getElementById("lpassword").value;
-
-  signInWithEmailAndPassword(auth, email, pass)
-    .then(() => {
-      alert("Login Success 🔥");
-    })
-    .catch(e => alert(e.message));
-};
-</script>
+<title>BaziBet Game</title>
 
 <style>
 body {
   margin:0;
   font-family: Arial;
-  background:#111;
+  background:#0f172a;
   color:white;
+  text-align:center;
 }
 
 .container {
-  background:#22b07d;
-  height:50vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  padding:40px;
 }
 
 .logo {
-  font-size:38px;
-  font-weight:bold;
-  margin-bottom:30px;
+  font-size:35px;
+  margin-bottom:20px;
+}
+
+.logo span {
+  color:#facc15;
 }
 
 .btn {
-  width:220px;
-  padding:15px;
+  padding:12px 20px;
   margin:10px;
-  font-size:18px;
-  border-radius:6px;
+  border-radius:8px;
+  border:none;
   cursor:pointer;
 }
 
 .login-btn {
+  border:2px solid #38bdf8;
   background:transparent;
-  border:2px solid white;
-  color:white;
+  color:#38bdf8;
 }
 
 .signup-btn {
   background:linear-gradient(to right, orange, yellow);
-  border:none;
-  color:white;
 }
 
-.form {
+input {
+  padding:10px;
+  margin:10px;
+  width:80%;
+}
+
+.dashboard {
   display:none;
   padding:20px;
 }
 
-input {
-  width:100%;
-  padding:12px;
-  margin:8px 0;
-  border-radius:5px;
-  border:none;
+.card {
+  background:#1e293b;
+  padding:15px;
+  margin:10px;
+  border-radius:10px;
 }
 
-.action {
-  background:#22b07d;
-  color:white;
-  border:none;
-  padding:12px;
-  width:100%;
-  margin-top:10px;
+/* GAME */
+.game-box {
+  margin-top:20px;
 }
+
+.colors button {
+  width:80px;
+  height:40px;
+  margin:5px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.red { background:red; }
+.green { background:green; }
+.blue { background:blue; }
 </style>
 </head>
 
 <body>
 
-<!-- HOME -->
-<div id="home" class="container">
-  <div class="logo">bj | baji</div>
+<div class="container">
+  <div class="logo">bazi <span>|</span> bet</div>
   <button class="btn login-btn" onclick="showLogin()">Login</button>
   <button class="btn signup-btn" onclick="showSignup()">Sign Up</button>
 </div>
 
 <!-- LOGIN -->
-<div id="loginForm" class="form">
+<div id="login" style="display:none;">
   <h2>Login</h2>
-  <input id="lemail" placeholder="Email">
-  <input id="lpassword" type="password" placeholder="Password">
-  <button class="action" onclick="login()">Login</button>
-  <button onclick="back()">Back</button>
+  <input id="lemail" placeholder="Email"><br>
+  <input id="lpass" type="password" placeholder="Password"><br>
+  <button onclick="login()">Login</button>
 </div>
 
 <!-- SIGNUP -->
-<div id="signupForm" class="form">
+<div id="signup" style="display:none;">
   <h2>Sign Up</h2>
-  <input id="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password">
-  <button class="action" onclick="signup()">Create Account</button>
-  <button onclick="back()">Back</button>
+  <input id="email" placeholder="Email"><br>
+  <input id="pass" type="password" placeholder="Password"><br>
+  <button onclick="signup()">Create</button>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="dashboard">
+  <h2>🎮 BaziBet Game</h2>
+
+  <div class="card">💰 Balance: <span id="balance">100</span> Coins</div>
+
+  <div class="game-box">
+    <h3>🎯 Choose Color</h3>
+
+    <div class="colors">
+      <button class="red" onclick="play('red')"></button>
+      <button class="green" onclick="play('green')"></button>
+      <button class="blue" onclick="play('blue')"></button>
+    </div>
+
+    <p id="result"></p>
+  </div>
+
+  <button onclick="logout()">Logout</button>
+</div>
+
+<div style="padding:20px;">
+  <h2>BaziBet Login</h2>
 </div>
 
 <script>
+let balance = 100;
+
 function showLogin(){
-  home.style.display="none";
-  loginForm.style.display="block";
+  login.style.display="block";
+  signup.style.display="none";
 }
+
 function showSignup(){
-  home.style.display="none";
-  signupForm.style.display="block";
+  signup.style.display="block";
+  login.style.display="none";
 }
-function back(){
-  home.style.display="flex";
-  loginForm.style.display="none";
-  signupForm.style.display="none";
+
+function signup(){
+  alert("Account Created (Demo)");
+}
+
+function login(){
+  dashboard.style.display="block";
+  login.style.display="none";
+  signup.style.display="none";
+}
+
+function logout(){
+  dashboard.style.display="none";
+}
+
+function play(choice){
+  let colors = ["red","green","blue"];
+  let random = colors[Math.floor(Math.random()*3)];
+
+  if(balance <= 0){
+    alert("No balance!");
+    return;
+  }
+
+  if(choice === random){
+    balance += 20;
+    result.innerText = "🔥 You Win! Color was " + random;
+  } else {
+    balance -= 10;
+    result.innerText = "❌ You Lose! Color was " + random;
+  }
+
+  document.getElementById("balance").innerText = balance;
 }
 </script>
 
