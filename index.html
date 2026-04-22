@@ -1,71 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login / Signup</title>
+  <title>Nova Areena</title>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 
   <style>
     body {
       margin: 0;
-      height: 100vh;
-      background: #0d1117;
+      font-family: Arial;
+      background: linear-gradient(135deg, #0f172a, #020617);
+      color: white;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: Arial;
-      color: white;
+      height: 100vh;
     }
 
     .box {
-      width: 350px;
-      background: #161b22;
-      padding: 20px;
-      border-radius: 10px;
+      width: 90%;
+      max-width: 420px;
+      padding: 30px;
+      background: #0b1220;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.6);
       text-align: center;
     }
 
-    h2 { margin-bottom: 15px; }
+    h2 {
+      margin-bottom: 20px;
+    }
 
-    input, select {
+    input {
       width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 6px;
-      border: 1px solid #30363d;
-      background: #0d1117;
+      padding: 14px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      background: #020617;
       color: white;
+      font-size: 16px;
     }
 
     button {
       width: 100%;
-      padding: 12px;
-      margin-top: 10px;
+      padding: 14px;
       border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .primary { background: #00c853; color: white; }
-    .secondary { background: #007bff; color: white; }
-
-    .hidden { display: none; }
-
-    .phone-box {
-      display: flex;
-      gap: 5px;
-    }
-
-    .phone-box select { width: 30%; }
-    .phone-box input { width: 70%; }
-
-    .checkbox {
-      font-size: 12px;
+      border-radius: 10px;
       margin-top: 10px;
-      display: flex;
-      align-items: center;
+      font-size: 16px;
+      cursor: pointer;
     }
 
-    .checkbox input { width: auto; margin-right: 5px; }
+    .btn-blue {
+      background: #2563eb;
+      color: white;
+    }
+
+    .btn-green {
+      background: #22c55e;
+      color: white;
+    }
+
+    .switch {
+      margin-top: 15px;
+      cursor: pointer;
+      color: #38bdf8;
+    }
   </style>
 </head>
 
@@ -73,129 +77,73 @@
 
 <div class="box">
 
-  <!-- MAIN -->
-  <div id="main">
-    <h2>Welcome</h2>
-    <button class="primary" onclick="showLogin()">Login</button>
-    <button class="secondary" onclick="showSignup()">Sign Up</button>
+  <!-- SIGNUP -->
+  <div id="signupBox">
+    <h2>Sign Up</h2>
+
+    <input id="email" type="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+
+    <button class="btn-blue" onclick="signup()">Create Account</button>
+
+    <p class="switch" onclick="showLogin()">Already have account? Login</p>
   </div>
 
   <!-- LOGIN -->
-  <div id="login" class="hidden">
+  <div id="loginBox" style="display:none;">
     <h2>Login</h2>
-    <input type="email" id="loginEmail" placeholder="Email">
-    <input type="password" id="loginPassword" placeholder="Password">
-    <button class="primary" onclick="login()">Login</button>
-    <button onclick="back()">Back</button>
-  </div>
 
-  <!-- SIGNUP -->
-  <div id="signup" class="hidden">
-    <h2>Sign Up</h2>
+    <input id="loginEmail" type="email" placeholder="Email">
+    <input id="loginPassword" type="password" placeholder="Password">
 
-    <input type="text" placeholder="Full Name">
-    <input type="text" placeholder="Username">
-    <input type="email" id="email" placeholder="Email">
+    <button class="btn-green" onclick="login()">Login</button>
 
-    <select>
-      <option>PKR</option>
-      <option>USD</option>
-    </select>
-
-    <div class="phone-box">
-      <select id="code">
-        <option value="+92">+92</option>
-      </select>
-      <input type="text" id="phone" placeholder="3001234567">
-    </div>
-
-    <div id="recaptcha-container"></div>
-
-    <button class="secondary" onclick="sendOTP()">Send OTP</button>
-
-    <input type="text" id="otp" placeholder="Enter OTP">
-
-    <button class="primary" onclick="verifyOTP()">Verify & Signup</button>
-
-    <div class="checkbox">
-      <input type="checkbox"> I accept Terms & Conditions
-    </div>
-
-    <button onclick="back()">Back</button>
+    <p class="switch" onclick="showSignup()">Create new account</p>
   </div>
 
 </div>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
-  import { 
-    getAuth, 
-    signInWithEmailAndPassword, 
-    RecaptchaVerifier, 
-    signInWithPhoneNumber 
-  } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
-
-  // 🔥 APNA REAL CONFIG YAHA LAGAO
+<script>
   const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
+    apiKey: "PASTE_YOUR_API_KEY",
     authDomain: "nova-areena.firebaseapp.com",
-    projectId: "nova-areena",
-    appId: "YOUR_APP_ID"
+    projectId: "nova-areena"
   };
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
 
-  // UI SWITCH
-  window.showLogin = () => {
-    main.style.display = "none";
-    login.style.display = "block";
-  };
+  function signup() {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
 
-  window.showSignup = () => {
-    main.style.display = "none";
-    signup.style.display = "block";
-
-    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-      size: 'normal'
-    });
-  };
-
-  window.back = () => {
-    login.style.display = "none";
-    signup.style.display = "none";
-    main.style.display = "block";
-  };
-
-  // LOGIN
-  window.login = () => {
-    const email = loginEmail.value;
-    const pass = loginPassword.value;
-
-    signInWithEmailAndPassword(auth, email, pass)
-      .then(() => alert("Login Success ✅"))
-      .catch(e => alert(e.message));
-  };
-
-  // SIGNUP (PHONE OTP)
-  let confirmationResult;
-
-  window.sendOTP = () => {
-    const num = code.value + phone.value;
-
-    signInWithPhoneNumber(auth, num, window.recaptchaVerifier)
-      .then(res => {
-        confirmationResult = res;
-        alert("OTP Sent ✅");
+    auth.createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        alert("Signup Success ✅");
       })
-      .catch(e => alert(e.message));
-  };
+      .catch(err => alert(err.message));
+  }
 
-  window.verifyOTP = () => {
-    confirmationResult.confirm(otp.value)
-      .then(() => alert("Signup Success ✅"))
-      .catch(() => alert("Wrong OTP ❌"));
-  };
+  function login() {
+    let email = document.getElementById("loginEmail").value;
+    let password = document.getElementById("loginPassword").value;
+
+    auth.signInWithEmailAndPassword(email, password)
+      .then(() => {
+        alert("Login Success 🎉");
+      })
+      .catch(err => alert(err.message));
+  }
+
+  function showLogin() {
+    document.getElementById("signupBox").style.display = "none";
+    document.getElementById("loginBox").style.display = "block";
+  }
+
+  function showSignup() {
+    document.getElementById("signupBox").style.display = "block";
+    document.getElementById("loginBox").style.display = "none";
+  }
 </script>
 
 </body>
