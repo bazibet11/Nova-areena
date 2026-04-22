@@ -1,116 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bazi Bet</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #020d1f;
-  color: white;
+body{
+  margin:0;
+  font-family:sans-serif;
+  background:#020c1b;
+  color:white;
 }
 
-.header img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+.banner img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
 }
 
-.logo {
-  text-align: center;
-  font-size: 28px;
-  margin: 10px;
+.logo{
+  text-align:center;
+  font-size:28px;
+  margin:10px 0;
 }
-.logo span {
-  color: gold;
+.logo span{ color:gold; }
+
+.btn{
+  width:90%;
+  margin:10px auto;
+  padding:15px;
+  border-radius:12px;
+  font-size:18px;
+  text-align:center;
+  display:block;
+}
+.login{ border:2px solid white; background:none; color:white; }
+.signup{ background:gold; color:black; }
+
+.form{
+  width:90%;
+  margin:10px auto;
+}
+input{
+  width:100%;
+  padding:15px;
+  margin:10px 0;
+  border-radius:10px;
+  border:none;
+  background:#0c1f3d;
+  color:white;
 }
 
-.btn {
-  display: block;
-  width: 80%;
-  margin: 10px auto;
-  padding: 12px;
-  border-radius: 10px;
-  font-size: 18px;
-  border: none;
+.password-box{
+  position:relative;
+}
+.eye{
+  position:absolute;
+  right:15px;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
 }
 
-.login {
-  background: transparent;
-  border: 2px solid white;
-  color: white;
+.balance{
+  text-align:center;
+  font-size:22px;
+  margin-top:10px;
+  color:gold;
 }
 
-.signup {
-  background: gold;
-  color: black;
+.games{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:10px;
+  padding:10px;
 }
-
-.form {
-  width: 85%;
-  margin: auto;
-  display: none;
+.card{
+  background:#0c1f3d;
+  border-radius:12px;
+  overflow:hidden;
+  text-align:center;
 }
-
-.form input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 10px;
-  border: none;
-  background: #0b1d3a;
-  color: white;
+.card img{
+  width:100%;
+  height:90px;
+  object-fit:cover;
 }
-
-.password-box {
-  position: relative;
-}
-.password-box span {
-  position: absolute;
-  right: 10px;
-  top: 12px;
-  cursor: pointer;
-}
-
-.games {
-  padding: 10px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.card {
-  background: #081a35;
-  border-radius: 12px;
-  text-align: center;
-  padding: 5px;
-  box-shadow: 0 0 10px rgba(255,215,0,0.3);
-}
-
-.card img {
-  width: 100%;
-  height: 90px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.card p {
-  margin: 5px;
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="header">
-  <img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317">
+<div class="banner">
+<img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317">
 </div>
 
 <div class="logo">bazi <span>bet</span></div>
@@ -118,123 +100,149 @@ body {
 <button class="btn login" onclick="showLogin()">Login</button>
 <button class="btn signup" onclick="showSignup()">Sign Up</button>
 
-<!-- LOGIN -->
-<div class="form" id="loginForm">
-  <input type="text" id="loginUser" placeholder="Username">
-  
-  <div class="password-box">
-    <input type="password" id="loginPass" placeholder="Password">
-    <span onclick="togglePass('loginPass')">👁️</span>
-  </div>
+<div class="balance">💰 Balance: <span id="balance">0</span></div>
 
-  <button class="btn signup" onclick="login()">Login</button>
+<!-- LOGIN -->
+<div class="form" id="loginBox">
+<input id="loginUser" placeholder="Phone Number">
+
+<div class="password-box">
+<input id="loginPass" type="password" placeholder="Password">
+<span class="eye" onclick="toggle('loginPass')">👁</span>
+</div>
+
+<button class="btn signup" onclick="login()">Login</button>
 </div>
 
 <!-- SIGNUP -->
-<div class="form" id="signupForm">
-  <input type="text" id="user" placeholder="Username">
-  <input type="text" id="name" placeholder="Full Name">
-  <input type="text" id="phone" placeholder="Phone Number">
+<div class="form" id="signupBox" style="display:none;">
+<input id="phone" placeholder="Phone Number">
 
-  <div class="password-box">
-    <input type="password" id="pass" placeholder="Password">
-    <span onclick="togglePass('pass')">👁️</span>
-  </div>
-
-  <button class="btn signup" onclick="signup()">Create Account</button>
+<div class="password-box">
+<input id="pass" type="password" placeholder="Password">
+<span class="eye" onclick="toggle('pass')">👁</span>
 </div>
 
-<!-- GAMES -->
+<button class="btn signup" onclick="signup()">Create Account</button>
+</div>
+
+<!-- GAME -->
+<button class="btn signup" onclick="playGame()">🎮 Play Game</button>
+
 <div class="games">
-  <h3>🎮 Games</h3>
-
-  <div class="grid">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1608889175123-8ee362201f81">
-      <p>Slots</p>
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1606167668584-78701c57f13d">
-      <p>Casino</p>
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317">
-      <p>Live Casino</p>
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420">
-      <p>Fortune Games</p>
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
-      <p>Jilli Games</p>
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2">
-      <p>Sports</p>
-    </div>
-  </div>
+<div class="card"><img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317"><p>Slots</p></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da"><p>Casino</p></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238"><p>Live</p></div>
 </div>
 
-<script>
+<script type="module">
 
-function showLogin(){
-  document.getElementById("loginForm").style.display="block";
-  document.getElementById("signupForm").style.display="none";
-}
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { 
+getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged 
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-function showSignup(){
-  document.getElementById("signupForm").style.display="block";
-  document.getElementById("loginForm").style.display="none";
-}
+import { 
+getFirestore, doc, setDoc, getDoc, updateDoc 
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-function togglePass(id){
-  let input = document.getElementById(id);
-  input.type = input.type === "password" ? "text" : "password";
-}
+// 🔥 paste your config
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_ID"
+};
 
-// SAVE DATA
-function signup(){
-  let user = document.getElementById("user").value;
-  let name = document.getElementById("name").value;
-  let phone = document.getElementById("phone").value;
-  let pass = document.getElementById("pass").value;
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-  localStorage.setItem("user", user);
-  localStorage.setItem("name", name);
-  localStorage.setItem("phone", phone);
-  localStorage.setItem("pass", pass);
-
-  alert("Account Created ✅");
-}
-
-// LOGIN
-function login(){
-  let u = document.getElementById("loginUser").value;
-  let p = document.getElementById("loginPass").value;
-
-  let savedUser = localStorage.getItem("user");
-  let savedPass = localStorage.getItem("pass");
-
-  if(u === savedUser && p === savedPass){
-    alert("Login Successful 🎉");
-  } else {
-    alert("Wrong Details ❌");
-  }
-}
+let currentUser = null;
 
 // AUTO LOGIN
-window.onload = function(){
-  let user = localStorage.getItem("user");
+onAuthStateChanged(auth, (user)=>{
   if(user){
-    console.log("Auto login:", user);
+    currentUser = user.uid;
+    loadWallet(user.uid);
   }
+});
+
+// SIGNUP
+window.signup = async ()=>{
+  let phone = phoneInput();
+  let pass = document.getElementById("pass").value;
+
+  let email = phone + "@bazibet.com";
+
+  let user = await createUserWithEmailAndPassword(auth, email, pass);
+
+  await setDoc(doc(db,"users",user.user.uid),{
+    phone:phone,
+    balance:1000
+  });
+
+  alert("Account Created +1000 💰");
+};
+
+// LOGIN
+window.login = async ()=>{
+  let phone = document.getElementById("loginUser").value;
+  let pass = document.getElementById("loginPass").value;
+
+  let email = phone + "@bazibet.com";
+
+  let user = await signInWithEmailAndPassword(auth,email,pass);
+
+  currentUser = user.user.uid;
+  loadWallet(currentUser);
+};
+
+// LOAD WALLET
+async function loadWallet(uid){
+  let snap = await getDoc(doc(db,"users",uid));
+  let data = snap.data();
+  document.getElementById("balance").innerText = data.balance;
 }
+
+// GAME
+window.playGame = async ()=>{
+  if(!currentUser){ alert("Login first"); return; }
+
+  let ref = doc(db,"users",currentUser);
+  let snap = await getDoc(ref);
+
+  let bal = snap.data().balance;
+
+  let win = Math.random()>0.5 ? 100 : -50;
+
+  let newBal = bal + win;
+
+  await updateDoc(ref,{balance:newBal});
+
+  alert(win>0 ? "Win 💰" : "Lose ❌");
+
+  loadWallet(currentUser);
+};
+
+// HELPERS
+function phoneInput(){
+  return document.getElementById("phone").value;
+}
+
+window.toggle = (id)=>{
+  let input = document.getElementById(id);
+  input.type = input.type === "password" ? "text" : "password";
+};
+
+window.showLogin = ()=>{
+  document.getElementById("loginBox").style.display="block";
+  document.getElementById("signupBox").style.display="none";
+};
+
+window.showSignup = ()=>{
+  document.getElementById("loginBox").style.display="none";
+  document.getElementById("signupBox").style.display="block";
+};
 
 </script>
 
