@@ -2,200 +2,194 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>BaziBet</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BaziBet</title>
 
 <style>
 body {
   margin: 0;
   font-family: Arial;
-  background: linear-gradient(to bottom, #0a0f2c, #000);
+  background: #0b0f1a;
   color: white;
 }
 
-/* TOP BANNER */
-.top-banner {
+/* 🔥 BANNER */
+.banner {
   width: 100%;
-  height: 180px;
-  background: url('https://i.imgur.com/8Km9tLL.jpg') center/cover;
-  border-bottom: 3px solid gold;
-}
-
-/* CENTER BOX */
-.container {
-  text-align: center;
-  padding: 20px;
+  height: 220px;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)),
+  url('https://images.unsplash.com/photo-1605902711622-cfb43c4437b1');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .logo {
-  font-size: 28px;
-  margin: 15px 0;
+  font-size: 32px;
+  font-weight: bold;
 }
-
 .logo span {
   color: gold;
 }
 
-/* BUTTONS */
+/* 🎮 TOP GAMES SCROLL */
+.top-games {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 10px;
+}
+.top-games span {
+  background: #1a1a1a;
+  color: gold;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* 🎯 BUTTONS */
+.buttons {
+  text-align: center;
+  margin: 20px 0;
+}
 .btn {
   width: 200px;
   padding: 12px;
   margin: 10px;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
 }
-
-.login-btn {
+.btn-login {
   border: 2px solid white;
   background: transparent;
   color: white;
 }
-
-.signup-btn {
-  background: linear-gradient(to right, orange, gold);
-  border: none;
+.btn-signup {
+  background: linear-gradient(45deg, orange, gold);
   color: black;
-}
-
-/* FORM */
-.form-box {
-  display: none;
-  margin-top: 20px;
-}
-
-input {
-  width: 80%;
-  padding: 12px;
-  margin: 8px;
-  border-radius: 6px;
   border: none;
 }
 
-.submit-btn {
-  background: green;
-  color: white;
-  border: none;
-  padding: 12px;
-  width: 60%;
-  border-radius: 6px;
+/* 💰 JACKPOT */
+.jackpot {
+  text-align: center;
+  color: gold;
+  font-size: 18px;
+  margin: 10px 0;
+  animation: glow 1s infinite alternate;
+}
+@keyframes glow {
+  from { text-shadow: 0 0 5px gold; }
+  to { text-shadow: 0 0 20px orange; }
 }
 
-/* GAMES SECTION */
+/* 🎮 GAMES GRID */
 .games {
-  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 15px;
 }
 
-.game-title {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.game-grid {
-  display: flex;
-  overflow-x: auto;
-}
-
-.game {
-  min-width: 120px;
-  margin: 5px;
+.game-card {
   background: #111;
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: 15px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(255,215,0,0.2);
 }
 
-.game img {
+.game-card img {
   width: 100%;
-  border-radius: 8px;
+  height: 100px;
+  object-fit: cover;
 }
 
+.game-card p {
+  padding: 8px;
+}
+
+/* 🔻 FOOTER */
+.footer {
+  text-align: center;
+  padding: 20px;
+  color: gray;
+}
 </style>
 </head>
 
 <body>
 
-<!-- TOP IMAGE -->
-<div class="top-banner"></div>
+<!-- 🔥 BANNER -->
+<div class="banner">
+  <h1 class="logo">bazi <span>bet</span></h1>
+</div>
 
-<div class="container">
+<!-- 🎮 TOP MENU -->
+<div class="top-games">
+  <span>🔥 Hot</span>
+  <span>🎰 Slots</span>
+  <span>🎡 Fortune</span>
+  <span>🌶 Chili</span>
+  <span>🎲 Table</span>
+  <span>🃏 Poker</span>
+</div>
 
-  <div class="logo">bazi <span>bet</span></div>
+<!-- 🎯 BUTTONS -->
+<div class="buttons">
+  <button class="btn btn-login" onclick="alert('Login Page Next')">Login</button>
+  <button class="btn btn-signup" onclick="alert('Signup Page Next')">Sign Up</button>
+</div>
 
-  <button class="btn login-btn" onclick="showLogin()">Login</button>
-  <button class="btn signup-btn" onclick="showSignup()">Sign Up</button>
+<!-- 💰 JACKPOT -->
+<div class="jackpot">
+  💰 GRAND JACKPOT 💰
+</div>
 
-  <!-- LOGIN -->
-  <div class="form-box" id="loginBox">
-    <h2>Login</h2>
-    <input type="text" placeholder="Username">
-    <input type="password" placeholder="Password">
-    <br>
-    <button class="submit-btn">Login</button>
+<!-- 🎮 GAMES -->
+<div class="games">
+
+  <div class="game-card">
+    <img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317">
+    <p>Slots</p>
   </div>
 
-  <!-- SIGNUP -->
-  <div class="form-box" id="signupBox">
-    <h2>Sign Up</h2>
-    <input type="text" placeholder="Full Name">
-    <input type="text" placeholder="Username">
-    <input type="email" placeholder="Email">
-    <input type="password" placeholder="Password">
-
-    <div id="captcha"></div>
-    <input type="text" placeholder="Enter Answer">
-
-    <br>
-    <button class="submit-btn">Create Account</button>
+  <div class="game-card">
+    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420">
+    <p>Casino</p>
   </div>
 
-  <!-- GAMES -->
-  <div class="games">
-    <div class="game-title">🎮 Games</div>
+  <div class="game-card">
+    <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc">
+    <p>Live Casino</p>
+  </div>
 
-    <div class="game-grid">
-      <div class="game">
-        <img src="https://i.imgur.com/3ZQ3Z6B.jpg">
-        Slots
-      </div>
+  <div class="game-card">
+    <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c">
+    <p>Fortune</p>
+  </div>
 
-      <div class="game">
-        <img src="https://i.imgur.com/FxZlV7F.jpg">
-        Casino
-      </div>
+  <div class="game-card">
+    <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db">
+    <p>Chili Game</p>
+  </div>
 
-      <div class="game">
-        <img src="https://i.imgur.com/9XqQZ6n.jpg">
-        Live Casino
-      </div>
-
-      <div class="game">
-        <img src="https://i.imgur.com/yYQZ6pN.jpg">
-        Jackpot
-      </div>
-    </div>
+  <div class="game-card">
+    <img src="https://images.unsplash.com/photo-1606166325695-4d6eec8b7c16">
+    <p>Tournament</p>
   </div>
 
 </div>
 
-<script>
-function showLogin(){
-  document.getElementById("loginBox").style.display = "block";
-  document.getElementById("signupBox").style.display = "none";
-}
-
-function showSignup(){
-  document.getElementById("signupBox").style.display = "block";
-  document.getElementById("loginBox").style.display = "none";
-  generateCaptcha();
-}
-
-/* CAPTCHA */
-function generateCaptcha(){
-  let a = Math.floor(Math.random()*10);
-  let b = Math.floor(Math.random()*10);
-  document.getElementById("captcha").innerHTML = a + " + " + b + " = ?";
-}
-</script>
+<!-- 🔻 FOOTER -->
+<div class="footer">
+  © 2026 BaziBet Gaming
+</div>
 
 </body>
 </html>
