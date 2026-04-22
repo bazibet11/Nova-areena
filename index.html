@@ -6,97 +6,95 @@
 <title>Bazi Bet</title>
 
 <style>
-body {
-  margin: 0;
+body{
+  margin:0;
   font-family: Arial;
-  background: #020b1c;
-  color: white;
+  background:#020b1c;
+  color:#fff;
 }
 
-/* TOP */
-.banner {
-  height: 200px;
-  background: url('https://images.unsplash.com/photo-1596838132731-3301c3fd4317') center/cover;
+/* Banner */
+.banner{
+  background:url("https://images.unsplash.com/photo-1606167668584-78701c57f13d") no-repeat center/cover;
+  height:220px;
 }
 
-/* TITLE */
-.title {
-  text-align: center;
-  font-size: 26px;
-  margin: 10px;
+/* Logo */
+.logo{
+  text-align:center;
+  font-size:32px;
+  margin-top:10px;
 }
-.title span { color: gold; }
-
-/* BUTTONS */
-.btn {
-  display: block;
-  width: 85%;
-  margin: 10px auto;
-  padding: 14px;
-  border-radius: 12px;
-  font-size: 18px;
+.logo span{
+  color:gold;
 }
 
-.login {
-  border: 2px solid white;
-  background: transparent;
-  color: white;
+/* Buttons */
+.btn{
+  width:80%;
+  margin:10px auto;
+  padding:14px;
+  display:block;
+  border-radius:30px;
+  font-size:18px;
+  text-align:center;
+}
+.login{
+  border:2px solid #fff;
+  background:transparent;
+  color:#fff;
+}
+.signup{
+  background:linear-gradient(to right,gold,orange);
+  color:#000;
 }
 
-.signup {
-  background: linear-gradient(to right, #ffcc00, #ffaa00);
-  color: black;
-  border: none;
+/* Form */
+.form{
+  width:85%;
+  margin:auto;
+}
+input{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border-radius:10px;
+  border:none;
+  background:#0d1b2a;
+  color:#fff;
 }
 
-/* FORM */
-.form-box {
-  display: none;
-  padding: 20px;
+/* Password eye */
+.pass-box{
+  position:relative;
+}
+.eye{
+  position:absolute;
+  right:10px;
+  top:14px;
+  cursor:pointer;
 }
 
-.input-box {
-  position: relative;
-  margin-bottom: 15px;
+/* Games Grid */
+.games{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  padding:10px;
 }
-
-input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
+.card{
+  background:#07142c;
+  border-radius:15px;
+  text-align:center;
+  padding:10px;
 }
-
-/* EYE ICON */
-.eye {
-  position: absolute;
-  right: 10px;
-  top: 12px;
-  cursor: pointer;
+.card img{
+  width:100%;
+  border-radius:10px;
 }
-
-/* GRID */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  padding: 15px;
+.card p{
+  margin-top:5px;
 }
-
-.card {
-  background: #0b132b;
-  border-radius: 12px;
-  overflow: hidden;
-  text-align: center;
-}
-
-.card img {
-  width: 100%;
-  height: 90px;
-  object-fit: cover;
-}
-
 </style>
 </head>
 
@@ -104,77 +102,122 @@ input {
 
 <div class="banner"></div>
 
-<div class="title">bazi <span>bet</span></div>
+<div class="logo">bazi <span>bet</span></div>
 
 <button class="btn login" onclick="showLogin()">Login</button>
 <button class="btn signup" onclick="showSignup()">Sign Up</button>
 
 <!-- LOGIN -->
-<div class="form-box" id="loginForm">
-  <h3>Login</h3>
-
-  <div class="input-box">
-    <input type="text" placeholder="Username">
-  </div>
-
-  <div class="input-box">
+<div id="loginBox" class="form" style="display:none;">
+  <h2>Login</h2>
+  <input type="text" id="loginUser" placeholder="Username">
+  
+  <div class="pass-box">
     <input type="password" id="loginPass" placeholder="Password">
-    <span class="eye" onclick="togglePass('loginPass')">👁️</span>
+    <span class="eye" onclick="toggle('loginPass')">👁</span>
   </div>
 
-  <button class="btn signup">Login Now</button>
+  <button class="btn signup" onclick="login()">Login Now</button>
 </div>
 
 <!-- SIGNUP -->
-<div class="form-box" id="signupForm">
-  <h3>Sign Up</h3>
+<div id="signupBox" class="form" style="display:none;">
+  <h2>Sign Up</h2>
+  <input type="text" id="name" placeholder="Full Name">
+  <input type="text" id="username" placeholder="Username">
+  <input type="text" id="phone" placeholder="Phone Number">
 
-  <div class="input-box">
-    <input type="text" placeholder="Username">
+  <div class="pass-box">
+    <input type="password" id="password" placeholder="Password">
+    <span class="eye" onclick="toggle('password')">👁</span>
   </div>
 
-  <div class="input-box">
-    <input type="password" id="signupPass" placeholder="Password">
-    <span class="eye" onclick="togglePass('signupPass')">👁️</span>
-  </div>
+  <input type="text" id="verify" placeholder="What is 1+2 ?">
 
-  <button class="btn signup">Create Account</button>
+  <button class="btn signup" onclick="signup()">Create Account</button>
 </div>
 
 <!-- GAMES -->
-<div class="grid">
+<div class="games">
 
   <div class="card">
-    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420">
+    <img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317">
     <p>Slots</p>
   </div>
 
   <div class="card">
-    <img src="https://images.unsplash.com/photo-1601379327928-bedfaf9da2d0">
+    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420">
     <p>Casino</p>
   </div>
 
   <div class="card">
-    <img src="https://images.unsplash.com/photo-1607082349566-187342175e2f">
+    <img src="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7">
     <p>Live Casino</p>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1616531770192-6eaea74c2456">
+    <p>Fortune</p>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1612874742237-6526221588e3">
+    <p>Jilli Games</p>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b">
+    <p>Sports</p>
   </div>
 
 </div>
 
 <script>
 function showLogin(){
-  document.getElementById("loginForm").style.display = "block";
-  document.getElementById("signupForm").style.display = "none";
+  document.getElementById("loginBox").style.display="block";
+  document.getElementById("signupBox").style.display="none";
 }
-
 function showSignup(){
-  document.getElementById("signupForm").style.display = "block";
-  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("signupBox").style.display="block";
+  document.getElementById("loginBox").style.display="none";
 }
 
-function togglePass(id){
-  let x = document.getElementById(id);
-  x.type = x.type === "password" ? "text" : "password";
+/* Password eye */
+function toggle(id){
+  let x=document.getElementById(id);
+  x.type = x.type==="password" ? "text":"password";
+}
+
+/* Signup */
+function signup(){
+  let u=document.getElementById("username").value;
+  let p=document.getElementById("password").value;
+  let v=document.getElementById("verify").value;
+
+  if(v != "3"){
+    alert("Wrong verification!");
+    return;
+  }
+
+  localStorage.setItem("user",u);
+  localStorage.setItem("pass",p);
+
+  alert("Account Created!");
+}
+
+/* Login */
+function login(){
+  let u=document.getElementById("loginUser").value;
+  let p=document.getElementById("loginPass").value;
+
+  let su=localStorage.getItem("user");
+  let sp=localStorage.getItem("pass");
+
+  if(u===su && p===sp){
+    alert("Login Success ✅");
+  }else{
+    alert("Wrong login ❌");
+  }
 }
 </script>
 
