@@ -1,71 +1,163 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Areena</title>
+
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+// 🔥 APNI CONFIG DALO (jo screenshot me hai)
+const firebaseConfig = {
+  apiKey: "YAHAN_API_KEY",
+  authDomain: "nova-areena.firebaseapp.com",
+  projectId: "nova-areena",
+  storageBucket: "nova-areena.appspot.com",
+  messagingSenderId: "888991377297",
+  appId: "1:888991377297:web:xxxx"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// SIGNUP
+window.signup = function () {
+  let email = document.getElementById("email").value;
+  let pass = document.getElementById("password").value;
+
+  createUserWithEmailAndPassword(auth, email, pass)
+    .then(() => {
+      alert("Account Created ✅");
+      showLogin();
+    })
+    .catch(e => alert(e.message));
+};
+
+// LOGIN
+window.login = function () {
+  let email = document.getElementById("lemail").value;
+  let pass = document.getElementById("lpassword").value;
+
+  signInWithEmailAndPassword(auth, email, pass)
+    .then(() => {
+      alert("Login Success 🔥");
+    })
+    .catch(e => alert(e.message));
+};
+</script>
+
 <style>
 body {
-  margin: 0;
+  margin:0;
   font-family: Arial;
-  background: #1e1e1e;
+  background:#111;
+  color:white;
 }
 
 .container {
-  background: #22b07d;
-  height: 50vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  background:#22b07d;
+  height:50vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
 }
 
 .logo {
-  font-size: 40px;
-  font-weight: bold;
-  color: white;
-  margin-bottom: 40px;
+  font-size:38px;
+  font-weight:bold;
+  margin-bottom:30px;
 }
 
 .btn {
-  width: 220px;
-  padding: 15px;
-  margin: 10px;
-  font-size: 18px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
+  width:220px;
+  padding:15px;
+  margin:10px;
+  font-size:18px;
+  border-radius:6px;
+  cursor:pointer;
 }
 
-.login {
-  background: transparent;
-  border: 2px solid white;
-  color: white;
+.login-btn {
+  background:transparent;
+  border:2px solid white;
+  color:white;
 }
 
-.signup {
-  background: linear-gradient(to right, orange, yellow);
-  color: white;
+.signup-btn {
+  background:linear-gradient(to right, orange, yellow);
+  border:none;
+  color:white;
 }
 
-.bottom {
-  padding: 20px;
-  color: white;
+.form {
+  display:none;
+  padding:20px;
+}
+
+input {
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border-radius:5px;
+  border:none;
+}
+
+.action {
+  background:#22b07d;
+  color:white;
+  border:none;
+  padding:12px;
+  width:100%;
+  margin-top:10px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- HOME -->
+<div id="home" class="container">
   <div class="logo">bj | baji</div>
-
-  <button class="btn login">Login</button>
-  <button class="btn signup">Sign Up</button>
+  <button class="btn login-btn" onclick="showLogin()">Login</button>
+  <button class="btn signup-btn" onclick="showSignup()">Sign Up</button>
 </div>
 
-<div class="bottom">
-  <h2>Baji999 Login</h2>
-  <p>Simple demo UI like your screenshot.</p>
+<!-- LOGIN -->
+<div id="loginForm" class="form">
+  <h2>Login</h2>
+  <input id="lemail" placeholder="Email">
+  <input id="lpassword" type="password" placeholder="Password">
+  <button class="action" onclick="login()">Login</button>
+  <button onclick="back()">Back</button>
 </div>
+
+<!-- SIGNUP -->
+<div id="signupForm" class="form">
+  <h2>Sign Up</h2>
+  <input id="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+  <button class="action" onclick="signup()">Create Account</button>
+  <button onclick="back()">Back</button>
+</div>
+
+<script>
+function showLogin(){
+  home.style.display="none";
+  loginForm.style.display="block";
+}
+function showSignup(){
+  home.style.display="none";
+  signupForm.style.display="block";
+}
+function back(){
+  home.style.display="flex";
+  loginForm.style.display="none";
+  signupForm.style.display="none";
+}
+</script>
 
 </body>
 </html>
