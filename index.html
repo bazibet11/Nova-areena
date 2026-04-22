@@ -8,27 +8,27 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
   background: #020b1c;
   color: white;
 }
 
-/* TOP IMAGE */
-.top-banner {
+/* TOP BANNER */
+.banner img {
   width: 100%;
   height: 220px;
-  background: url('https://images.unsplash.com/photo-1596838132731-3301c3fd4317') center/cover no-repeat;
+  object-fit: cover;
 }
 
 /* TITLE */
 .title {
   text-align: center;
   font-size: 26px;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .title span {
-  color: #ffcc00;
+  color: gold;
 }
 
 /* BUTTONS */
@@ -37,10 +37,8 @@ body {
   width: 80%;
   margin: 10px auto;
   padding: 14px;
-  font-size: 18px;
   border-radius: 12px;
-  text-align: center;
-  cursor: pointer;
+  font-size: 18px;
 }
 
 .login {
@@ -51,14 +49,13 @@ body {
 
 .signup {
   background: linear-gradient(to right, #ffcc00, #ffaa00);
-  color: black;
   border: none;
+  color: black;
 }
 
-/* GAMES TITLE */
-.games-title {
+/* GAMES */
+.games {
   text-align: center;
-  font-size: 20px;
   margin-top: 15px;
 }
 
@@ -76,7 +73,7 @@ body {
   border-radius: 15px;
   overflow: hidden;
   text-align: center;
-  box-shadow: 0 0 12px rgba(255, 204, 0, 0.3);
+  box-shadow: 0 0 12px rgba(255,215,0,0.3);
   position: relative;
 }
 
@@ -90,24 +87,25 @@ body {
   margin: 8px 0;
 }
 
-/* BADGE */
+/* BADGES */
 .badge {
   position: absolute;
   top: 5px;
   left: 5px;
   background: red;
-  font-size: 10px;
   padding: 3px 6px;
+  font-size: 10px;
   border-radius: 5px;
 }
 </style>
-
 </head>
 
 <body>
 
-<!-- TOP -->
-<div class="top-banner"></div>
+<!-- TOP IMAGE (FIXED) -->
+<div class="banner">
+  <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420">
+</div>
 
 <!-- TITLE -->
 <div class="title">bazi <span>bet</span></div>
@@ -117,39 +115,39 @@ body {
 <button class="btn signup">Sign Up</button>
 
 <!-- GAMES -->
-<div class="games-title">🎮 Games</div>
+<div class="games">🎮 Games</div>
 
 <div class="grid">
 
   <div class="card">
-    <img src="https://cdn.pixabay.com/photo/2017/08/10/07/32/slot-machine-2619077_640.jpg">
+    <img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317">
     <p>Slots</p>
   </div>
 
   <div class="card">
-    <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/casino-1869567_640.jpg">
+    <img src="https://images.unsplash.com/photo-1601379327928-bedfaf9da2d0">
     <p>Casino</p>
   </div>
 
   <div class="card">
     <span class="badge">LIVE</span>
-    <img src="https://cdn.pixabay.com/photo/2017/08/06/00/40/woman-2587954_640.jpg">
+    <img src="https://images.unsplash.com/photo-1607082349566-187342175e2f">
     <p>Live Casino</p>
   </div>
 
   <div class="card">
-    <img src="https://cdn.pixabay.com/photo/2017/01/31/21/23/wheel-2027853_640.png">
+    <img src="https://images.unsplash.com/photo-1611996575749-79a3a250f948">
     <p>Fortune Games</p>
   </div>
 
   <div class="card">
     <span class="badge">HOT</span>
-    <img src="https://cdn.pixabay.com/photo/2017/01/20/00/30/chili-1995056_640.png">
+    <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d">
     <p>Chili Games</p>
   </div>
 
   <div class="card">
-    <img src="https://cdn.pixabay.com/photo/2016/11/29/09/32/trophy-1867148_640.jpg">
+    <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b">
     <p>Tournaments</p>
   </div>
 
