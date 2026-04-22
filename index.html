@@ -5,38 +5,19 @@
 <title>Bazi Bet</title>
 
 <style>
-body{
-  margin:0;
-  background:#020c1b;
-  color:white;
-  font-family:sans-serif;
-}
-
-.logo{
-  text-align:center;
-  font-size:28px;
-  margin:20px 0;
-}
+body{margin:0;background:#020c1b;color:white;font-family:sans-serif;}
+.logo{text-align:center;font-size:28px;margin:20px;}
 .logo span{color:gold;}
 
 input{
-  width:90%;
-  margin:8px auto;
-  padding:14px;
-  border-radius:10px;
-  border:none;
-  display:block;
-  background:#0c1f3d;
-  color:white;
+  width:90%;margin:8px auto;padding:14px;
+  border-radius:10px;border:none;
+  background:#0c1f3d;color:white;display:block;
 }
 
 .btn{
-  width:90%;
-  margin:10px auto;
-  padding:15px;
-  border-radius:12px;
-  font-size:18px;
-  display:block;
+  width:90%;margin:10px auto;padding:15px;
+  border-radius:12px;font-size:18px;display:block;
 }
 .gold{background:gold;color:black;}
 .outline{border:2px solid white;background:none;color:white;}
@@ -44,11 +25,8 @@ input{
 .hide{display:none;}
 
 .card{
-  background:#0c1f3d;
-  margin:10px;
-  padding:10px;
-  border-radius:12px;
-  text-align:center;
+  background:#0c1f3d;margin:10px;padding:12px;
+  border-radius:12px;text-align:center;
 }
 </style>
 </head>
@@ -66,7 +44,7 @@ input{
 <input id="captcha" placeholder="Enter 1234">
 
 <button class="btn gold" onclick="signup()">Create Account</button>
-<button class="btn outline" onclick="showLogin()">Go to Login</button>
+<button class="btn outline" onclick="showLogin()">Login</button>
 </div>
 
 <!-- LOGIN -->
@@ -85,10 +63,9 @@ input{
 <button class="btn gold" onclick="openWallet()">💳 Wallet</button>
 
 <h3 style="text-align:center;">🎮 Games</h3>
-
-<div class="card">Slots Game</div>
-<div class="card">Casino Game</div>
-<div class="card">Live Game</div>
+<div class="card">Slots</div>
+<div class="card">Casino</div>
+<div class="card">Live Casino</div>
 
 <button class="btn outline" onclick="logout()">Logout</button>
 </div>
@@ -98,7 +75,7 @@ input{
 <h3 style="text-align:center;">Wallet</h3>
 
 <input id="depositAmount" placeholder="Deposit Amount">
-<button class="btn gold" onclick="deposit()">Deposit (EasyPaisa/JazzCash)</button>
+<button class="btn gold" onclick="deposit()">Deposit (EasyPaisa / JazzCash)</button>
 
 <input id="withdrawAmount" placeholder="Withdraw Amount">
 <button class="btn gold" onclick="withdraw()">Withdraw</button>
@@ -107,10 +84,17 @@ input{
 </div>
 
 <script>
-let users = JSON.parse(localStorage.getItem("users")) || [];
-let currentUser = null;
 
-// SIGNUP
+// ===== STORAGE =====
+let users = JSON.parse(localStorage.getItem("users")) || [];
+let currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
+
+// ===== AUTO LOGIN =====
+if(currentUser){
+  showDashboard();
+}
+
+// ===== SIGNUP =====
 function signup(){
   let name = fullName.value;
   let user = userName.value;
@@ -118,51 +102,54 @@ function signup(){
   let passw = pass.value;
   let cap = captcha.value;
 
-  if(cap != "1234"){
+  if(cap !== "1234"){
     alert("Captcha wrong ❌");
     return;
   }
 
+  if(users.find(x=>x.user===user)){
+    alert("Username already exists ❌");
+    return;
+  }
+
   let obj = {
-    name,
-    user,
-    phoneNo,
-    passw,
-    balance:1000
+    name,user,phoneNo,passw,balance:1000
   };
 
   users.push(obj);
-  localStorage.setItem("users", JSON.stringify(users));
+  localStorage.setItem("users",JSON.stringify(users));
 
   alert("Account Created ✅");
   showLogin();
 }
 
-// LOGIN
+// ===== LOGIN =====
 function login(){
   let u = loginUser.value;
   let p = loginPass.value;
 
-  let found = users.find(x => x.user===u && x.passw===p);
+  let found = users.find(x=>x.user===u && x.passw===p);
 
   if(found){
     currentUser = found;
+    localStorage.setItem("currentUser",JSON.stringify(found));
     showDashboard();
   }else{
-    alert("Invalid Login ❌");
+    alert("Invalid login ❌");
   }
 }
 
-// DASHBOARD
+// ===== DASHBOARD =====
 function showDashboard(){
   signupBox.style.display="none";
   loginBox.style.display="none";
+  wallet.style.display="none";
   dashboard.style.display="block";
 
   bal.innerText = currentUser.balance;
 }
 
-// WALLET
+// ===== WALLET =====
 function openWallet(){
   dashboard.style.display="none";
   wallet.style.display="block";
@@ -173,16 +160,21 @@ function back(){
   dashboard.style.display="block";
 }
 
-// DEPOSIT
+// ===== DEPOSIT =====
 function deposit(){
   let amt = parseInt(depositAmount.value);
+
+  if(!amt || amt<=0){
+    alert("Enter valid amount ❌");
+    return;
+  }
+
   currentUser.balance += amt;
   save();
-  alert("Deposit Request Sent 💰");
-  back();
+  alert("Deposit request submitted 💰");
 }
 
-// WITHDRAW
+// ===== WITHDRAW =====
 function withdraw(){
   let amt = parseInt(withdrawAmount.value);
 
@@ -193,22 +185,24 @@ function withdraw(){
 
   currentUser.balance -= amt;
   save();
-  alert("Withdraw Request Sent 💸");
-  back();
+  alert("Withdraw request sent 💸");
 }
 
-// SAVE
+// ===== SAVE =====
 function save(){
-  localStorage.setItem("users", JSON.stringify(users));
+  users = users.map(u=>u.user===currentUser.user ? currentUser : u);
+  localStorage.setItem("users",JSON.stringify(users));
+  localStorage.setItem("currentUser",JSON.stringify(currentUser));
   showDashboard();
 }
 
-// LOGOUT
+// ===== LOGOUT =====
 function logout(){
+  localStorage.removeItem("currentUser");
   location.reload();
 }
 
-// NAV
+// ===== NAV =====
 function showLogin(){
   signupBox.style.display="none";
   loginBox.style.display="block";
@@ -218,6 +212,7 @@ function showSignup(){
   signupBox.style.display="block";
   loginBox.style.display="none";
 }
+
 </script>
 
 </body>
