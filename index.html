@@ -5,148 +5,60 @@
 <title>Bazi Bet</title>
 
 <style>
-body{
-  margin:0;
-  font-family:sans-serif;
-  background:#020c1b;
-  color:white;
-}
+body{margin:0;background:#020c1b;color:white;font-family:sans-serif;}
+.center{text-align:center;margin-top:20px;}
+.btn{width:90%;margin:10px auto;padding:15px;border-radius:12px;font-size:18px;display:block;}
+.login{border:2px solid white;background:none;color:white;}
+.signup{background:gold;color:black;}
+input{width:90%;padding:15px;margin:10px auto;border-radius:10px;border:none;background:#0c1f3d;color:white;display:block;}
+.hide{display:none;}
 
-.banner img{
-  width:100%;
-  height:200px;
-  object-fit:cover;
-}
-
-.logo{
-  text-align:center;
-  font-size:28px;
-  margin:10px 0;
-}
-.logo span{ color:gold; }
-
-.btn{
-  width:90%;
-  margin:10px auto;
-  padding:15px;
-  border-radius:12px;
-  font-size:18px;
-  text-align:center;
-  display:block;
-}
-.login{ border:2px solid white; background:none; color:white; }
-.signup{ background:gold; color:black; }
-
-.form{
-  width:90%;
-  margin:10px auto;
-}
-input{
-  width:100%;
-  padding:15px;
-  margin:10px 0;
-  border-radius:10px;
-  border:none;
-  background:#0c1f3d;
-  color:white;
-}
-
-.password-box{
-  position:relative;
-}
-.eye{
-  position:absolute;
-  right:15px;
-  top:50%;
-  transform:translateY(-50%);
-  cursor:pointer;
-}
-
-.balance{
-  text-align:center;
-  font-size:22px;
-  margin-top:10px;
-  color:gold;
-}
-
-.games{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:10px;
-  padding:10px;
-}
-.card{
-  background:#0c1f3d;
-  border-radius:12px;
-  overflow:hidden;
-  text-align:center;
-}
-.card img{
-  width:100%;
-  height:90px;
-  object-fit:cover;
-}
+.card{background:#0c1f3d;border-radius:12px;margin:10px;padding:10px;text-align:center;}
 </style>
 </head>
 
 <body>
 
-<div class="banner">
-<img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317">
-</div>
+<!-- AUTH -->
+<div id="auth">
+<h2 class="center">bazi <span style="color:gold">bet</span></h2>
 
-<div class="logo">bazi <span>bet</span></div>
-
-<button class="btn login" onclick="showLogin()">Login</button>
-<button class="btn signup" onclick="showSignup()">Sign Up</button>
-
-<div class="balance">💰 Balance: <span id="balance">0</span></div>
-
-<!-- LOGIN -->
-<div class="form" id="loginBox">
-<input id="loginUser" placeholder="Phone Number">
-
-<div class="password-box">
-<input id="loginPass" type="password" placeholder="Password">
-<span class="eye" onclick="toggle('loginPass')">👁</span>
-</div>
-
-<button class="btn signup" onclick="login()">Login</button>
-</div>
-
-<!-- SIGNUP -->
-<div class="form" id="signupBox" style="display:none;">
 <input id="phone" placeholder="Phone Number">
-
-<div class="password-box">
 <input id="pass" type="password" placeholder="Password">
-<span class="eye" onclick="toggle('pass')">👁</span>
-</div>
 
 <button class="btn signup" onclick="signup()">Create Account</button>
+<button class="btn login" onclick="login()">Login</button>
 </div>
 
-<!-- GAME -->
-<button class="btn signup" onclick="playGame()">🎮 Play Game</button>
+<!-- DASHBOARD -->
+<div id="dashboard" class="hide">
+<h3 class="center">💰 Balance: <span id="bal">0</span></h3>
 
-<div class="games">
-<div class="card"><img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317"><p>Slots</p></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da"><p>Casino</p></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238"><p>Live</p></div>
+<button class="btn signup" onclick="playGame()">🎮 Play Game</button>
+<button class="btn login" onclick="openWallet()">💳 Wallet</button>
+</div>
+
+<!-- WALLET -->
+<div id="wallet" class="hide">
+<h3 class="center">Wallet</h3>
+
+<input id="withdrawPhone" placeholder="Withdraw Phone">
+<input id="amount" placeholder="Amount">
+
+<button class="btn signup" onclick="withdraw()">Withdraw</button>
+<button class="btn login" onclick="back()">Back</button>
 </div>
 
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { 
-getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged 
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-import { 
-getFirestore, doc, setDoc, getDoc, updateDoc 
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc, updateDoc } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// 🔥 paste your config
+// 🔥 apna config yahan dalo
 const firebaseConfig = {
   apiKey: "YOUR_KEY",
   authDomain: "YOUR_DOMAIN",
@@ -157,91 +69,94 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-let currentUser = null;
-
-// AUTO LOGIN
-onAuthStateChanged(auth, (user)=>{
-  if(user){
-    currentUser = user.uid;
-    loadWallet(user.uid);
-  }
-});
+let uid=null;
 
 // SIGNUP
 window.signup = async ()=>{
-  let phone = phoneInput();
+  let phone = document.getElementById("phone").value;
   let pass = document.getElementById("pass").value;
 
-  let email = phone + "@bazibet.com";
+  let email = phone + "@bazi.com";
 
-  let user = await createUserWithEmailAndPassword(auth, email, pass);
+  let user = await createUserWithEmailAndPassword(auth,email,pass);
 
   await setDoc(doc(db,"users",user.user.uid),{
-    phone:phone,
-    balance:1000
+    balance:1000,
+    phone:phone
   });
 
-  alert("Account Created +1000 💰");
+  uid=user.user.uid;
+  showDashboard();
 };
 
 // LOGIN
 window.login = async ()=>{
-  let phone = document.getElementById("loginUser").value;
-  let pass = document.getElementById("loginPass").value;
+  let phone = document.getElementById("phone").value;
+  let pass = document.getElementById("pass").value;
 
-  let email = phone + "@bazibet.com";
+  let email = phone + "@bazi.com";
 
   let user = await signInWithEmailAndPassword(auth,email,pass);
 
-  currentUser = user.user.uid;
-  loadWallet(currentUser);
+  uid=user.user.uid;
+  showDashboard();
 };
 
-// LOAD WALLET
-async function loadWallet(uid){
+// DASHBOARD
+async function showDashboard(){
+  document.getElementById("auth").style.display="none";
+  document.getElementById("dashboard").style.display="block";
+
   let snap = await getDoc(doc(db,"users",uid));
-  let data = snap.data();
-  document.getElementById("balance").innerText = data.balance;
+  document.getElementById("bal").innerText = snap.data().balance;
 }
 
 // GAME
 window.playGame = async ()=>{
-  if(!currentUser){ alert("Login first"); return; }
+  let ref = doc(db,"users",uid);
+  let snap = await getDoc(ref);
 
-  let ref = doc(db,"users",currentUser);
+  let bal = snap.data().balance;
+  let win = Math.random()>0.5 ? 100 : -50;
+
+  await updateDoc(ref,{balance:bal+win});
+
+  alert(win>0?"Win 💰":"Lose ❌");
+
+  showDashboard();
+};
+
+// WALLET
+window.openWallet=()=>{
+  document.getElementById("dashboard").style.display="none";
+  document.getElementById("wallet").style.display="block";
+};
+
+window.back=()=>{
+  document.getElementById("wallet").style.display="none";
+  document.getElementById("dashboard").style.display="block";
+};
+
+// WITHDRAW
+window.withdraw = async ()=>{
+  let phone = document.getElementById("withdrawPhone").value;
+  let amount = parseInt(document.getElementById("amount").value);
+
+  let ref = doc(db,"users",uid);
   let snap = await getDoc(ref);
 
   let bal = snap.data().balance;
 
-  let win = Math.random()>0.5 ? 100 : -50;
+  if(amount>bal){
+    alert("Not enough balance ❌");
+    return;
+  }
 
-  let newBal = bal + win;
+  await updateDoc(ref,{balance:bal-amount});
 
-  await updateDoc(ref,{balance:newBal});
+  alert("Withdraw request sent to "+phone);
 
-  alert(win>0 ? "Win 💰" : "Lose ❌");
-
-  loadWallet(currentUser);
-};
-
-// HELPERS
-function phoneInput(){
-  return document.getElementById("phone").value;
-}
-
-window.toggle = (id)=>{
-  let input = document.getElementById(id);
-  input.type = input.type === "password" ? "text" : "password";
-};
-
-window.showLogin = ()=>{
-  document.getElementById("loginBox").style.display="block";
-  document.getElementById("signupBox").style.display="none";
-};
-
-window.showSignup = ()=>{
-  document.getElementById("loginBox").style.display="none";
-  document.getElementById("signupBox").style.display="block";
+  back();
 };
 
 </script>
