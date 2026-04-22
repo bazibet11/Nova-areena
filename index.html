@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BaziBet</title>
+<title>BaziBet Pro</title>
 
 <style>
 body{
@@ -13,10 +13,10 @@ body{
     color:white;
 }
 
-/* TOP BANNER */
+/* BANNER */
 .banner{
-    background: url('https://images.unsplash.com/photo-1596838132731-3301c3fd4317') center/cover no-repeat;
-    padding:40px 10px;
+    background:url('https://images.unsplash.com/photo-1596838132731-3301c3fd4317') center/cover;
+    padding:50px 10px;
     text-align:center;
     position:relative;
 }
@@ -24,8 +24,8 @@ body{
 .banner::after{
     content:'';
     position:absolute;
-    top:0;left:0;right:0;bottom:0;
-    background:rgba(0,0,0,0.6);
+    inset:0;
+    background:rgba(0,0,0,0.7);
 }
 
 .banner-content{
@@ -33,24 +33,30 @@ body{
     z-index:1;
 }
 
+/* LOGO ANIMATION */
 .logo{
-    font-size:34px;
+    font-size:36px;
     font-weight:bold;
+    animation: glow 2s infinite alternate;
 }
 
 .logo span{
     color:gold;
 }
 
+@keyframes glow{
+    from{ text-shadow:0 0 10px gold;}
+    to{ text-shadow:0 0 25px gold;}
+}
+
 .crown{
     font-size:28px;
-    margin-top:5px;
 }
 
 /* BUTTONS */
 .buttons{
     text-align:center;
-    margin:20px 0;
+    margin:20px;
 }
 
 .btn{
@@ -59,6 +65,7 @@ body{
     margin:10px;
     border-radius:10px;
     font-size:16px;
+    cursor:pointer;
 }
 
 .login{
@@ -69,15 +76,16 @@ body{
 
 .signup{
     background:gold;
-    border:none;
     color:black;
+    border:none;
 }
 
-/* GAMES TITLE */
-.games-title{
+/* JACKPOT */
+.jackpot{
     text-align:center;
+    color:gold;
     font-size:22px;
-    margin:10px 0;
+    margin:15px;
 }
 
 /* GRID */
@@ -92,7 +100,13 @@ body{
     background:#0b1220;
     border-radius:15px;
     overflow:hidden;
-    box-shadow:0 0 12px rgba(255,215,0,0.2);
+    box-shadow:0 0 15px rgba(255,215,0,0.3);
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.card:hover{
+    transform:scale(1.05);
 }
 
 .card img{
@@ -104,7 +118,6 @@ body{
 .card p{
     text-align:center;
     padding:10px;
-    margin:0;
 }
 
 /* FOOTER */
@@ -114,64 +127,90 @@ body{
     color:#aaa;
 }
 </style>
-
 </head>
+
 <body>
 
-<!-- 🔥 NEW BANNER -->
+<!-- BANNER -->
 <div class="banner">
-    <div class="banner-content">
-        <div class="logo">BAZI <span>BET</span></div>
-        <div class="crown">👑</div>
-    </div>
+  <div class="banner-content">
+    <div class="logo">BAZI <span>BET</span></div>
+    <div class="crown">👑</div>
+  </div>
 </div>
 
 <!-- BUTTONS -->
 <div class="buttons">
-    <button class="btn login">Login</button><br>
-    <button class="btn signup">Sign Up</button>
+  <button class="btn login" onclick="login()">Login</button><br>
+  <button class="btn signup" onclick="signup()">Sign Up</button>
+</div>
+
+<!-- JACKPOT -->
+<div class="jackpot">
+💰 GRAND JACKPOT: <span id="money">1000</span> $
 </div>
 
 <!-- GAMES -->
-<div class="games-title">🎮 Games</div>
-
 <div class="grid">
 
-    <div class="card">
-        <img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317">
-        <p>Slots</p>
-    </div>
+<div class="card" onclick="openGame('Slots')">
+<img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317">
+<p>Slots</p>
+</div>
 
-    <div class="card">
-        <img src="https://images.unsplash.com/photo-1511193311914-0346f16efe90">
-        <p>Casino</p>
-    </div>
+<div class="card" onclick="openGame('Casino')">
+<img src="https://images.unsplash.com/photo-1511193311914-0346f16efe90">
+<p>Casino</p>
+</div>
 
-    <div class="card">
-        <img src="https://images.unsplash.com/photo-1606166325683-79c5c8f93c76">
-        <p>Live Casino</p>
-    </div>
+<div class="card" onclick="openGame('Live Casino')">
+<img src="https://images.unsplash.com/photo-1606166325683-79c5c8f93c76">
+<p>Live Casino</p>
+</div>
 
-    <div class="card">
-        <img src="https://images.unsplash.com/photo-1607082349566-187342175e2f">
-        <p>Fortune Games</p>
-    </div>
+<div class="card" onclick="openGame('Fortune')">
+<img src="https://images.unsplash.com/photo-1607082349566-187342175e2f">
+<p>Fortune Games</p>
+</div>
 
-    <div class="card">
-        <img src="https://images.unsplash.com/photo-1592503254549-d83d24a4dfab">
-        <p>Chili Games</p>
-    </div>
+<div class="card" onclick="openGame('Chili')">
+<img src="https://images.unsplash.com/photo-1592503254549-d83d24a4dfab">
+<p>Chili Games</p>
+</div>
 
-    <div class="card">
-        <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b">
-        <p>Tournaments</p>
-    </div>
+<div class="card" onclick="openGame('Tournament')">
+<img src="https://images.unsplash.com/photo-1517649763962-0c623066013b">
+<p>Tournaments</p>
+</div>
 
 </div>
 
-<div class="footer">
-© 2026 BaziBet Gaming
-</div>
+<div class="footer">© 2026 BaziBet Gaming</div>
+
+<script>
+
+/* JACKPOT COUNTER */
+let money = 1000;
+setInterval(()=>{
+    money += Math.floor(Math.random()*50);
+    document.getElementById("money").innerText = money;
+},1000);
+
+/* BUTTON FUNCTIONS */
+function login(){
+    alert("Login Page Coming...");
+}
+
+function signup(){
+    alert("Signup Page Coming...");
+}
+
+/* GAME CLICK */
+function openGame(name){
+    alert("Opening " + name + " 🎮");
+}
+
+</script>
 
 </body>
 </html>
