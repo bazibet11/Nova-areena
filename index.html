@@ -13,22 +13,22 @@ body {
   color: white;
 }
 
-/* TOP BANNER */
-.banner {
+/* TOP IMAGE */
+.top-banner {
   width: 100%;
-  height: 200px;
+  height: 220px;
   background: url('https://images.unsplash.com/photo-1596838132731-3301c3fd4317') center/cover no-repeat;
 }
 
 /* TITLE */
 .title {
   text-align: center;
-  font-size: 28px;
+  font-size: 26px;
   margin-top: 15px;
 }
 
 .title span {
-  color: gold;
+  color: #ffcc00;
 }
 
 /* BUTTONS */
@@ -36,9 +36,9 @@ body {
   display: block;
   width: 80%;
   margin: 10px auto;
-  padding: 12px;
+  padding: 14px;
   font-size: 18px;
-  border-radius: 10px;
+  border-radius: 12px;
   text-align: center;
   cursor: pointer;
 }
@@ -55,13 +55,14 @@ body {
   border: none;
 }
 
-/* GAMES */
+/* GAMES TITLE */
 .games-title {
   text-align: center;
   font-size: 20px;
   margin-top: 15px;
 }
 
+/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -69,17 +70,19 @@ body {
   padding: 15px;
 }
 
+/* CARD */
 .card {
   background: #0b132b;
-  border-radius: 12px;
+  border-radius: 15px;
   overflow: hidden;
   text-align: center;
-  box-shadow: 0 0 10px rgba(255,215,0,0.3);
+  box-shadow: 0 0 12px rgba(255, 204, 0, 0.3);
+  position: relative;
 }
 
 .card img {
   width: 100%;
-  height: 90px;
+  height: 95px;
   object-fit: cover;
 }
 
@@ -87,83 +90,70 @@ body {
   margin: 8px 0;
 }
 
-/* BADGES */
+/* BADGE */
 .badge {
   position: absolute;
+  top: 5px;
+  left: 5px;
   background: red;
-  color: white;
   font-size: 10px;
-  padding: 2px 5px;
+  padding: 3px 6px;
   border-radius: 5px;
-  margin: 5px;
 }
 </style>
 
 </head>
+
 <body>
 
-<!-- TOP IMAGE -->
-<div class="banner"></div>
+<!-- TOP -->
+<div class="top-banner"></div>
 
 <!-- TITLE -->
 <div class="title">bazi <span>bet</span></div>
 
 <!-- BUTTONS -->
-<button class="btn login" onclick="login()">Login</button>
-<button class="btn signup" onclick="signup()">Sign Up</button>
+<button class="btn login">Login</button>
+<button class="btn signup">Sign Up</button>
 
 <!-- GAMES -->
 <div class="games-title">🎮 Games</div>
 
 <div class="grid">
 
-  <!-- Slots -->
   <div class="card">
     <img src="https://cdn.pixabay.com/photo/2017/08/10/07/32/slot-machine-2619077_640.jpg">
     <p>Slots</p>
   </div>
 
-  <!-- Casino -->
   <div class="card">
     <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/casino-1869567_640.jpg">
     <p>Casino</p>
   </div>
 
-  <!-- Live Casino -->
   <div class="card">
+    <span class="badge">LIVE</span>
     <img src="https://cdn.pixabay.com/photo/2017/08/06/00/40/woman-2587954_640.jpg">
     <p>Live Casino</p>
   </div>
 
-  <!-- Fortune -->
   <div class="card">
     <img src="https://cdn.pixabay.com/photo/2017/01/31/21/23/wheel-2027853_640.png">
     <p>Fortune Games</p>
   </div>
 
-  <!-- Jilli (FIXED) -->
   <div class="card">
+    <span class="badge">HOT</span>
     <img src="https://cdn.pixabay.com/photo/2017/01/20/00/30/chili-1995056_640.png">
-    <p>Jilli Games</p>
+    <p>Chili Games</p>
   </div>
 
-  <!-- Tournament -->
   <div class="card">
     <img src="https://cdn.pixabay.com/photo/2016/11/29/09/32/trophy-1867148_640.jpg">
     <p>Tournaments</p>
   </div>
 
 </div>
-
-<script>
-function login(){
-  alert("Login system coming soon...");
-}
-
-function signup(){
-  alert("Signup system coming soon...");
-}
-</script>
 
 </body>
 </html>
