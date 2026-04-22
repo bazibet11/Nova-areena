@@ -1,150 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Nova Areena</title>
+<title>Login</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #1e1e1e;
+}
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+.container {
+  background: #22b07d;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: linear-gradient(135deg, #0f172a, #020617);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+.logo {
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 40px;
+}
 
-    .box {
-      width: 90%;
-      max-width: 420px;
-      padding: 30px;
-      background: #0b1220;
-      border-radius: 20px;
-      box-shadow: 0 0 25px rgba(0,0,0,0.6);
-      text-align: center;
-    }
+.btn {
+  width: 220px;
+  padding: 15px;
+  margin: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
 
-    h2 {
-      margin-bottom: 20px;
-    }
+.login {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+}
 
-    input {
-      width: 100%;
-      padding: 14px;
-      margin: 10px 0;
-      border-radius: 10px;
-      border: none;
-      outline: none;
-      background: #020617;
-      color: white;
-      font-size: 16px;
-    }
+.signup {
+  background: linear-gradient(to right, orange, yellow);
+  color: white;
+}
 
-    button {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 10px;
-      margin-top: 10px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .btn-blue {
-      background: #2563eb;
-      color: white;
-    }
-
-    .btn-green {
-      background: #22c55e;
-      color: white;
-    }
-
-    .switch {
-      margin-top: 15px;
-      cursor: pointer;
-      color: #38bdf8;
-    }
-  </style>
+.bottom {
+  padding: 20px;
+  color: white;
+}
+</style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="container">
+  <div class="logo">bj | baji</div>
 
-  <!-- SIGNUP -->
-  <div id="signupBox">
-    <h2>Sign Up</h2>
-
-    <input id="email" type="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Password">
-
-    <button class="btn-blue" onclick="signup()">Create Account</button>
-
-    <p class="switch" onclick="showLogin()">Already have account? Login</p>
-  </div>
-
-  <!-- LOGIN -->
-  <div id="loginBox" style="display:none;">
-    <h2>Login</h2>
-
-    <input id="loginEmail" type="email" placeholder="Email">
-    <input id="loginPassword" type="password" placeholder="Password">
-
-    <button class="btn-green" onclick="login()">Login</button>
-
-    <p class="switch" onclick="showSignup()">Create new account</p>
-  </div>
-
+  <button class="btn login">Login</button>
+  <button class="btn signup">Sign Up</button>
 </div>
 
-<script>
-  const firebaseConfig = {
-    apiKey: "PASTE_YOUR_API_KEY",
-    authDomain: "nova-areena.firebaseapp.com",
-    projectId: "nova-areena"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-
-  function signup() {
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-
-    auth.createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        alert("Signup Success ✅");
-      })
-      .catch(err => alert(err.message));
-  }
-
-  function login() {
-    let email = document.getElementById("loginEmail").value;
-    let password = document.getElementById("loginPassword").value;
-
-    auth.signInWithEmailAndPassword(email, password)
-      .then(() => {
-        alert("Login Success 🎉");
-      })
-      .catch(err => alert(err.message));
-  }
-
-  function showLogin() {
-    document.getElementById("signupBox").style.display = "none";
-    document.getElementById("loginBox").style.display = "block";
-  }
-
-  function showSignup() {
-    document.getElementById("signupBox").style.display = "block";
-    document.getElementById("loginBox").style.display = "none";
-  }
-</script>
+<div class="bottom">
+  <h2>Baji999 Login</h2>
+  <p>Simple demo UI like your screenshot.</p>
+</div>
 
 </body>
 </html>
