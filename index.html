@@ -2,100 +2,51 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BaziBet Login</title>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-// 🔥 APNI CONFIG DAALO
-const firebaseConfig = {
-  apiKey: "YAHAN_API_KEY",
-  authDomain: "nova-areena.firebaseapp.com",
-  projectId: "nova-areena",
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-// SIGNUP
-window.signup = async function () {
-  let email = document.getElementById("email").value;
-  let pass = document.getElementById("password").value;
-
-  try {
-    await createUserWithEmailAndPassword(auth, email, pass);
-    alert("Account Created ✅");
-  } catch (e) {
-    alert(e.message);
-  }
-};
-
-// LOGIN
-window.login = async function () {
-  let email = document.getElementById("lemail").value;
-  let pass = document.getElementById("lpassword").value;
-
-  try {
-    await signInWithEmailAndPassword(auth, email, pass);
-  } catch (e) {
-    alert(e.message);
-  }
-};
-
-// AUTO LOGIN
-onAuthStateChanged(auth, (user) => {
-  if(user){
-    home.style.display="none";
-    loginBox.style.display="none";
-    signupBox.style.display="none";
-    dashboard.style.display="block";
-  }
-});
-
-// LOGOUT
-window.logout = function(){
-  signOut(auth);
-  location.reload();
-};
-</script>
+<title>BaziBet</title>
 
 <style>
 body{
   margin:0;
   font-family:Arial;
-  background:#0f172a;
+  background:#0b1220;
   color:white;
   text-align:center;
 }
 
-.container{
-  padding:40px;
+/* BACKGROUND HERO */
+.hero{
+  background:url('https://images.unsplash.com/photo-1605902711622-cfb43c44367f') no-repeat center/cover;
+  padding:80px 20px;
 }
 
+/* LOGO */
 .logo{
-  font-size:35px;
+  font-size:36px;
   margin-bottom:20px;
 }
-
 .logo span{
   color:gold;
 }
 
+/* INPUT */
 input{
+  width:85%;
   padding:12px;
   margin:10px;
-  width:80%;
-  border-radius:6px;
-  border:none;
+  border-radius:10px;
+  border:1px solid #334155;
+  background:#1e293b;
+  color:white;
 }
 
+/* BUTTON */
 button{
   padding:12px 20px;
-  margin:10px;
   border:none;
-  border-radius:6px;
+  border-radius:10px;
+  margin:10px;
   cursor:pointer;
+  font-weight:bold;
 }
 
 .login-btn{
@@ -107,59 +58,159 @@ button{
 .signup-btn{
   background:linear-gradient(to right, orange, yellow);
 }
+
+/* BOX */
+.box{
+  display:none;
+  padding:20px;
+}
+
+.active{
+  display:block;
+}
+
+/* CARD STYLE */
+.card{
+  background:#111827;
+  margin:20px;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 0 10px rgba(0,0,0,0.5);
+}
+
+/* FOOTER IMAGE */
+.footer{
+  background:url('https://images.unsplash.com/photo-1511512578047-dfb367046420') no-repeat center/cover;
+  padding:60px 20px;
+  margin-top:40px;
+}
 </style>
 </head>
 
 <body>
 
-<div id="home" class="container">
-  <div class="logo">bazi <span>|</span> bet</div>
-  <button class="login-btn" onclick="showLogin()">Login</button>
-  <button class="signup-btn" onclick="showSignup()">Sign Up</button>
+<!-- HOME -->
+<div id="home" class="active">
+
+  <div class="hero">
+    <div class="logo">bazi <span>|</span> bet</div>
+    <button class="login-btn" onclick="showLogin()">Login</button>
+    <button class="signup-btn" onclick="showSignup()">Sign Up</button>
+  </div>
+
+  <div class="footer">
+    <h2>🎰 Play & Win Big</h2>
+  </div>
+
 </div>
 
 <!-- LOGIN -->
-<div id="loginBox" style="display:none;">
-  <h2>Login</h2>
-  <input id="lemail" placeholder="Email"><br>
-  <input id="lpassword" type="password" placeholder="Password"><br>
-  <button onclick="login()">Login</button>
-  <br><button onclick="back()">Back</button>
+<div id="loginBox" class="box">
+  <div class="card">
+    <h2>Login</h2>
+    <input id="loginUser" placeholder="Username">
+    <input id="loginPass" type="password" placeholder="Password">
+    <br>
+    <button onclick="login()">Login</button>
+    <br>
+    <button onclick="back()">Back</button>
+  </div>
 </div>
 
 <!-- SIGNUP -->
-<div id="signupBox" style="display:none;">
-  <h2>Sign Up</h2>
-  <input id="email" placeholder="Email"><br>
-  <input id="password" type="password"><br>
-  <button onclick="signup()">Create Account</button>
-  <br><button onclick="back()">Back</button>
+<div id="signupBox" class="box">
+  <div class="card">
+    <h2>Sign Up</h2>
+    <input id="name" placeholder="Full Name">
+    <input id="user" placeholder="Username">
+    <input id="email" placeholder="Email">
+    <input id="pass" type="password" placeholder="Password">
+
+    <p id="captchaText"></p>
+    <input id="captchaInput" placeholder="Enter Answer">
+
+    <br>
+    <button onclick="signup()">Create Account</button>
+    <br>
+    <button onclick="back()">Back</button>
+  </div>
 </div>
 
 <!-- DASHBOARD -->
-<div id="dashboard" style="display:none;">
-  <h2>✅ Login Successful</h2>
-  <p>Welcome to BaziBet</p>
-  <button onclick="logout()">Logout</button>
-</div>
-
-<div style="padding:20px;">
-  <h3>BaziBet Login</h3>
+<div id="dashboard" class="box">
+  <div class="card">
+    <h2>🎉 Welcome to BaziBet</h2>
+    <p>Now you can play games</p>
+    <button onclick="logout()">Logout</button>
+  </div>
 </div>
 
 <script>
+// NAV
 function showLogin(){
-  home.style.display="none";
-  loginBox.style.display="block";
+  hideAll();
+  loginBox.classList.add("active");
 }
 function showSignup(){
-  home.style.display="none";
-  signupBox.style.display="block";
+  hideAll();
+  signupBox.classList.add("active");
+  generateCaptcha();
 }
 function back(){
-  home.style.display="block";
-  loginBox.style.display="none";
-  signupBox.style.display="none";
+  hideAll();
+  home.classList.add("active");
+}
+function hideAll(){
+  home.classList.remove("active");
+  loginBox.classList.remove("active");
+  signupBox.classList.remove("active");
+  dashboard.classList.remove("active");
+}
+
+// CAPTCHA
+let answer=0;
+function generateCaptcha(){
+  let a=Math.floor(Math.random()*10);
+  let b=Math.floor(Math.random()*10);
+  answer=a+b;
+  captchaText.innerText=a+" + "+b+" = ?";
+}
+
+// SIGNUP
+function signup(){
+  let user=document.getElementById("user").value;
+  let pass=document.getElementById("pass").value;
+  let cap=document.getElementById("captchaInput").value;
+
+  if(cap!=answer){
+    alert("Wrong Captcha ❌");
+    generateCaptcha();
+    return;
+  }
+
+  localStorage.setItem(user,pass);
+  alert("Account Created ✅");
+  back();
+}
+
+// LOGIN
+function login(){
+  let user=document.getElementById("loginUser").value;
+  let pass=document.getElementById("loginPass").value;
+
+  let saved=localStorage.getItem(user);
+
+  if(saved==pass){
+    hideAll();
+    dashboard.classList.add("active");
+  }else{
+    alert("Wrong Login ❌");
+  }
+}
+
+// LOGOUT
+function logout(){
+  back();
 }
 </script>
 
