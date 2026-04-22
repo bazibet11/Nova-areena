@@ -13,35 +13,47 @@ body {
   color: white;
 }
 
-/* 🔥 BANNER */
+/* 🔥 TOP BANNER */
 .banner {
   width: 100%;
-  height: 220px;
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)),
+  height: 240px;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.9)),
   url('https://images.unsplash.com/photo-1605902711622-cfb43c4437b1');
   background-size: cover;
   background-position: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
+/* 👑 LOGO */
 .logo {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: bold;
+  color: white;
 }
+
 .logo span {
   color: gold;
 }
 
-/* 🎮 TOP GAMES SCROLL */
+/* 👑 crown effect */
+.logo::after {
+  content: "👑";
+  display: block;
+  font-size: 24px;
+  margin-top: 5px;
+}
+
+/* 🎮 TOP MENU */
 .top-games {
   display: flex;
   overflow-x: auto;
   gap: 10px;
   padding: 10px;
 }
+
 .top-games span {
   background: #1a1a1a;
   color: gold;
@@ -56,6 +68,7 @@ body {
   text-align: center;
   margin: 20px 0;
 }
+
 .btn {
   width: 200px;
   padding: 12px;
@@ -64,11 +77,13 @@ body {
   font-size: 16px;
   cursor: pointer;
 }
+
 .btn-login {
   border: 2px solid white;
   background: transparent;
   color: white;
 }
+
 .btn-signup {
   background: linear-gradient(45deg, orange, gold);
   color: black;
@@ -79,13 +94,14 @@ body {
 .jackpot {
   text-align: center;
   color: gold;
-  font-size: 18px;
-  margin: 10px 0;
+  font-size: 20px;
+  margin: 15px 0;
   animation: glow 1s infinite alternate;
 }
+
 @keyframes glow {
   from { text-shadow: 0 0 5px gold; }
-  to { text-shadow: 0 0 20px orange; }
+  to { text-shadow: 0 0 25px orange; }
 }
 
 /* 🎮 GAMES GRID */
@@ -102,16 +118,22 @@ body {
   overflow: hidden;
   text-align: center;
   box-shadow: 0 0 10px rgba(255,215,0,0.2);
+  transition: 0.3s;
+}
+
+.game-card:hover {
+  transform: scale(1.05);
 }
 
 .game-card img {
   width: 100%;
-  height: 100px;
+  height: 120px;
   object-fit: cover;
 }
 
 .game-card p {
-  padding: 8px;
+  padding: 10px;
+  font-size: 14px;
 }
 
 /* 🔻 FOOTER */
@@ -127,10 +149,10 @@ body {
 
 <!-- 🔥 BANNER -->
 <div class="banner">
-  <h1 class="logo">bazi <span>bet</span></h1>
+  <h1 class="logo">BAZI <span>BET</span></h1>
 </div>
 
-<!-- 🎮 TOP MENU -->
+<!-- 🎮 MENU -->
 <div class="top-games">
   <span>🔥 Hot</span>
   <span>🎰 Slots</span>
@@ -142,8 +164,8 @@ body {
 
 <!-- 🎯 BUTTONS -->
 <div class="buttons">
-  <button class="btn btn-login" onclick="alert('Login Page Next')">Login</button>
-  <button class="btn btn-signup" onclick="alert('Signup Page Next')">Sign Up</button>
+  <button class="btn btn-login">Login</button>
+  <button class="btn btn-signup">Sign Up</button>
 </div>
 
 <!-- 💰 JACKPOT -->
@@ -160,33 +182,32 @@ body {
   </div>
 
   <div class="game-card">
-    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420">
+    <img src="https://images.unsplash.com/photo-1606166325695-4d6eec8b7c16">
     <p>Casino</p>
   </div>
 
   <div class="game-card">
-    <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc">
+    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420">
     <p>Live Casino</p>
   </div>
 
   <div class="game-card">
-    <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c">
-    <p>Fortune</p>
+    <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc">
+    <p>Fortune Games</p>
   </div>
 
   <div class="game-card">
     <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db">
-    <p>Chili Game</p>
+    <p>Chili Games</p>
   </div>
 
   <div class="game-card">
-    <img src="https://images.unsplash.com/photo-1606166325695-4d6eec8b7c16">
-    <p>Tournament</p>
+    <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c">
+    <p>Tournaments</p>
   </div>
 
 </div>
 
-<!-- 🔻 FOOTER -->
 <div class="footer">
   © 2026 BaziBet Gaming
 </div>
