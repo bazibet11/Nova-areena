@@ -1,22 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bazi Bet</title>
+  <title>Bazi Bet Login</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="home">
+<div class="container">
+
   <h1 class="logo">Bazi <span>Bet</span></h1>
 
-  <a href="login.htm">
-    <button class="login-btn">Login</button>
-  </a>
+  <div class="tabs">
+    <button class="active">Log in</button>
+    <button onclick="goSignup()">Sign up</button>
+  </div>
 
-  <a href="signup.html">
-    <button class="signup-btn">Sign Up</button>
-  </a>
+  <form onsubmit="loginUser(event)">
+    
+    <label>Username</label>
+    <input type="text" id="loginUser" placeholder="Enter username" required>
+
+    <label>Password</label>
+    <input type="password" id="loginPass" placeholder="Enter password" required>
+
+    <button class="login-btn">Log in</button>
+
+  </form>
+
 </div>
+
+<script src="app.js"></script>
 
 </body>
 </html>
