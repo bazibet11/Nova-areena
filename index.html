@@ -1,36 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Bazi Bet Login</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bazi Bet</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <div class="container">
 
-  <h1 class="logo">Bazi <span>Bet</span></h1>
-
-  <div class="tabs">
-    <button class="active">Log in</button>
-    <button onclick="goSignup()">Sign up</button>
+  <!-- HERO -->
+  <div class="hero">
+    <h2>Hello</h2>
+    <h1>Welcome to Bazi Bet</h1>
   </div>
 
-  <form onsubmit="loginUser(event)">
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab active" onclick="showLogin(this)">Log in</div>
+    <div class="tab" onclick="showSignup(this)">Sign up</div>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="loginForm">
+    <input type="text" placeholder="Enter your username">
+
+    <div class="password-box">
+      <input type="password" id="loginPass" placeholder="Enter your password">
+      <span onclick="togglePassword('loginPass')">👁️</span>
+    </div>
+
+    <a href="#" class="forgot">Forgot password?</a>
+
+    <button>Log in</button>
+  </div>
+
+  <!-- SIGNUP -->
+  <div id="signupForm" style="display:none;">
+
+    <input type="text" placeholder="Full Name">
+    <input type="text" placeholder="Username">
     
-    <label>Username</label>
-    <input type="text" id="loginUser" placeholder="Enter username" required>
+    <input type="text" placeholder="Phone Number (+92...)">
 
-    <label>Password</label>
-    <input type="password" id="loginPass" placeholder="Enter password" required>
+    <div class="password-box">
+      <input type="password" id="signupPass" placeholder="Password">
+      <span onclick="togglePassword('signupPass')">👁️</span>
+    </div>
 
-    <button class="login-btn">Log in</button>
+    <select>
+      <option>PKR</option>
+    </select>
 
-  </form>
+    <div class="checkbox">
+      <input type="checkbox">
+      <label>I am 18+ and agree terms</label>
+    </div>
+
+    <button>Continue</button>
+  </div>
 
 </div>
 
 <script src="app.js"></script>
-
 </body>
 </html>
