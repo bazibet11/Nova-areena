@@ -6,29 +6,61 @@ body {
   text-align: center;
 }
 
-h1, h2 {
+.logo {
+  font-size: 30px;
+  margin: 20px;
+}
+
+.logo span {
+  color: gold;
+}
+
+.buttons {
+  margin: 20px;
+}
+
+.login-btn {
+  width: 80%;
+  padding: 15px;
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.signup-btn {
+  width: 80%;
+  padding: 15px;
+  background: gold;
+  border: none;
+  color: black;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.games-title {
   margin-top: 20px;
 }
 
-input {
+.games {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 15px;
+}
+
+.card {
+  background: #111;
+  border-radius: 15px;
   padding: 10px;
-  margin: 10px;
-  width: 80%;
-  border-radius: 5px;
-  border: none;
 }
 
-button {
-  padding: 12px 20px;
-  margin: 10px;
-  border: none;
-  border-radius: 5px;
-  background: gold;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
+.card img {
+  width: 100%;
+  border-radius: 10px;
 }
 
-button:hover {
-  background: orange;
+.card p {
+  margin-top: 10px;
 }
