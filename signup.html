@@ -1,18 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Signup</title>
+  <title>Bazi Bet Signup</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h2>Signup</h2>
+<div class="container">
 
-<input id="name" placeholder="Full Name"><br>
-<input id="username" placeholder="Username"><br>
-<input id="password" type="password" placeholder="Password"><br>
+  <h1 class="logo">Bazi <span>Bet</span></h1>
 
-<button onclick="signup()">Signup</button>
+  <div class="tabs">
+    <button onclick="goLogin()">Log in</button>
+    <button class="active">Sign up</button>
+  </div>
+
+  <form onsubmit="signupUser(event)">
+
+    <p class="code">Affiliate Code: 123ABC</p>
+
+    <label>Username</label>
+    <input type="text" id="signupUser" placeholder="Enter username" required>
+
+    <label>Choose Currency</label>
+    <select id="currency">
+      <option>PKR</option>
+      <option>USD</option>
+    </select>
+
+    <label>Phone Number</label>
+    <input type="text" id="phone" placeholder="+92 3000000000" required>
+
+    <label>Password</label>
+    <input type="password" id="signupPass" placeholder="Enter password" required>
+
+    <div class="check">
+      <input type="checkbox" required> I am 18+ and agree terms
+    </div>
+
+    <button class="login-btn">Continue</button>
+
+  </form>
+
+</div>
 
 <script src="app.js"></script>
 
