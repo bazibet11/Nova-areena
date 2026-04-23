@@ -1,111 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Game Home</title>
+  <title>Bazi Bet</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Welcome to Nova Game</h1>
+<div class="home">
+  <h1 class="logo">Bazi <span>Bet</span></h1>
 
-<a href="login.html"><button>Login</button></a>
-<a href="signup.html"><button>Signup</button></a>
+  <a href="login.htm">
+    <button class="login-btn">Login</button>
+  </a>
+
+  <a href="signup.html">
+    <button class="signup-btn">Sign Up</button>
+  </a>
+</div>
 
 </body>
 </html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Signup</title>
-</head>
-<body>
-
-<h2>Signup</h2>
-
-<input id="name" placeholder="Full Name"><br>
-<input id="username" placeholder="Username"><br>
-<input id="password" type="password" placeholder="Password"><br>
-
-<button onclick="signup()">Signup</button>
-
-<script src="app.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Login</title>
-</head>
-<body>
-
-<h2>Login</h2>
-
-<input id="loginUser" placeholder="Username"><br>
-<input id="loginPass" type="password" placeholder="Password"><br>
-
-<button onclick="login()">Login</button>
-
-<script src="app.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Dashboard</title>
-</head>
-<body>
-
-<h1>Dashboard</h1>
-<p id="welcome"></p>
-
-<button onclick="startGame()">Play Game</button>
-
-<script src="app.js"></script>
-</body>
-</html>
-body {
-  text-align: center;
-  font-family: Arial;
-}
-button {
-  padding: 10px;
-  margin: 10px;
-}
-// Signup
-function signup() {
-  let user = document.getElementById("username").value;
-  let pass = document.getElementById("password").value;
-
-  localStorage.setItem("user", user);
-  localStorage.setItem("pass", pass);
-
-  alert("Signup Success");
-  window.location.href = "login.html";
-}
-
-// Login
-function login() {
-  let user = document.getElementById("loginUser").value;
-  let pass = document.getElementById("loginPass").value;
-
-  let savedUser = localStorage.getItem("user");
-  let savedPass = localStorage.getItem("pass");
-
-  if (user === savedUser && pass === savedPass) {
-    localStorage.setItem("loggedIn", user);
-    window.location.href = "dashboard.html";
-  } else {
-    alert("Wrong details");
-  }
-}
-
-// Dashboard
-if (window.location.pathname.includes("dashboard.html")) {
-  let user = localStorage.getItem("loggedIn");
-  document.getElementById("welcome").innerText = "Welcome " + user;
-}
-
-// Game (basic placeholder)
-function startGame() {
-  alert("Game Start (next step me real game add karenge)");
-}
