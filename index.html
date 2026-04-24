@@ -136,3 +136,67 @@ window.onload = function() {
   generateCaptcha("cap1");
 };
 </script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script>
+// 🔥 YOUR CONFIG
+var firebaseConfig = {
+  apiKey: "AIzaSyDHpc9lN_y8c2Ta0Xfed5ayOzEjYbN5ur4",
+  authDomain: "nova-areena.firebaseapp.com",
+  projectId: "nova-areena",
+};
+
+firebase.initializeApp(firebaseConfig);
+var auth = firebase.auth();
+
+// CAPTCHA
+let a, b;
+
+function generateCaptcha(id) {
+  a = Math.floor(Math.random() * 10);
+  b = Math.floor(Math.random() * 10);
+  document.getElementById(id).innerText = a + " + " + b + " =";
+}
+
+// SIGNUP
+function signup() {
+  let email = document.getElementById("userName").value + "@gmail.com";
+  let pass = document.getElementById("pass").value;
+  let cap = document.getElementById("capAns2").value;
+
+  if (parseInt(cap) !== (a + b)) {
+    alert("Wrong captcha!");
+    return;
+  }
+
+  auth.createUserWithEmailAndPassword(email, pass)
+    .then(() => {
+      alert("Signup Success ✅");
+    })
+    .catch(err => alert(err.message));
+}
+
+// LOGIN
+function login() {
+  let email = document.getElementById("loginUser").value + "@gmail.com";
+  let pass = document.getElementById("loginPass").value;
+  let cap = document.getElementById("capAns1").value;
+
+  if (parseInt(cap) !== (a + b)) {
+    alert("Wrong captcha!");
+    return;
+  }
+
+  auth.signInWithEmailAndPassword(email, pass)
+    .then(() => {
+      alert("Login Success 🎉");
+    })
+    .catch(err => alert(err.message));
+}
+
+// LOAD
+window.onload = function() {
+  generateCaptcha("cap1");
+}
+</script>
