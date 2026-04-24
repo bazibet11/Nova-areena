@@ -67,3 +67,72 @@
 <script src="app.js"></script>
 </body>
 </html>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+// ✅ TUMHARA REAL CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSyDHpc9lN_y8c2Ta0Xfed5ayOzEjYbN5ur4",
+  authDomain: "nova-areena.firebaseapp.com",
+  projectId: "nova-areena",
+  storageBucket: "nova-areena.appspot.com",
+  messagingSenderId: "888991377297",
+  appId: "1:888991377297:web:9f049d040121c538385c30"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// CAPTCHA
+let a, b;
+window.generateCaptcha = function(id) {
+  a = Math.floor(Math.random() * 10);
+  b = Math.floor(Math.random() * 10);
+  window.captchaAnswer = a + b;
+  document.getElementById(id).innerText = a + " + " + b + " =";
+}
+
+// SIGNUP
+window.signup = function () {
+  let email = document.getElementById("userName").value + "@gmail.com";
+  let pass = document.getElementById("pass").value;
+  let cap = document.getElementById("capAns2").value;
+
+  if (parseInt(cap) !== window.captchaAnswer) {
+    alert("Wrong captcha!");
+    return;
+  }
+
+  createUserWithEmailAndPassword(auth, email, pass)
+    .then(() => {
+      alert("Signup Success ✅");
+    })
+    .catch(err => alert(err.message));
+}
+
+// LOGIN
+window.login = function () {
+  let email = document.getElementById("loginUser").value + "@gmail.com";
+  let pass = document.getElementById("loginPass").value;
+  let cap = document.getElementById("capAns1").value;
+
+  if (parseInt(cap) !== window.captchaAnswer) {
+    alert("Wrong captcha!");
+    return;
+  }
+
+  signInWithEmailAndPassword(auth, email, pass)
+    .then(() => {
+      alert("Login Success 🎉");
+      // 👉 NEXT STEP: dashboard open karenge
+    })
+    .catch(err => alert(err.message));
+}
+
+// LOAD
+window.onload = function() {
+  generateCaptcha("cap1");
+};
+</script>
