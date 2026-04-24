@@ -1,60 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+<title>Dashboard</title>
+
+<style>
+body{
+  background:#0b1220;
+  color:white;
+  font-family:Arial;
+  text-align:center;
+  padding-top:100px;
+}
+
+.box{
+  background:#121a2b;
+  padding:30px;
+  border-radius:15px;
+  width:90%;
+  max-width:350px;
+  margin:auto;
+}
+
+button{
+  background:#00c853;
+  border:none;
+  padding:12px;
+  width:100%;
+  color:white;
+  border-radius:10px;
+  margin-top:20px;
+}
+</style>
 </head>
+
 <body>
 
-<!-- TOP IMAGE -->
-<div class="top-banner">
-  <img src="https://i.imgur.com/8Km9tLL.jpg" width="100%">
+<div class="box">
+  <h2>Welcome 🎉</h2>
+  <p id="user"></p>
+
+  <button onclick="logout()">Logout</button>
 </div>
 
-<h1 class="logo">bazi <span>bet</span></h1>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
-<!-- BUTTONS -->
-<div class="buttons">
-  <a href="login.html"><button class="login-btn">Login</button></a>
-  <a href="signup.html"><button class="signup-btn">Sign Up</button></a>
-</div>
+<script>
+var firebaseConfig = {
+  apiKey: "AIzaSyDHpc9lN_y8c2Ta0Xfed5ayOzEjYbN5ur4",
+  authDomain: "nova-areena.firebaseapp.com",
+  projectId: "nova-areena",
+};
 
-<h2 class="games-title">🎮 Games</h2>
+firebase.initializeApp(firebaseConfig);
+var auth = firebase.auth();
 
-<!-- GAMES GRID -->
-<div class="games">
+auth.onAuthStateChanged(user=>{
+  if(user){
+    document.getElementById("user").innerText = user.email;
+  }else{
+    window.location.href="index.html";
+  }
+});
 
-  <div class="card">
-    <img src="https://i.imgur.com/1.jpg">
-    <p>Slots</p>
-  </div>
-
-  <div class="card">
-    <img src="https://i.imgur.com/2.jpg">
-    <p>Casino</p>
-  </div>
-
-  <div class="card">
-    <img src="https://i.imgur.com/3.jpg">
-    <p>Live Casino</p>
-  </div>
-
-  <div class="card">
-    <img src="https://i.imgur.com/4.jpg">
-    <p>Fortune Games</p>
-  </div>
-
-  <div class="card">
-    <img src="https://i.imgur.com/5.jpg">
-    <p>Chili Games</p>
-  </div>
-
-  <div class="card">
-    <img src="https://i.imgur.com/6.jpg">
-    <p>Tournaments</p>
-  </div>
-
-</div>
+function logout(){
+  auth.signOut().then(()=>{
+    window.location.href="index.html";
+  });
+}
+</script>
 
 </body>
 </html>
