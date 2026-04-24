@@ -1,95 +1,102 @@
 body {
-  margin: 0;
-  font-family: Arial;
-  background: #0b0f1a;
-  color: white;
+  margin:0;
+  font-family:Arial;
+  background:#0b1220;
+  color:white;
 }
 
-.container {
-  max-width: 400px;
-  margin: auto;
-  padding: 20px;
+/* HEADER */
+.header {
+  display:flex;
+  justify-content:space-between;
+  padding:10px;
+  background:#021;
 }
 
-/* HERO */
-.hero {
-  margin-bottom: 20px;
+.logo span { color:#00c853; }
+
+.balance {
+  background:#00c853;
+  padding:5px 10px;
+  border-radius:10px;
 }
 
-.hero h2 {
-  color: gray;
+/* BANNER */
+.banner {
+  padding:20px;
+  background:linear-gradient(135deg,#021,#032);
 }
 
-.hero h1 {
-  font-size: 22px;
+.bar {
+  height:8px;
+  background:#333;
+  border-radius:10px;
 }
 
-/* TABS */
-.tabs {
-  display: flex;
-  margin-bottom: 20px;
+.bar div {
+  width:30%;
+  height:100%;
+  background:#00c853;
 }
 
-.tab {
-  flex: 1;
-  text-align: center;
-  padding: 10px;
-  color: gray;
-  cursor: pointer;
+/* CARDS */
+.cards {
+  display:flex;
+  justify-content:space-around;
+  padding:10px;
 }
 
-.tab.active {
-  color: white;
-  border-bottom: 3px solid #00ff88;
+.card {
+  background:#121a2b;
+  padding:10px;
+  border-radius:10px;
+  text-align:center;
 }
 
-/* INPUT */
-input, select {
-  width: 100%;
-  padding: 14px;
-  border-radius: 8px;
-  background: #1a1f2b;
-  border: none;
-  color: white;
-  margin-bottom: 12px;
+/* FORM */
+.form {
+  padding:15px;
 }
 
-/* PASSWORD BOX */
-.password-box {
-  position: relative;
+input {
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border:none;
+  border-radius:10px;
+  background:#1a2235;
+  color:white;
 }
 
-.password-box span {
-  position: absolute;
-  right: 10px;
-  top: 12px;
-  cursor: pointer;
-}
-
-/* BUTTON */
 button {
-  width: 100%;
-  padding: 14px;
-  background: #00c853;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  color: white;
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  background:#00c853;
+  border:none;
+  border-radius:10px;
 }
 
-/* CHECKBOX */
-.checkbox {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
+/* CAPTCHA */
+.captcha-box {
+  display:flex;
+  gap:10px;
+  margin-top:10px;
 }
 
-/* FORGOT */
-.forgot {
-  color: #00ff88;
-  display: block;
-  margin-bottom: 10px;
-  text-align: right;
-  font-size: 14px;
+/* NAV */
+.nav {
+  position:fixed;
+  bottom:0;
+  width:100%;
+  display:flex;
+  justify-content:space-around;
+  background:#021;
+  padding:10px;
+}
+
+.play {
+  background:gold;
+  padding:10px;
+  border-radius:50%;
 }
