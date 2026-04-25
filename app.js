@@ -1,67 +1,53 @@
-var firebaseConfig = {
-  apiKey: "AIzaSyDHpc9lN_y8c2Ta0Xfed5ayOzEjYbN5ur4",
-  authDomain: "nova-areena.firebaseapp.com",
-  projectId: "nova-areena",
-};
+let users = JSON.parse(localStorage.getItem("users")) || [];
 
-firebase.initializeApp(firebaseConfig);
-var auth = firebase.auth();
-
-/* CAPTCHA */
-let cap1, cap2;
-
-function generateCaptcha1(){
-  let a=Math.floor(Math.random()*10);
-  let b=Math.floor(Math.random()*10);
-  cap1=a+b;
-  document.getElementById("cap1").innerText=a+" + "+b+" =";
+// CAPTCHA LOGIN
+let a1 = Math.floor(Math.random()*10);
+let b1 = Math.floor(Math.random()*10);
+if(document.getElementById("q1")){
+  document.getElementById("q1").innerText = a1 + " + " + b1;
 }
 
-function generateCaptcha2(){
-  let a=Math.floor(Math.random()*10);
-  let b=Math.floor(Math.random()*10);
-  cap2=a+b;
-  document.getElementById("cap2").innerText=a+" + "+b+" =";
+// CAPTCHA SIGNUP
+let a2 = Math.floor(Math.random()*10);
+let b2 = Math.floor(Math.random()*10);
+if(document.getElementById("q2")){
+  document.getElementById("q2").innerText = a2 + " + " + b2;
 }
 
-/* SWITCH */
-function showSignup(){
-  document.getElementById("loginBox").style.display="none";
-  document.getElementById("signupBox").style.display="block";
+// SIGNUP
+function signup() {
+  let user = document.getElementById("user").value;
+  let pass = document.getElementById("pass").value;
+  let ans = document.getElementById("ans2").value;
+
+  if (ans != (a2 + b2)) {
+    alert("Captcha wrong");
+    return;
+  }
+
+  users.push({user, pass});
+  localStorage.setItem("users", JSON.stringify(users));
+
+  alert("Signup successful!");
+  window.location.href = "index.html";
 }
 
-function showLogin(){
-  document.getElementById("loginBox").style.display="block";
-  document.getElementById("signupBox").style.display="none";
+// LOGIN
+function login() {
+  let user = document.getElementById("loginUser").value;
+  let pass = document.getElementById("loginPass").value;
+  let ans = document.getElementById("ans1").value;
+
+  if (ans != (a1 + b1)) {
+    alert("Captcha wrong");
+    return;
+  }
+
+  let found = users.find(u => u.user === user && u.pass === pass);
+
+  if (found) {
+    alert("Login success!");
+  } else {
+    alert("User not found");
+  }
 }
-
-/* SIGNUP */
-function signup(){
-  let email=document.getElementById("userName").value+"@gmail.com";
-  let pass=document.getElementById("pass").value;
-  let cap=document.getElementById("capAns2").value;
-
-  if(parseInt(cap)!==cap2){ alert("Wrong captcha"); return; }
-
-  auth.createUserWithEmailAndPassword(email,pass)
-  .then(()=>alert("Signup Success"))
-  .catch(e=>alert(e.message));
-}
-
-/* LOGIN */
-function login(){
-  let email=document.getElementById("loginUser").value+"@gmail.com";
-  let pass=document.getElementById("loginPass").value;
-  let cap=document.getElementById("capAns1").value;
-
-  if(parseInt(cap)!==cap1){ alert("Wrong captcha"); return; }
-
-  auth.signInWithEmailAndPassword(email,pass)
-  .then(()=>window.location.href="dashboard.html")
-  .catch(e=>alert(e.message));
-}
-
-window.onload=()=>{
-  generateCaptcha1();
-  generateCaptcha2();
-    }
