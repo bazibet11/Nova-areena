@@ -1,66 +1,32 @@
-<div class="container">
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login - Bazi Bet</title>
+<link rel="stylesheet" href="style.css">
+</head>
 
-  <!-- 🔥 TOP BANNER -->
-  <div class="top-banner">
-    <h1>CASINO LEVEL</h1>
-    <p>Play. Win. Level Up.</p>
+<body>
 
-    <div class="level-card">
-      <div>Level 2</div>
-      <div class="bar"><div class="fill"></div></div>
-      <div>320 / 1000 XP</div>
-    </div>
+<div class="card">
+  <h2>🎰 BAZI BET</h2>
+  <h3>Login</h3>
+
+  <input type="text" id="loginUser" placeholder="Username">
+  <input type="password" id="loginPass" placeholder="Password">
+
+  <div class="captcha">
+    <span id="q1"></span>
+    <input type="number" id="ans1" placeholder="Answer">
   </div>
 
-  <!-- 🎯 ACTION BOXES -->
-  <div class="actions">
-    <div class="box">🎁<span>Bonus</span></div>
-    <div class="box">🎯<span>Missions</span></div>
-    <div class="box">📈<span>Level</span></div>
-    <div class="box">💰<span>Deposit</span></div>
-  </div>
+  <button onclick="login()">Log in</button>
 
-  <!-- 🔐 LOGIN + SIGNUP WRAPPER -->
-  <div class="auth-section">
-
-    <!-- LOGIN -->
-    <div class="card">
-      <h2>Log in</h2>
-
-      <input type="text" placeholder="Username">
-      <input type="password" placeholder="Password">
-
-      <div class="captcha-box">
-        <span id="cap">7 + 3</span>
-        <input type="text" placeholder="Answer">
-      </div>
-
-      <button>Log in</button>
-    </div>
-
-    <!-- SIGNUP -->
-    <div class="card">
-      <h2>Sign up</h2>
-
-      <input type="text" placeholder="Full Name">
-      <input type="text" placeholder="Username">
-      <input type="text" placeholder="Phone">
-      <input type="password" placeholder="Password">
-
-      <div class="captcha-box">
-        <span id="cap2">12 - 4</span>
-        <input type="text" placeholder="Answer">
-      </div>
-
-      <button>Continue</button>
-    </div>
-
-  </div>
-
+  <p>Don't have account? 
+    <a href="signup.html">Sign up</a>
+  </p>
 </div>
-<style>
-body {
-  background: black;
-  color: white;
-}
-</style>
+
+<script src="app.js"></script>
+</body>
+</html>
