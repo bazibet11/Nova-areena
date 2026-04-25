@@ -1,88 +1,49 @@
 body {
   margin: 0;
-  background: #061b2c;
   font-family: Arial;
+  background: #061a2b;
   color: white;
-}
-
-.container {
-  padding: 10px;
-}
-
-/* 🔥 Banner */
-.top-banner {
-  background: linear-gradient(135deg, #0f3d2e, #021d1a);
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
-
-.bar {
-  height: 6px;
-  background: #333;
-  border-radius: 10px;
-}
-
-.fill {
-  width: 32%;
-  height: 100%;
-  background: #00ff88;
-  border-radius: 10px;
-}
-
-/* 🎯 Actions */
-.actions {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
-}
-
-.box {
-  background: #0b2235;
-  width: 23%;
-  padding: 10px;
-  border-radius: 10px;
-  text-align: center;
-}
-
-/* 🔐 Auth */
-.auth-section {
-  display: flex;
-  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .card {
-  background: #0b2235;
-  padding: 15px;
-  border-radius: 12px;
-  width: 50%;
+  background: #0d2538;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 350px;
+  text-align: center;
 }
 
-/* inputs */
 input {
   width: 100%;
+  margin: 8px 0;
   padding: 10px;
-  margin: 6px 0;
+  border-radius: 5px;
   border: none;
-  border-radius: 8px;
-  background: #1c2f45;
-  color: white;
 }
 
-/* captcha */
-.captcha-box {
+button {
+  width: 100%;
+  padding: 12px;
+  background: limegreen;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  color: white;
+  font-weight: bold;
+}
+
+.captcha {
   display: flex;
   gap: 10px;
   align-items: center;
 }
 
-/* button */
-button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  background: #00c853;
-  border: none;
-  border-radius: 8px;
-  color: white;
+a {
+  color: lime;
+  text-decoration: none;
 }
