@@ -1,102 +1,88 @@
 body {
-  margin:0;
-  font-family:Arial;
-  background:#0b1220;
-  color:white;
+  margin: 0;
+  background: #061b2c;
+  font-family: Arial;
+  color: white;
 }
 
-/* HEADER */
-.header {
-  display:flex;
-  justify-content:space-between;
-  padding:10px;
-  background:#021;
+.container {
+  padding: 10px;
 }
 
-.logo span { color:#00c853; }
-
-.balance {
-  background:#00c853;
-  padding:5px 10px;
-  border-radius:10px;
-}
-
-/* BANNER */
-.banner {
-  padding:20px;
-  background:linear-gradient(135deg,#021,#032);
+/* 🔥 Banner */
+.top-banner {
+  background: linear-gradient(135deg, #0f3d2e, #021d1a);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
 }
 
 .bar {
-  height:8px;
-  background:#333;
-  border-radius:10px;
+  height: 6px;
+  background: #333;
+  border-radius: 10px;
 }
 
-.bar div {
-  width:30%;
-  height:100%;
-  background:#00c853;
+.fill {
+  width: 32%;
+  height: 100%;
+  background: #00ff88;
+  border-radius: 10px;
 }
 
-/* CARDS */
-.cards {
-  display:flex;
-  justify-content:space-around;
-  padding:10px;
+/* 🎯 Actions */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.box {
+  background: #0b2235;
+  width: 23%;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* 🔐 Auth */
+.auth-section {
+  display: flex;
+  gap: 10px;
 }
 
 .card {
-  background:#121a2b;
-  padding:10px;
-  border-radius:10px;
-  text-align:center;
+  background: #0b2235;
+  padding: 15px;
+  border-radius: 12px;
+  width: 50%;
 }
 
-/* FORM */
-.form {
-  padding:15px;
-}
-
+/* inputs */
 input {
-  width:100%;
-  padding:10px;
-  margin-top:10px;
-  border:none;
-  border-radius:10px;
-  background:#1a2235;
-  color:white;
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+  border: none;
+  border-radius: 8px;
+  background: #1c2f45;
+  color: white;
 }
 
-button {
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  background:#00c853;
-  border:none;
-  border-radius:10px;
-}
-
-/* CAPTCHA */
+/* captcha */
 .captcha-box {
-  display:flex;
-  gap:10px;
-  margin-top:10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
-/* NAV */
-.nav {
-  position:fixed;
-  bottom:0;
-  width:100%;
-  display:flex;
-  justify-content:space-around;
-  background:#021;
-  padding:10px;
-}
-
-.play {
-  background:gold;
-  padding:10px;
-  border-radius:50%;
+/* button */
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #00c853;
+  border: none;
+  border-radius: 8px;
+  color: white;
 }
