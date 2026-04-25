@@ -1,94 +1,60 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Bazi Bet</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+<div class="container">
 
-<body>
+  <!-- 🔥 TOP BANNER -->
+  <div class="top-banner">
+    <h1>CASINO LEVEL</h1>
+    <p>Play. Win. Level Up.</p>
 
-<!-- 🔥 HEADER -->
-<div class="header">
-  <div class="logo">BAZI <span>BET</span></div>
-
-  <div class="balance">PKR 0</div>
-
-  <div class="profile">👤</div>
-</div>
-
-<!-- 🔥 BANNER -->
-<div class="banner">
-  <h1>CASINO LEVEL</h1>
-  <p>Play. Win. Level Up.</p>
-
-  <div class="level">
-    <span>Level 2</span>
-    <span>320 / 1000 XP</span>
+    <div class="level-card">
+      <div>Level 2</div>
+      <div class="bar"><div class="fill"></div></div>
+      <div>320 / 1000 XP</div>
+    </div>
   </div>
 
-  <div class="bar">
-    <div></div>
-  </div>
-</div>
-
-<!-- 🔥 CARDS -->
-<div class="cards">
-  <div class="card">🎁<p>Bonus</p></div>
-  <div class="card">🎯<p>Missions</p></div>
-  <div class="card">📈<p>Level</p></div>
-  <div class="card">💰<p>Deposit</p></div>
-</div>
-
-<!-- 🔥 FORM -->
-<div class="form">
-
-  <div class="tabs">
-    <span id="loginTab" class="active" onclick="showLogin()">Log in</span>
-    <span id="signupTab" onclick="showSignup()">Sign up</span>
+  <!-- 🎯 ACTION BOXES -->
+  <div class="actions">
+    <div class="box">🎁<span>Bonus</span></div>
+    <div class="box">🎯<span>Missions</span></div>
+    <div class="box">📈<span>Level</span></div>
+    <div class="box">💰<span>Deposit</span></div>
   </div>
 
-  <!-- LOGIN -->
-  <div id="loginBox">
-    <input id="loginUser" placeholder="Username">
-    <input id="loginPass" type="password" placeholder="Password">
+  <!-- 🔐 LOGIN + SIGNUP WRAPPER -->
+  <div class="auth-section">
 
-    <div class="captcha-box">
-      <span id="cap1"></span>
-      <input id="capAns1" placeholder="Answer">
+    <!-- LOGIN -->
+    <div class="card">
+      <h2>Log in</h2>
+
+      <input type="text" placeholder="Username">
+      <input type="password" placeholder="Password">
+
+      <div class="captcha-box">
+        <span id="cap">7 + 3</span>
+        <input type="text" placeholder="Answer">
+      </div>
+
+      <button>Log in</button>
     </div>
 
-    <button onclick="login()">Log in</button>
-  </div>
+    <!-- SIGNUP -->
+    <div class="card">
+      <h2>Sign up</h2>
 
-  <!-- SIGNUP -->
-  <div id="signupBox" style="display:none;">
-    <input id="userName" placeholder="Username">
-    <input id="pass" type="password" placeholder="Password">
+      <input type="text" placeholder="Full Name">
+      <input type="text" placeholder="Username">
+      <input type="text" placeholder="Phone">
+      <input type="password" placeholder="Password">
 
-    <div class="captcha-box">
-      <span id="cap2"></span>
-      <input id="capAns2" placeholder="Answer">
+      <div class="captcha-box">
+        <span id="cap2">12 - 4</span>
+        <input type="text" placeholder="Answer">
+      </div>
+
+      <button>Continue</button>
     </div>
 
-    <button onclick="signup()">Continue</button>
   </div>
 
 </div>
-
-<!-- 🔥 NAVBAR -->
-<div class="nav">
-  <div>🏠</div>
-  <div>🎮</div>
-  <div class="play">▶</div>
-  <div>💳</div>
-  <div>👤</div>
-</div>
-
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
-<script src="app.js"></script>
-
-</body>
-</html>
