@@ -1,64 +1,30 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background: #06283D;
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bazi Bet Login</title>
+<link rel="stylesheet" href="style.css">
+</head>
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+<body>
 
-  height: 100vh;
-}
+<div class="container">
+  <h1>🎰 Bazi Bet</h1>
+  <h2>Login</h2>
 
-/* Main container */
-.container {
-  width: 90%;
-  max-width: 400px;
-  background: #0B3C5D;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.4);
-}
+  <input type="email" id="loginEmail" placeholder="Email">
+  <input type="password" id="loginPassword" placeholder="Password">
 
-/* Title */
-h1, h2 {
-  text-align: center;
-  color: white;
-}
+  <button onclick="login()">Log in</button>
 
-/* Inputs */
-input, select {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 6px;
-}
+  <p>Don't have account? <a href="signup.html">Sign up</a></p>
+</div>
 
-/* Buttons */
-button {
-  width: 100%;
-  padding: 12px;
-  background: #2ECC71;
-  border: none;
-  border-radius: 6px;
-  color: white;
-  font-size: 16px;
-  margin-top: 10px;
-}
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 
-/* Checkbox area */
-.terms {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: white;
-  font-size: 14px;
-}
+<script src="app.js"></script>
 
-/* Links */
-a {
-  color: #2ECC71;
-  text-decoration: none;
-}
+</body>
+</html>
