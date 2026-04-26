@@ -1,30 +1,54 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bazi Bet Login</title>
-<link rel="stylesheet" href="style.css">
-</head>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #06283D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-<body>
+.container {
+  width: 90%;
+  max-width: 400px;
+  background: #0B3C5D;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  color: white;
+}
 
-<div class="container">
-  <h1>🎰 Bazi Bet</h1>
-  <h2>Login</h2>
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: none;
+}
 
-  <input type="email" id="loginEmail" placeholder="Email">
-  <input type="password" id="loginPassword" placeholder="Password">
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: #2ECC71;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-size: 16px;
+}
 
-  <button onclick="login()">Log in</button>
+.link {
+  color: #2ECC71;
+  cursor: pointer;
+}
 
-  <p>Don't have account? <a href="signup.html">Sign up</a></p>
-</div>
+.field {
+  position: relative;
+}
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-
-<script src="app.js"></script>
-
-</body>
-</html>
+.eye {
+  position: absolute;
+  right: 15px;
+  top: 12px;
+  cursor: pointer;
+}
