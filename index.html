@@ -3,64 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bazi Bet</title>
-
-<style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #06283D;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.container {
-  width: 90%;
-  max-width: 400px;
-  background: #0B3C5D;
-  padding: 25px;
-  border-radius: 15px;
-  text-align: center;
-  color: white;
-}
-
-input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 6px;
-  border: none;
-}
-
-button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  background: #2ECC71;
-  border: none;
-  color: white;
-  border-radius: 6px;
-  font-size: 16px;
-}
-
-.link {
-  color: #2ECC71;
-  cursor: pointer;
-}
-
-.eye {
-  position: absolute;
-  right: 15px;
-  top: 12px;
-  cursor: pointer;
-}
-
-.field {
-  position: relative;
-}
-
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -71,112 +14,53 @@ button {
 
 <!-- LOGIN -->
 <div id="loginBox">
+  <h2>Login</h2>
 
-<h2>Login</h2>
+  <input id="loginUser" placeholder="Username">
 
-<input id="loginUser" placeholder="Username">
-<div class="field">
-  <input type="password" id="loginPass" placeholder="Password">
-  <span class="eye" onclick="togglePass('loginPass')">👁</span>
-</div>
+  <div class="field">
+    <input type="password" id="loginPass" placeholder="Password">
+    <span class="eye" onclick="togglePass('loginPass')">👁</span>
+  </div>
 
-<p id="captchaQ1"></p>
-<input id="captchaA1" placeholder="Answer">
+  <p id="captchaQ1"></p>
+  <input id="captchaA1" placeholder="Answer">
 
-<button onclick="login()">Log in</button>
+  <button onclick="login()">Log in</button>
 
-<p class="link" onclick="forgot()">Forgot Password?</p>
+  <p class="link" onclick="forgot()">Forgot Password?</p>
 
-<p>Don't have account? 
-<span class="link" onclick="showSignup()">Sign up</span></p>
-
+  <p>Don't have account? 
+    <span class="link" onclick="showSignup()">Sign up</span>
+  </p>
 </div>
 
 <!-- SIGNUP -->
 <div id="signupBox" style="display:none;">
+  <h2>Sign Up</h2>
 
-<h2>Sign Up</h2>
+  <input id="realName" placeholder="Full Name">
+  <input id="userName" placeholder="Username">
+  <input id="phone" placeholder="Phone Number">
 
-<input id="realName" placeholder="Full Name">
-<input id="userName" placeholder="Username">
-<input id="phone" placeholder="Phone Number">
+  <div class="field">
+    <input type="password" id="signPass" placeholder="Password">
+    <span class="eye" onclick="togglePass('signPass')">👁</span>
+  </div>
 
-<div class="field">
-  <input type="password" id="signPass" placeholder="Password">
-  <span class="eye" onclick="togglePass('signPass')">👁</span>
+  <p id="captchaQ2"></p>
+  <input id="captchaA2" placeholder="Answer">
+
+  <button onclick="signup()">Create Account</button>
+
+  <p>Already have account? 
+    <span class="link" onclick="showLogin()">Login</span>
+  </p>
 </div>
 
-<p id="captchaQ2"></p>
-<input id="captchaA2" placeholder="Answer">
-
-<button onclick="signup()">Create Account</button>
-
-<p>Already have account? 
-<span class="link" onclick="showLogin()">Login</span></p>
-
 </div>
 
-</div>
-
-<script>
-
-// CAPTCHA
-let num1 = Math.floor(Math.random()*10);
-let num2 = Math.floor(Math.random()*10);
-document.getElementById("captchaQ1").innerText = num1 + " + " + num2;
-
-let num3 = Math.floor(Math.random()*10);
-let num4 = Math.floor(Math.random()*10);
-document.getElementById("captchaQ2").innerText = num3 + " + " + num4;
-
-// TOGGLE
-function showSignup(){
-  document.getElementById("loginBox").style.display="none";
-  document.getElementById("signupBox").style.display="block";
-}
-
-function showLogin(){
-  document.getElementById("loginBox").style.display="block";
-  document.getElementById("signupBox").style.display="none";
-}
-
-// PASSWORD EYE
-function togglePass(id){
-  let input = document.getElementById(id);
-  input.type = input.type === "password" ? "text" : "password";
-}
-
-// LOGIN
-function login(){
-  let ans = document.getElementById("captchaA1").value;
-
-  if(parseInt(ans) !== (num1 + num2)){
-    alert("Wrong Captcha");
-    return;
-  }
-
-  alert("Login Successful (Demo)");
-}
-
-// SIGNUP
-function signup(){
-  let ans = document.getElementById("captchaA2").value;
-
-  if(parseInt(ans) !== (num3 + num4)){
-    alert("Wrong Captcha");
-    return;
-  }
-
-  alert("Account Created (Demo)");
-  showLogin();
-}
-
-// FORGOT
-function forgot(){
-  alert("Forgot password feature coming soon");
-}
-
-</script>
+<script src="app.js"></script>
 
 </body>
 </html>
