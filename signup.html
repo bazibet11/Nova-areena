@@ -1,49 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bazi Bet Signup</title>
-  <link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <div class="container">
+  <h1>🎰 Bazi Bet</h1>
+  <h2>Sign Up</h2>
 
-  <h1 class="logo">Bazi <span>Bet</span></h1>
+  <input type="email" id="signupEmail" placeholder="Email">
+  <input type="password" id="signupPassword" placeholder="Password">
 
-  <div class="tabs">
-    <button onclick="goLogin()">Log in</button>
-    <button class="active">Sign up</button>
-  </div>
+  <button onclick="signup()">Create Account</button>
 
-  <form onsubmit="signupUser(event)">
-
-    <p class="code">Affiliate Code: 123ABC</p>
-
-    <label>Username</label>
-    <input type="text" id="signupUser" placeholder="Enter username" required>
-
-    <label>Choose Currency</label>
-    <select id="currency">
-      <option>PKR</option>
-      <option>USD</option>
-    </select>
-
-    <label>Phone Number</label>
-    <input type="text" id="phone" placeholder="+92 3000000000" required>
-
-    <label>Password</label>
-    <input type="password" id="signupPass" placeholder="Enter password" required>
-
-    <div class="check">
-      <input type="checkbox" required> I am 18+ and agree terms
-    </div>
-
-    <button class="login-btn">Continue</button>
-
-  </form>
-
+  <p>Already have account? <a href="index.html">Login</a></p>
 </div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 
 <script src="app.js"></script>
 
