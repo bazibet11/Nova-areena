@@ -1,49 +1,64 @@
 body {
   margin: 0;
-  font-family: Arial;
-  background: #061a2b;
-  color: white;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #06283D;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   height: 100vh;
 }
 
-.card {
-  background: #0d2538;
-  padding: 20px;
-  border-radius: 10px;
+/* Main container */
+.container {
   width: 90%;
-  max-width: 350px;
+  max-width: 400px;
+  background: #0B3C5D;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+/* Title */
+h1, h2 {
   text-align: center;
+  color: white;
 }
 
-input {
+/* Inputs */
+input, select {
   width: 100%;
+  padding: 12px;
   margin: 8px 0;
-  padding: 10px;
-  border-radius: 5px;
   border: none;
+  border-radius: 6px;
 }
 
+/* Buttons */
 button {
   width: 100%;
   padding: 12px;
-  background: limegreen;
+  background: #2ECC71;
   border: none;
-  border-radius: 5px;
-  margin-top: 10px;
+  border-radius: 6px;
   color: white;
-  font-weight: bold;
+  font-size: 16px;
+  margin-top: 10px;
 }
 
-.captcha {
+/* Checkbox area */
+.terms {
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 8px;
+  color: white;
+  font-size: 14px;
 }
 
+/* Links */
 a {
-  color: lime;
+  color: #2ECC71;
   text-decoration: none;
 }
