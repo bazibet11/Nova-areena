@@ -1,54 +1,42 @@
 body {
   margin: 0;
   font-family: Arial;
-  background: #06283D;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.container {
-  width: 90%;
-  max-width: 400px;
-  background: #0B3C5D;
-  padding: 25px;
-  border-radius: 15px;
-  text-align: center;
+  background: #1c8c6d;
   color: white;
+  text-align: center;
 }
 
-input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 6px;
-  border: none;
+#home {
+  margin-top: 120px;
+}
+
+h1 {
+  font-size: 40px;
 }
 
 button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  background: #2ECC71;
+  padding: 15px;
+  width: 220px;
+  margin: 10px;
   border: none;
-  color: white;
+  font-size: 18px;
   border-radius: 6px;
-  font-size: 16px;
 }
 
-.link {
-  color: #2ECC71;
-  cursor: pointer;
+.signup {
+  background: orange;
 }
 
-.field {
-  position: relative;
+.box {
+  display: none;
+  margin-top: 80px;
 }
 
-.eye {
-  position: absolute;
-  right: 15px;
-  top: 12px;
-  cursor: pointer;
+input {
+  display: block;
+  margin: 10px auto;
+  padding: 12px;
+  width: 260px;
+  border-radius: 6px;
+  border: none;
 }
