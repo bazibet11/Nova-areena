@@ -1,74 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Dashboard</title>
-
-<style>
-body{
-  background:#0b1220;
-  color:white;
-  font-family:Arial;
-  text-align:center;
-  padding-top:100px;
-}
-
-.box{
-  background:#121a2b;
-  padding:30px;
-  border-radius:15px;
-  width:90%;
-  max-width:350px;
-  margin:auto;
-}
-
-button{
-  background:#00c853;
-  border:none;
-  padding:12px;
-  width:100%;
-  color:white;
-  border-radius:10px;
-  margin-top:20px;
-}
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bazi Bet</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="box">
-  <h2>Welcome 🎉</h2>
-  <p id="user"></p>
-
-  <button onclick="logout()">Logout</button>
+<!-- HOME -->
+<div id="home">
+  <h1>🎰 Bazi Bet</h1>
+  <button onclick="showLogin()">Login</button>
+  <button onclick="showSignup()" class="signup">Sign Up</button>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<!-- LOGIN -->
+<div id="loginBox" class="box">
+  <h2>Login</h2>
+  <input type="email" id="loginEmail" placeholder="Email">
+  <input type="password" id="loginPass" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <p onclick="goHome()">⬅ Back</p>
+</div>
 
-<script>
-var firebaseConfig = {
-  apiKey: "AIzaSyDHpc9lN_y8c2Ta0Xfed5ayOzEjYbN5ur4",
-  authDomain: "nova-areena.firebaseapp.com",
-  projectId: "nova-areena",
-};
+<!-- SIGNUP -->
+<div id="signupBox" class="box">
+  <h2>Sign Up</h2>
+  <input type="email" id="signupEmail" placeholder="Email">
+  <input type="password" id="signupPass" placeholder="Password">
+  <button onclick="signup()">Create Account</button>
+  <p onclick="goHome()">⬅ Back</p>
+</div>
 
-firebase.initializeApp(firebaseConfig);
-var auth = firebase.auth();
-
-auth.onAuthStateChanged(user=>{
-  if(user){
-    document.getElementById("user").innerText = user.email;
-  }else{
-    window.location.href="index.html";
-  }
-});
-
-function logout(){
-  auth.signOut().then(()=>{
-    window.location.href="index.html";
-  });
-}
-</script>
+<script type="module" src="app.js"></script>
 
 </body>
 </html>
