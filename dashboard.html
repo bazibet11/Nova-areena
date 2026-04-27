@@ -6,90 +6,61 @@
 <title>Bazi Bet</title>
 
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
 <!-- TOP BAR -->
 <div class="topbar">
-  <span class="logo">Bazi Bet</span>
-  <span class="balanceTop" id="topBalance">Rs 0</span>
+  <div class="logo">Bazi Bet</div>
+  <div class="balance">Rs <span id="topBalance">0</span></div>
 </div>
 
-<!-- MAIN -->
-<div class="container">
+<!-- SLIDER -->
+<div class="banner">
+  <img src="https://via.placeholder.com/350x140" alt="">
+</div>
 
-  <h1>Welcome</h1>
-  <h2 id="user"></h2>
-  <h2 id="balance"></h2>
+<!-- MENU -->
+<div class="menu">
+  <div class="menu-item">Exclusive</div>
+  <div class="menu-item">Crash</div>
+  <div class="menu-item">Sports</div>
+  <div class="menu-item">Slots</div>
+</div>
 
-  <button onclick="addMoney()">Deposit 100</button>
-  <button onclick="withdraw()">Withdraw 50</button>
+<!-- BONUS -->
+<div class="bonus">
+  🎁 Get Bonus upto 5000 PKR
+</div>
+
+<!-- GAMES -->
+<div class="games">
+
+  <div class="game">Aviator</div>
+  <div class="game">Crash</div>
+  <div class="game">Slots</div>
+  <div class="game">Spin</div>
+
+</div>
+
+<!-- ACTION -->
+<div class="actions">
+  <button onclick="addMoney()">Deposit</button>
+  <button onclick="withdraw()">Withdraw</button>
   <button onclick="logout()">Logout</button>
-
-  <!-- GAMES -->
-  <div class="cards">
-    <div class="card">Aviator</div>
-    <div class="card">Crash</div>
-    <div class="card">Slots</div>
-    <div class="card">Spin</div>
-  </div>
-
 </div>
 
-<!-- BOTTOM MENU -->
-<div class="bottom">
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
   <div>Home</div>
   <div>Casino</div>
   <div>Wallet</div>
   <div>Profile</div>
 </div>
 
-<script>
-
-// USER CHECK
-let user = localStorage.getItem("currentUser");
-
-if (!user) {
-  window.location.href = "index.html";
-} else {
-  document.getElementById("user").innerText = "User: " + user;
-}
-
-// BALANCE
-let balance = parseInt(localStorage.getItem(user + "_balance")) || 0;
-
-function updateUI() {
-  document.getElementById("balance").innerText = "Balance: " + balance + " PKR";
-  document.getElementById("topBalance").innerText = "Rs " + balance;
-}
-updateUI();
-
-// ADD MONEY
-function addMoney() {
-  balance += 100;
-  localStorage.setItem(user + "_balance", balance);
-  updateUI();
-}
-
-// WITHDRAW
-function withdraw() {
-  if (balance >= 50) {
-    balance -= 50;
-    localStorage.setItem(user + "_balance", balance);
-    updateUI();
-  } else {
-    alert("Not enough balance");
-  }
-}
-
-// LOGOUT
-function logout() {
-  localStorage.removeItem("currentUser");
-  window.location.href = "index.html";
-}
-
-</script>
+<script src="app.js"></script>
 
 </body>
 </html>
