@@ -67,11 +67,11 @@ function login() {
   let obj = JSON.parse(data);
 
   if (obj.password === pass) {
-    alert("Login success");
-  } else {
-    alert("Wrong password");
+  alert("Login success");
+  window.location.href = "dashboard.html";
+} else {
+  alert("Wrong password");
   }
-}
 
 // FORGOT PASSWORD
 function forgotPass() {
