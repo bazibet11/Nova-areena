@@ -53,15 +53,13 @@ function login() {
   if (obj.password === pass) {
     alert("Login success");
 
-    localStorage.setItem("currentUser", user); // ⭐ IMPORTANT
+    localStorage.setItem("currentUser", user); // ⭐ important
 
     window.location.href = "dashboard.html";
   } else {
     alert("Wrong password");
   }
 }
-
-
 // FORGOT PASSWORD
 function forgotPass() {
   let user = prompt("Enter username");
