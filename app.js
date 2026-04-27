@@ -1,58 +1,53 @@
-// CAPTCHA
-let num1 = Math.floor(Math.random()*10);
-let num2 = Math.floor(Math.random()*10);
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-let num3 = Math.floor(Math.random()*10);
-let num4 = Math.floor(Math.random()*10);
+/* 🔴 APNI FIREBASE CONFIG YAHAN PASTE KARO */
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_ID",
+};
 
-window.onload = function(){
-  document.getElementById("captchaQ1").innerText = num1 + " + " + num2;
-  document.getElementById("captchaQ2").innerText = num3 + " + " + num4;
-}
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-// SWITCH
-function showSignup(){
-  document.getElementById("loginBox").style.display="none";
-  document.getElementById("signupBox").style.display="block";
-}
+/* SCREEN SWITCH */
+window.showLogin = function () {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("loginBox").style.display = "block";
+};
 
-function showLogin(){
-  document.getElementById("loginBox").style.display="block";
-  document.getElementById("signupBox").style.display="none";
-}
+window.showSignup = function () {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("signupBox").style.display = "block";
+};
 
-// PASSWORD EYE
-function togglePass(id){
-  let input = document.getElementById(id);
-  input.type = input.type === "password" ? "text" : "password";
-}
+window.goHome = function () {
+  document.getElementById("home").style.display = "block";
+  document.getElementById("loginBox").style.display = "none";
+  document.getElementById("signupBox").style.display = "none";
+};
 
-// LOGIN
-function login(){
-  let ans = document.getElementById("captchaA1").value;
+/* SIGNUP */
+window.signup = function () {
+  let email = document.getElementById("signupEmail").value;
+  let pass = document.getElementById("signupPass").value;
 
-  if(parseInt(ans) !== (num1 + num2)){
-    alert("Wrong Captcha");
-    return;
-  }
+  createUserWithEmailAndPassword(auth, email, pass)
+    .then(() => alert("Signup Successful"))
+    .catch(err => alert(err.message));
+};
 
-  alert("Login Successful (Demo)");
-}
+/* LOGIN */
+window.login = function () {
+  let email = document.getElementById("loginEmail").value;
+  let pass = document.getElementById("loginPass").value;
 
-// SIGNUP
-function signup(){
-  let ans = document.getElementById("captchaA2").value;
-
-  if(parseInt(ans) !== (num3 + num4)){
-    alert("Wrong Captcha");
-    return;
-  }
-
-  alert("Account Created");
-  showLogin();
-}
-
-// FORGOT
-function forgot(){
-  alert("Forgot password coming soon");
-}
+  signInWithEmailAndPassword(auth, email, pass)
+    .then(() => {
+      alert("Login Successful");
+      window.location.href = "dashboard.html";
+    })
+    .catch(err => alert(err.message));
+};
