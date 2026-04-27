@@ -1,28 +1,12 @@
-// SWITCH
-function showLogin() {
-  document.getElementById("loginBox").style.display = "block";
-  document.getElementById("signupBox").style.display = "none";
-}
-
-function showSignup() {
-  document.getElementById("loginBox").style.display = "none";
-  document.getElementById("signupBox").style.display = "block";
-}
-
-// PASSWORD EYE
-function togglePass(id) {
-  let input = document.getElementById(id);
-  input.type = input.type === "password" ? "text" : "password";
-}
-
 // CAPTCHA
-let a = Math.floor(Math.random()*10);
-let b = Math.floor(Math.random()*10);
-let c = Math.floor(Math.random()*10);
-let d = Math.floor(Math.random()*10);
+let a = Math.floor(Math.random() * 10);
+let b = Math.floor(Math.random() * 10);
+let c = Math.floor(Math.random() * 10);
+let d = Math.floor(Math.random() * 10);
 
-document.getElementById("loginCaptcha").innerText = `${a} + ${b} = ?`;
-document.getElementById("signCaptcha").innerText = `${c} + ${d} = ?`;
+document.getElementById("loginCaptcha").innerText = a + " + " + b;
+document.getElementById("signCaptcha").innerText = c + " + " + d;
+
 
 // SIGNUP
 function signup() {
@@ -42,9 +26,9 @@ function signup() {
   };
 
   localStorage.setItem(user, JSON.stringify(data));
-
   alert("Signup success");
 }
+
 
 // LOGIN
 function login() {
@@ -67,11 +51,16 @@ function login() {
   let obj = JSON.parse(data);
 
   if (obj.password === pass) {
-  alert("Login success");
-  window.location.href = "dashboard.html";
-} else {
-  alert("Wrong password");
+    alert("Login success");
+
+    localStorage.setItem("currentUser", user); // ⭐ IMPORTANT
+
+    window.location.href = "dashboard.html";
+  } else {
+    alert("Wrong password");
   }
+}
+
 
 // FORGOT PASSWORD
 function forgotPass() {
@@ -87,4 +76,4 @@ function forgotPass() {
   let obj = JSON.parse(data);
 
   alert("Your password is: " + obj.password);
-    }
+}
