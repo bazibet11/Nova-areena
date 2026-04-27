@@ -1,30 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Signup</title>
-<link rel="stylesheet" href="style.css">
+  <title>Signup</title>
 </head>
-
 <body>
 
-<div class="container">
-  <h1>🎰 Bazi Bet</h1>
-  <h2>Sign Up</h2>
+<h2>Signup</h2>
 
-  <input type="email" id="signupEmail" placeholder="Email">
-  <input type="password" id="signupPassword" placeholder="Password">
+<form id="signupForm">
+  <input type="text" id="fullname" placeholder="Full Name" required><br><br>
+  <input type="text" id="username" placeholder="Username" required><br><br>
+  <input type="password" id="password" placeholder="Password" required><br><br>
 
-  <button onclick="signup()">Create Account</button>
+  <p id="captcha"></p>
+  <input type="text" id="captchaInput" placeholder="Answer" required><br><br>
 
-  <p>Already have account? <a href="index.html">Login</a></p>
-</div>
+  <button type="submit">Signup</button>
+</form>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-
-<script src="app.js"></script>
+<script src="signup.js"></script>
 
 </body>
 </html>
