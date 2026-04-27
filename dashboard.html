@@ -1,9 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>Dashboard</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0f172a;
+  color: white;
+  text-align: center;
+}
+
+.box {
+  margin-top: 100px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  background: red;
+  color: white;
+  cursor: pointer;
+}
+</style>
+
 </head>
+
 <body>
-<h1>Welcome to Dashboard 🎉</h1>
+
+<div class="box">
+  <h1>Welcome to Dashboard</h1>
+  <h2 id="user"></h2>
+
+  <button onclick="logout()">Logout</button>
+</div>
+
+<script>
+let user = localStorage.getItem("currentUser");
+
+if (!user) {
+  window.location.href = "index.html";
+} else {
+  document.getElementById("user").innerText = "User: " + user;
+}
+
+function logout() {
+  localStorage.removeItem("currentUser");
+  window.location.href = "index.html";
+}
+</script>
+
 </body>
 </html>
