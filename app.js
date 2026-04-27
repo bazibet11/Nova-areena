@@ -4,74 +4,78 @@ let b = Math.floor(Math.random() * 10);
 let c = Math.floor(Math.random() * 10);
 let d = Math.floor(Math.random() * 10);
 
+// Show captcha
 document.getElementById("loginCaptcha").innerText = a + " + " + b;
 document.getElementById("signCaptcha").innerText = c + " + " + d;
 
 
-// SIGNUP
+// ================= SIGNUP =================
 function signup() {
-  let user = document.getElementById("userName").value;
-  let pass = document.getElementById("signPass").value;
-  let cap = document.getElementById("signCapInput").value;
+    let user = document.getElementById("userName").value;
+    let pass = document.getElementById("signPass").value;
+    let cap = document.getElementById("signCapInput").value;
 
-  if (parseInt(cap) !== (c + d)) {
-    alert("Wrong captcha");
-    return;
-  }
+    if (parseInt(cap) !== (c + d)) {
+        alert("Wrong captcha");
+        return;
+    }
 
-  let data = {
-    name: document.getElementById("fullName").value,
-    phone: document.getElementById("phone").value,
-    password: pass
-  };
+    let data = {
+        name: document.getElementById("fullName").value,
+        phone: document.getElementById("phone").value,
+        password: pass
+    };
 
-  localStorage.setItem(user, JSON.stringify(data));
-  alert("Signup success");
+    localStorage.setItem(user, JSON.stringify(data));
+    alert("Signup success");
 }
 
 
-// LOGIN
+// ================= LOGIN =================
 function login() {
-  let user = document.getElementById("loginUser").value;
-  let pass = document.getElementById("loginPass").value;
-  let cap = document.getElementById("loginCapInput").value;
+    let user = document.getElementById("loginUser").value;
+    let pass = document.getElementById("loginPass").value;
+    let cap = document.getElementById("loginCapInput").value;
 
-  if (parseInt(cap) !== (a + b)) {
-    alert("Wrong captcha");
-    return;
-  }
+    if (parseInt(cap) !== (a + b)) {
+        alert("Wrong captcha");
+        return;
+    }
 
-  let data = localStorage.getItem(user);
+    let data = localStorage.getItem(user);
 
-  if (!data) {
-    alert("User not found");
-    return;
-  }
+    if (!data) {
+        alert("User not found");
+        return;
+    }
 
-  let obj = JSON.parse(data);
+    let obj = JSON.parse(data);
 
-  if (obj.password === pass) {
-    alert("Login success");
+    if (obj.password === pass) {
+        alert("Login success");
 
-    localStorage.setItem("currentUser", user); // ⭐ important
+        // ⭐ IMPORTANT
+        localStorage.setItem("currentUser", user);
 
-    window.location.href = "dashboard.html";
-  } else {
-    alert("Wrong password");
-  }
+        window.location.href = "dashboard.html";
+    } else {
+        alert("Wrong password");
+    }
 }
-// FORGOT PASSWORD
+
+
+// ================= FORGOT PASSWORD =================
 function forgotPass() {
-  let user = prompt("Enter username");
+    let user = prompt("Enter username");
 
-  let data = localStorage.getItem(user);
+    let data = localStorage.getItem(user);
 
-  if (!data) {
-    alert("User not found");
-    return;
-  }
+    if (!data) {
+        alert("User not found");
+        return;
+    }
 
-  let obj = JSON.parse(data);
+    let obj = JSON.parse(data);
 
-  alert("Your password is: " + obj.password);
+    alert("Your password is: " + obj.password);
 }
