@@ -6,23 +6,24 @@
 
 <style>
 body {
-  margin: 0;
-  font-family: Arial;
-  background: #0f172a;
-  color: white;
-  text-align: center;
+    margin: 0;
+    font-family: Arial;
+    background: #0f172a;
+    color: white;
+    text-align: center;
 }
 
 .box {
-  margin-top: 100px;
+    margin-top: 100px;
 }
 
 button {
-  padding: 10px 20px;
-  border: none;
-  background: red;
-  color: white;
-  cursor: pointer;
+    padding: 10px 20px;
+    border: none;
+    background: red;
+    color: white;
+    cursor: pointer;
+    margin: 5px;
 }
 </style>
 
@@ -31,27 +32,59 @@ button {
 <body>
 
 <div class="box">
-  <h1>Welcome to Dashboard</h1>
-  <h2 id="user"></h2>
+    <h1>Welcome to Dashboard</h1>
+    <h2 id="user"></h2>
 
-  <button onclick="logout()">Logout</button>
+    <!-- Balance -->
+    <h2 id="balance">Balance: 0 PKR</h2>
+
+    <!-- Buttons -->
+    <button onclick="addMoney()">Add 100</button>
+    <button onclick="withdraw()">Withdraw 50</button>
+
+    <br><br>
+    <button onclick="logout()">Logout</button>
 </div>
 
 <script>
+
+// USER CHECK
 let user = localStorage.getItem("currentUser");
 
-// ✅ Agar user login nahi hai to index pe bhejo
 if (!user) {
     window.location.href = "index.html";
 } else {
     document.getElementById("user").innerText = "User: " + user;
 }
 
-// Logout function
+// BALANCE LOAD
+let balance = parseInt(localStorage.getItem(user + "_balance")) || 0;
+document.getElementById("balance").innerText = "Balance: " + balance + " PKR";
+
+// ADD MONEY
+function addMoney() {
+    balance += 100;
+    localStorage.setItem(user + "_balance", balance);
+    document.getElementById("balance").innerText = "Balance: " + balance + " PKR";
+}
+
+// WITHDRAW
+function withdraw() {
+    if (balance >= 50) {
+        balance -= 50;
+        localStorage.setItem(user + "_balance", balance);
+        document.getElementById("balance").innerText = "Balance: " + balance + " PKR";
+    } else {
+        alert("Not enough balance");
+    }
+}
+
+// LOGOUT
 function logout() {
     localStorage.removeItem("currentUser");
     window.location.href = "index.html";
 }
+
 </script>
 
 </body>
