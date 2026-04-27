@@ -2,136 +2,43 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Bazi Bet Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bazi Bet</title>
 
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial;
-}
-
-body {
-  background: #0f172a;
-  color: white;
-}
-
-/* TOP BAR */
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px;
-  background: #020617;
-  align-items: center;
-}
-
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-  color: #22c55e;
-}
-
-.balance {
-  background: #1e293b;
-  padding: 8px 12px;
-  border-radius: 8px;
-}
-
-/* USER */
-.user {
-  text-align: center;
-  margin-top: 20px;
-}
-
-/* ACTION BUTTONS */
-.actions {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 20px;
-}
-
-.actions button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  background: #22c55e;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* GAMES */
-.games {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  padding: 15px;
-}
-
-.game {
-  background: #1e293b;
-  padding: 20px;
-  text-align: center;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.game:hover {
-  background: #22c55e;
-  color: black;
-}
-
-/* FOOTER */
-.footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  background: #020617;
-  padding: 10px;
-}
-
-.footer div {
-  text-align: center;
-}
-</style>
-
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- TOP -->
+<!-- TOP BAR -->
 <div class="topbar">
-  <div class="logo">Bazi Bet</div>
-  <div class="balance" id="balance">Rs 0</div>
+  <span class="logo">Bazi Bet</span>
+  <span class="balanceTop" id="topBalance">Rs 0</span>
 </div>
 
-<!-- USER -->
-<div class="user">
+<!-- MAIN -->
+<div class="container">
+
+  <h1>Welcome</h1>
   <h2 id="user"></h2>
-</div>
+  <h2 id="balance"></h2>
 
-<!-- ACTIONS -->
-<div class="actions">
-  <button onclick="deposit()">Deposit</button>
-  <button onclick="withdraw()">Withdraw</button>
+  <button onclick="addMoney()">Deposit 100</button>
+  <button onclick="withdraw()">Withdraw 50</button>
   <button onclick="logout()">Logout</button>
+
+  <!-- GAMES -->
+  <div class="cards">
+    <div class="card">Aviator</div>
+    <div class="card">Crash</div>
+    <div class="card">Slots</div>
+    <div class="card">Spin</div>
+  </div>
+
 </div>
 
-<!-- GAMES -->
-<div class="games">
-  <div class="game" onclick="playGame()">Aviator</div>
-  <div class="game" onclick="playGame()">Crash</div>
-  <div class="game" onclick="playGame()">Slots</div>
-  <div class="game" onclick="playGame()">Spin</div>
-</div>
-
-<!-- FOOTER -->
-<div class="footer">
+<!-- BOTTOM MENU -->
+<div class="bottom">
   <div>Home</div>
   <div>Casino</div>
   <div>Wallet</div>
@@ -146,18 +53,23 @@ let user = localStorage.getItem("currentUser");
 if (!user) {
   window.location.href = "index.html";
 } else {
-  document.getElementById("user").innerText = "Welcome " + user;
+  document.getElementById("user").innerText = "User: " + user;
 }
 
 // BALANCE
 let balance = parseInt(localStorage.getItem(user + "_balance")) || 0;
-document.getElementById("balance").innerText = "Rs " + balance;
 
-// DEPOSIT
-function deposit() {
+function updateUI() {
+  document.getElementById("balance").innerText = "Balance: " + balance + " PKR";
+  document.getElementById("topBalance").innerText = "Rs " + balance;
+}
+updateUI();
+
+// ADD MONEY
+function addMoney() {
   balance += 100;
   localStorage.setItem(user + "_balance", balance);
-  document.getElementById("balance").innerText = "Rs " + balance;
+  updateUI();
 }
 
 // WITHDRAW
@@ -165,32 +77,10 @@ function withdraw() {
   if (balance >= 50) {
     balance -= 50;
     localStorage.setItem(user + "_balance", balance);
-    document.getElementById("balance").innerText = "Rs " + balance;
+    updateUI();
   } else {
     alert("Not enough balance");
   }
-}
-
-// GAME (demo)
-function playGame() {
-  let bet = 10;
-
-  if (balance < bet) {
-    alert("Low balance");
-    return;
-  }
-
-  balance -= bet;
-
-  if (Math.random() > 0.5) {
-    balance += 20;
-    alert("You Win!");
-  } else {
-    alert("You Lose!");
-  }
-
-  localStorage.setItem(user + "_balance", balance);
-  document.getElementById("balance").innerText = "Rs " + balance;
 }
 
 // LOGOUT
