@@ -1,81 +1,38 @@
-// CAPTCHA
-let a = Math.floor(Math.random() * 10);
-let b = Math.floor(Math.random() * 10);
-let c = Math.floor(Math.random() * 10);
-let d = Math.floor(Math.random() * 10);
+let user = localStorage.getItem("currentUser");
 
-// Show captcha
-document.getElementById("loginCaptcha").innerText = a + " + " + b;
-document.getElementById("signCaptcha").innerText = c + " + " + d;
-
-
-// ================= SIGNUP =================
-function signup() {
-    let user = document.getElementById("userName").value;
-    let pass = document.getElementById("signPass").value;
-    let cap = document.getElementById("signCapInput").value;
-
-    if (parseInt(cap) !== (c + d)) {
-        alert("Wrong captcha");
-        return;
-    }
-
-    let data = {
-        name: document.getElementById("fullName").value,
-        phone: document.getElementById("phone").value,
-        password: pass
-    };
-
-    localStorage.setItem(user, JSON.stringify(data));
-    alert("Signup success");
+if(!user){
+  window.location.href = "index.html";
 }
 
+// BALANCE LOAD
+let balance = parseInt(localStorage.getItem(user+"_balance")) || 0;
+updateBalance();
 
-// ================= LOGIN =================
-function login() {
-    let user = document.getElementById("loginUser").value;
-    let pass = document.getElementById("loginPass").value;
-    let cap = document.getElementById("loginCapInput").value;
-
-    if (parseInt(cap) !== (a + b)) {
-        alert("Wrong captcha");
-        return;
-    }
-
-    let data = localStorage.getItem(user);
-
-    if (!data) {
-        alert("User not found");
-        return;
-    }
-
-    let obj = JSON.parse(data);
-
-    if (obj.password === pass) {
-        alert("Login success");
-
-        // ⭐ IMPORTANT
-        localStorage.setItem("currentUser", user);
-
-        window.location.href = "dashboard.html";
-    } else {
-        alert("Wrong password");
-    }
+// UPDATE FUNCTION
+function updateBalance(){
+  document.getElementById("topBalance").innerText = balance;
 }
 
+// ADD MONEY
+function addMoney(){
+  balance += 100;
+  localStorage.setItem(user+"_balance", balance);
+  updateBalance();
+}
 
-// ================= FORGOT PASSWORD =================
-function forgotPass() {
-    let user = prompt("Enter username");
+// WITHDRAW
+function withdraw(){
+  if(balance >= 50){
+    balance -= 50;
+    localStorage.setItem(user+"_balance", balance);
+    updateBalance();
+  }else{
+    alert("Not enough balance");
+  }
+}
 
-    let data = localStorage.getItem(user);
-
-    if (!data) {
-        alert("User not found");
-        return;
-    }
-
-    let obj = JSON.parse(data);
-
-    alert("Your password is: " + obj.password);
+// LOGOUT
+function logout(){
+  localStorage.removeItem("currentUser");
+  window.location.href = "index.html";
 }
