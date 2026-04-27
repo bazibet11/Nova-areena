@@ -1,63 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bazi Bet</title>
-<link rel="stylesheet" href="style.css">
+  <title>Bazi Bet</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="container">
+<h1>Bazi Bet 🎰</h1>
 
-<h1>🎰 Bazi Bet</h1>
+<div class="buttons">
+  <button onclick="showLogin()">Login</button>
+  <button onclick="showSignup()">Signup</button>
+</div>
 
 <!-- LOGIN -->
-<div id="loginBox">
+<div id="loginBox" class="box">
   <h2>Login</h2>
 
-  <input id="loginUser" placeholder="Username">
+  <input type="text" id="loginUser" placeholder="Username"><br>
 
-  <div class="field">
+  <div class="passBox">
     <input type="password" id="loginPass" placeholder="Password">
-    <span class="eye" onclick="togglePass('loginPass')">👁</span>
+    <span onclick="togglePass('loginPass')">👁</span>
   </div>
 
-  <p id="captchaQ1"></p>
-  <input id="captchaA1" placeholder="Answer">
+  <p id="loginCaptcha"></p>
+  <input type="text" id="loginCapInput" placeholder="Answer"><br>
 
-  <button onclick="login()">Log in</button>
+  <button onclick="login()">Login</button>
 
-  <p class="link" onclick="forgot()">Forgot Password?</p>
-
-  <p>Don't have account? 
-    <span class="link" onclick="showSignup()">Sign up</span>
-  </p>
+  <p onclick="forgotPass()">Forgot Password?</p>
 </div>
 
 <!-- SIGNUP -->
-<div id="signupBox" style="display:none;">
-  <h2>Sign Up</h2>
+<div id="signupBox" class="box" style="display:none;">
+  <h2>Signup</h2>
 
-  <input id="realName" placeholder="Full Name">
-  <input id="userName" placeholder="Username">
-  <input id="phone" placeholder="Phone Number">
+  <input type="text" id="fullName" placeholder="Full Name"><br>
+  <input type="text" id="userName" placeholder="Username"><br>
+  <input type="text" id="phone" placeholder="Phone No"><br>
 
-  <div class="field">
+  <div class="passBox">
     <input type="password" id="signPass" placeholder="Password">
-    <span class="eye" onclick="togglePass('signPass')">👁</span>
+    <span onclick="togglePass('signPass')">👁</span>
   </div>
 
-  <p id="captchaQ2"></p>
-  <input id="captchaA2" placeholder="Answer">
+  <p id="signCaptcha"></p>
+  <input type="text" id="signCapInput" placeholder="Answer"><br>
 
-  <button onclick="signup()">Create Account</button>
-
-  <p>Already have account? 
-    <span class="link" onclick="showLogin()">Login</span>
-  </p>
-</div>
-
+  <button onclick="signup()">Register</button>
 </div>
 
 <script src="app.js"></script>
