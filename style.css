@@ -1,42 +1,40 @@
 body {
-  margin: 0;
-  font-family: Arial;
-  background: #1c8c6d;
-  color: white;
   text-align: center;
-}
-
-#home {
-  margin-top: 120px;
-}
-
-h1 {
-  font-size: 40px;
-}
-
-button {
-  padding: 15px;
-  width: 220px;
-  margin: 10px;
-  border: none;
-  font-size: 18px;
-  border-radius: 6px;
-}
-
-.signup {
-  background: orange;
+  background: #1f8a70;
+  color: white;
+  font-family: Arial;
 }
 
 .box {
-  display: none;
-  margin-top: 80px;
+  background: white;
+  color: black;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
 }
 
 input {
-  display: block;
-  margin: 10px auto;
-  padding: 12px;
-  width: 260px;
-  border-radius: 6px;
-  border: none;
+  padding: 10px;
+  margin: 5px;
+  width: 80%;
+}
+
+button {
+  padding: 10px;
+  width: 50%;
+  margin-top: 10px;
+}
+
+.passBox {
+  display: flex;
+  justify-content: center;
+}
+
+.passBox input {
+  width: 70%;
+}
+
+.passBox span {
+  cursor: pointer;
+  padding: 10px;
 }
