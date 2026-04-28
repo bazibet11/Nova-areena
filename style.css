@@ -1,108 +1,54 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: Arial;
+body {
+  margin: 0;
+  padding: 0;
+  background: #021a2b;
+  font-family: Arial, sans-serif;
 }
 
-body{
-  background:#0c1b2a;
-  color:white;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-/* TOP BAR */
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  padding:12px;
-  background:#081521;
-  font-size:18px;
+/* LOGIN BOX */
+.login-box {
+  background: #0a2a3f;
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
 }
 
-.logo{
-  color:#00ffae;
-  font-weight:bold;
+.login-box h2 {
+  color: white;
+  text-align: center;
 }
 
-.balance{
-  background:#1c8c6e;
-  padding:5px 10px;
-  border-radius:6px;
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
 }
 
-/* BANNER */
-.banner img{
-  width:100%;
-  border-radius:10px;
-  margin:10px 0;
+button {
+  width: 100%;
+  padding: 10px;
+  background: #00d084;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-/* MENU */
-.menu{
-  display:flex;
-  justify-content:space-around;
-  margin:10px 0;
+button:hover {
+  background: #00a86b;
 }
 
-.menu-item{
-  background:#162c3f;
-  padding:10px;
-  border-radius:10px;
-  width:22%;
-  text-align:center;
-}
-
-/* BONUS */
-.bonus{
-  background:gold;
-  color:black;
-  margin:10px;
-  padding:12px;
-  border-radius:10px;
-  text-align:center;
-  font-weight:bold;
-}
-
-/* GAMES */
-.games{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  padding:10px;
-}
-
-.game{
-  background:#1b2e44;
-  height:100px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  border-radius:10px;
-  font-size:18px;
-}
-
-/* BUTTONS */
-.actions{
-  text-align:center;
-  margin:15px 0;
-}
-
-button{
-  padding:10px 15px;
-  margin:5px;
-  border:none;
-  border-radius:6px;
-  background:#00ffae;
-  font-weight:bold;
-}
-
-/* BOTTOM NAV */
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  background:#081521;
-  display:flex;
-  justify-content:space-around;
-  padding:10px 0;
+a {
+  color: #00d084;
+  font-size: 12px;
 }
