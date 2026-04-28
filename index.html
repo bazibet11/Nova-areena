@@ -8,16 +8,44 @@
 <body>
 
 <div class="container">
-  <div class="login-box">
+
+  <!-- LOGIN -->
+  <div class="box" id="loginBox">
     <h2>Login</h2>
 
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Password">
+    <input type="text" id="loginUser" placeholder="Username">
+
+    <div class="password-field">
+      <input type="password" id="loginPass" placeholder="Password">
+      <span onclick="togglePass('loginPass')">👁️</span>
+    </div>
+
+    <div class="captcha">
+      <span id="captchaQ"></span>
+      <input type="text" id="captchaA" placeholder="Answer">
+    </div>
 
     <button onclick="login()">Login</button>
 
-    <p><a href="#">Forgot Password?</a></p>
+    <p onclick="showSignup()">Create Account</p>
   </div>
+
+  <!-- SIGNUP -->
+  <div class="box" id="signupBox" style="display:none;">
+    <h2>Signup</h2>
+
+    <input type="text" id="signupUser" placeholder="Username">
+
+    <div class="password-field">
+      <input type="password" id="signupPass" placeholder="Password">
+      <span onclick="togglePass('signupPass')">👁️</span>
+    </div>
+
+    <button onclick="signup()">Signup</button>
+
+    <p onclick="showLogin()">Back to Login</p>
+  </div>
+
 </div>
 
 <script src="script.js"></script>
