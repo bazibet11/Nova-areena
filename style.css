@@ -1,76 +1,48 @@
 body {
   margin: 0;
-  background: #021a2b;
   font-family: Arial;
-}
-
-.container {
+  background: #0b2c3d;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-/* BOX */
-.box {
-  background: #0a2a3f;
-  padding: 25px;
-  width: 300px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
-  text-align: center;
+.container {
+  width: 90%;
+  max-width: 400px;
 }
 
-h2 {
+.card {
+  background: #0f3a4f;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  text-align: center;
   color: white;
 }
 
-/* INPUT */
 input {
   width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 5px;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 6px;
   border: none;
 }
 
-/* PASSWORD FIELD */
-.password-field {
-  position: relative;
-}
-
-.password-field span {
-  position: absolute;
-  right: 10px;
-  top: 12px;
-  cursor: pointer;
-}
-
-/* CAPTCHA */
-.captcha {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-
-.captcha span {
-  color: white;
-  font-size: 18px;
-}
-
-/* BUTTON */
 button {
   width: 100%;
-  padding: 10px;
-  margin-top: 15px;
-  background: #00d084;
+  padding: 12px;
+  background: #00c98d;
   border: none;
   color: white;
-  border-radius: 5px;
+  font-weight: bold;
+  border-radius: 6px;
+  margin-top: 10px;
 }
 
-p {
-  color: #00d084;
+.link {
+  color: #00c98d;
   cursor: pointer;
-  font-size: 14px;
+  margin-top: 10px;
 }
