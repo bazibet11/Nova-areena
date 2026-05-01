@@ -1,54 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bazi Bet</title>
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="container">
-
-  <!-- LOGIN -->
-  <div class="box" id="loginBox">
+  <div class="card">
     <h2>Login</h2>
 
-    <input type="text" id="loginUser" placeholder="Username">
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
 
-    <div class="password-field">
-      <input type="password" id="loginPass" placeholder="Password">
-      <span onclick="togglePass('loginPass')">👁️</span>
-    </div>
-
-    <div class="captcha">
-      <span id="captchaQ"></span>
-      <input type="text" id="captchaA" placeholder="Answer">
-    </div>
+    <p id="captchaText"></p>
+    <input type="text" id="captchaInput" placeholder="Enter Captcha">
 
     <button onclick="login()">Login</button>
-
-    <p onclick="showSignup()">Create Account</p>
+    <p onclick="goSignup()" class="link">Create Account</p>
   </div>
-
-  <!-- SIGNUP -->
-  <div class="box" id="signupBox" style="display:none;">
-    <h2>Signup</h2>
-
-    <input type="text" id="signupUser" placeholder="Username">
-
-    <div class="password-field">
-      <input type="password" id="signupPass" placeholder="Password">
-      <span onclick="togglePass('signupPass')">👁️</span>
-    </div>
-
-    <button onclick="signup()">Signup</button>
-
-    <p onclick="showLogin()">Back to Login</p>
-  </div>
-
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
