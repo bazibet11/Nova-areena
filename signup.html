@@ -2,23 +2,23 @@
 <html>
 <head>
   <title>Signup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>Signup</h2>
+<div class="container">
+  <div class="card">
+    <h2>Signup</h2>
 
-<form id="signupForm">
-  <input type="text" id="fullname" placeholder="Full Name" required><br><br>
-  <input type="text" id="username" placeholder="Username" required><br><br>
-  <input type="password" id="password" placeholder="Password" required><br><br>
+    <input type="text" id="su_user" placeholder="Username">
+    <input type="password" id="su_pass" placeholder="Password">
 
-  <p id="captcha"></p>
-  <input type="text" id="captchaInput" placeholder="Answer" required><br><br>
+    <button onclick="signup()">Create Account</button>
+    <p onclick="goLogin()" class="link">Back to Login</p>
+  </div>
+</div>
 
-  <button type="submit">Signup</button>
-</form>
-
-<script src="signup.js"></script>
-
+<script src="script.js"></script>
 </body>
 </html>
