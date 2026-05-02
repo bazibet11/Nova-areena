@@ -1,101 +1,56 @@
-// ===== GLOBAL CAPTCHA =====
-let num1 = 0;
-let num2 = 0;
+let mode = "login";
+let captcha = "";
 
-// ===== PAGE LOAD =====
-window.onload = function () {
-  generateCaptcha();
-};
-
-// ===== CAPTCHA GENERATE =====
-function generateCaptcha() {
-  num1 = Math.floor(Math.random() * 5) + 1;
-  num2 = Math.floor(Math.random() * 5) + 1;
-
-  let captchaText = document.getElementById("captchaQ");
-  if (captchaText) {
-    captchaText.innerText = num1 + " + " + num2;
-  }
+function generateCaptcha(){
+    captcha = Math.floor(1000 + Math.random()*9000);
+    document.getElementById("captchaText").innerText = "Captcha: " + captcha;
 }
 
-// ===== PASSWORD TOGGLE =====
-function togglePass(id) {
-  let input = document.getElementById(id);
+generateCaptcha();
 
-  if (!input) return;
-
-  if (input.type === "password") {
-    input.type = "text";
-  } else {
-    input.type = "password";
-  }
-}
-
-// ===== SWITCH FORMS =====
-function showSignup() {
-  document.getElementById("loginBox").style.display = "none";
-  document.getElementById("signupBox").style.display = "block";
-}
-
-function showLogin() {
-  document.getElementById("signupBox").style.display = "none";
-  document.getElementById("loginBox").style.display = "block";
-  generateCaptcha();
-}
-
-// ===== SIGNUP FUNCTION =====
-function signup() {
-  let user = document.getElementById("signupUser").value.trim();
-  let pass = document.getElementById("signupPass").value.trim();
-
-  if (user === "" || pass === "") {
-    alert("Please fill all fields");
-    return;
-  }
-
-  // SAVE DATA (browser storage)
-  localStorage.setItem("user", user);
-  localStorage.setItem("pass", pass);
-
-  alert("Signup Successful ✔");
-
-  // Clear fields
-  document.getElementById("signupUser").value = "";
-  document.getElementById("signupPass").value = "";
-
-  showLogin();
-}
-
-// ===== LOGIN FUNCTION =====
-function login() {
-  let user = document.getElementById("loginUser").value.trim();
-  let pass = document.getElementById("loginPass").value.trim();
-  let captcha = document.getElementById("captchaA").value.trim();
-
-  let savedUser = localStorage.getItem("user");
-  let savedPass = localStorage.getItem("pass");
-
-  // VALIDATION
-  if (user === "" || pass === "" || captcha === "") {
-    alert("All fields required");
-    return;
-  }
-
-  // CAPTCHA CHECK
-  if (parseInt(captcha) !== num1 + num2) {
-    alert("Wrong captcha ❌");
+function switchMode(){
+    mode = (mode === "login") ? "signup" : "login";
+    document.querySelector(".btn").innerText = mode === "login" ? "Login" : "Sign Up";
+    document.querySelector(".link").innerText = mode === "login" ? "Create Account" : "Back to Login";
     generateCaptcha();
-    document.getElementById("captchaA").value = "";
-    return;
-  }
+}
 
-  // LOGIN CHECK
-  if (user === savedUser && pass === savedPass) {
-    alert("Login Successful ✅");
+function submit(){
+    let user = document.getElementById("user").value;
+    let pass = document.getElementById("pass").value;
+    let cap = document.getElementById("captchaInput").value;
 
-    // OPTIONAL REDIRECT
-    // window.location.href = "dashboard.html";
-  } else {
-    alert("Wrong Username or Password ❌");
-  }
+    if(!user || !pass){
+        alert("Fill all fields");
+        return;
+    }
+
+    if(cap != captcha){
+        alert("Wrong captcha");
+        generateCaptcha();
+        return;
+    }
+
+    if(mode === "signup"){
+        localStorage.setItem(user, pass);
+        alert("Account Created!");
+    }else{
+        let saved = localStorage.getItem(user);
+        if(saved === pass){
+            showDashboard(user);
+        }else{
+            alert("Invalid Login");
+        }
+    }
+}
+
+function showDashboard(user){
+    document.getElementById("authBox").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+    document.getElementById("welcomeUser").innerText = "Hello " + user;
+}
+
+function logout(){
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("authBox").style.display = "block";
 }
