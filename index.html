@@ -1,105 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bazi Bet</title>
 
 <style>
-body {
-    margin:0;
-    font-family:monospace;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    background: 
-    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
-    url("https://images.unsplash.com/photo-1606813909355-d1b0c0b3bcd5");
-    background-size:cover;
+body{
+margin:0;
+font-family:sans-serif;
+background:linear-gradient(135deg,#001f2f,#000);
+color:#fff;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
 }
 
-/* CARD */
-.card {
-    width:92%;
-    max-width:400px;
-    padding:25px;
-    border-radius:25px;
-    background:#0a0a0a;
-    box-shadow:0 0 40px #00f2fe;
-    color:#fff;
+.card{
+width:90%;
+max-width:400px;
+background:#0a0a0a;
+border-radius:20px;
+padding:20px;
+box-shadow:0 0 20px #00f0ff55;
+text-align:center;
 }
 
-/* LOGO */
-.logo {
-    text-align:center;
-    font-size:36px;
-    font-weight:bold;
-    letter-spacing:4px;
-    margin-bottom:20px;
-    color:#00f2fe;
-    text-shadow:0 0 15px #00f2fe;
+.logo{
+font-size:28px;
+color:#00f0ff;
+text-shadow:0 0 10px #00f0ff;
+margin-bottom:20px;
 }
 
-/* BUTTON */
-.btn {
-    width:100%;
-    padding:14px;
-    margin-top:12px;
-    border:none;
-    border-radius:12px;
-    font-weight:bold;
-    cursor:pointer;
+.btn{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
 }
 
-.login {background:linear-gradient(45deg,#00c6ff,#0072ff);}
-.signup {background:linear-gradient(45deg,#ff7b00,#ff3c00);}
+.login{background:#00bfff;}
+.signup{background:#ff5e00;color:#fff;}
 
-/* INPUT */
-.input-box {
-    position:relative;
-    margin-top:12px;
+.input-box{
+position:relative;
+margin-top:10px;
 }
 
-.input-box input, select {
-    width:100%;
-    padding:12px 40px 12px 12px;
-    border-radius:10px;
-    border:none;
-    background:#111;
-    color:#fff;
-    box-sizing:border-box;
+.input-box input, select{
+width:100%;
+padding:10px;
+border-radius:10px;
+border:none;
+background:#111;
+color:#fff;
 }
 
-/* EYE */
-.eye {
-    position:absolute;
-    right:12px;
-    top:50%;
-    transform:translateY(-50%);
-    cursor:pointer;
+.eye{
+position:absolute;
+right:10px;
+top:10px;
+cursor:pointer;
 }
 
-/* CAPTCHA */
-.captcha {
-    margin-top:10px;
-    padding:10px;
-    background:#111;
-    border-radius:8px;
-    text-align:center;
-}
+.form-box{display:none;}
 
-/* FORMS */
-.form-box {display:none;}
-.dashboard {display:none;}
+.back{margin-top:10px;color:#aaa;cursor:pointer;}
 
-/* BACK */
-.back {
-    text-align:center;
-    margin-top:10px;
-    cursor:pointer;
-    opacity:0.7;
+.dashboard{display:none;text-align:center;}
+
+.captcha{
+margin-top:10px;
+background:#111;
+padding:10px;
+border-radius:10px;
 }
 </style>
 </head>
@@ -108,7 +86,7 @@ body {
 
 <div class="card">
 
-<div class="logo">BAZI BET</div>
+<div class="logo">🎮 BAZI BET</div>
 
 <div id="mainBtns">
 <button class="btn login" onclick="showLogin()">LOGIN</button>
@@ -117,21 +95,20 @@ body {
 
 <!-- LOGIN -->
 <div id="loginForm" class="form-box">
-
 <div class="input-box">
-<input id="luser" placeholder="Username">
+<input id="loginUser" placeholder="Username">
 </div>
 
 <div class="input-box">
-<input type="password" id="lpass" placeholder="Password">
-<span class="eye" onclick="togglePass('lpass')">👁</span>
+<input type="password" id="loginPass" placeholder="Password">
+<span class="eye" onclick="togglePass('loginPass')">👁</span>
 </div>
 
-<div class="captcha" id="loginCap"></div>
-<input id="loginCapInput" placeholder="Enter captcha">
+<div class="captcha" id="loginCaptcha"></div>
+<input id="loginCaptchaInput" placeholder="Enter captcha">
 
 <button class="btn login" onclick="login()">ENTER</button>
-<div class="back" onclick="goBack()">⬅ Back</div>
+<div class="back" onclick="goBack()">← Back</div>
 </div>
 
 <!-- SIGNUP -->
@@ -147,10 +124,10 @@ body {
 
 <div class="input-box">
 <select id="country">
-<option value="+92">Pakistan (+92)</option>
-<option value="+91">India (+91)</option>
-<option value="+971">UAE (+971)</option>
-<option value="+880">Bangladesh (+880)</option>
+<option>Pakistan (+92)</option>
+<option>India (+91)</option>
+<option>UAE (+971)</option>
+<option>Bangladesh (+880)</option>
 </select>
 </div>
 
@@ -163,16 +140,15 @@ body {
 <span class="eye" onclick="togglePass('pass')">👁</span>
 </div>
 
-<div class="captcha" id="signCap"></div>
-<input id="signCapInput" placeholder="Enter captcha">
+<div class="captcha" id="signupCaptcha"></div>
+<input id="signupCaptchaInput" placeholder="Enter captcha">
 
 <button class="btn signup" onclick="signup()">CREATE ACCOUNT</button>
-<div class="back" onclick="goBack()">⬅ Back</div>
+<div class="back" onclick="goBack()">← Back</div>
 </div>
 
 <!-- DASHBOARD -->
 <div id="dashboard" class="dashboard">
-
 <h2>🎮 Welcome Player</h2>
 
 <button onclick="window.location.href='game.html'" class="btn login">
@@ -180,91 +156,80 @@ body {
 </button>
 
 <button class="btn signup" onclick="logout()">Logout</button>
-
 </div>
 
 </div>
 
 <script>
-let cap1=0, cap2=0;
+let cap1, cap2;
 
-/* CAPTCHA */
-function genLoginCap(){
-let a=Math.floor(Math.random()*10);
-let b=Math.floor(Math.random()*10);
-cap1=a+b;
-loginCap.innerText=a+" + "+b;
+function generateCaptcha(id){
+cap1 = Math.floor(Math.random()*10);
+cap2 = Math.floor(Math.random()*10);
+document.getElementById(id).innerHTML = cap1 + " + " + cap2;
 }
 
-function genSignCap(){
-let a=Math.floor(Math.random()*10);
-let b=Math.floor(Math.random()*10);
-cap2=a+b;
-signCap.innerText=a+" + "+b;
-}
-
-/* TOGGLE */
-function togglePass(id){
-let x=document.getElementById(id);
-x.type=x.type==="password"?"text":"password";
-}
-
-/* SHOW */
 function showLogin(){
-hideAll();
-loginForm.style.display="block";
-genLoginCap();
+document.getElementById("mainBtns").style.display="none";
+document.getElementById("loginForm").style.display="block";
+generateCaptcha("loginCaptcha");
 }
 
 function showSignup(){
-hideAll();
-signupForm.style.display="block";
-genSignCap();
+document.getElementById("mainBtns").style.display="none";
+document.getElementById("signupForm").style.display="block";
+generateCaptcha("signupCaptcha");
 }
 
-/* SIGNUP */
-function signup(){
-if(parseInt(signCapInput.value)!==cap2){
-alert("Wrong captcha"); return;
-}
-localStorage.setItem("user",user.value);
-localStorage.setItem("pass",pass.value);
-alert("Account Created");
-showLogin();
-}
-
-/* LOGIN */
-function login(){
-if(parseInt(loginCapInput.value)!==cap1){
-alert("Wrong captcha"); return;
-}
-
-if(luser.value===localStorage.getItem("user") &&
-lpass.value===localStorage.getItem("pass")){
-hideAll();
-dashboard.style.display="block";
-}
-else alert("Wrong login");
-}
-
-/* LOGOUT */
-function logout(){
-hideAll();
-mainBtns.style.display="block";
-}
-
-/* BACK */
 function goBack(){
-hideAll();
-mainBtns.style.display="block";
+document.getElementById("mainBtns").style.display="block";
+document.getElementById("loginForm").style.display="none";
+document.getElementById("signupForm").style.display="none";
 }
 
-/* HIDE */
-function hideAll(){
-loginForm.style.display="none";
-signupForm.style.display="none";
-dashboard.style.display="none";
-mainBtns.style.display="none";
+function togglePass(id){
+let x = document.getElementById(id);
+x.type = x.type === "password" ? "text" : "password";
+}
+
+function signup(){
+let answer = cap1 + cap2;
+let userAns = document.getElementById("signupCaptchaInput").value;
+
+if(userAns != answer){
+alert("Captcha wrong");
+return;
+}
+
+localStorage.setItem("user", document.getElementById("user").value);
+localStorage.setItem("pass", document.getElementById("pass").value);
+
+alert("Account created");
+goBack();
+}
+
+function login(){
+let answer = cap1 + cap2;
+let userAns = document.getElementById("loginCaptchaInput").value;
+
+if(userAns != answer){
+alert("Captcha wrong");
+return;
+}
+
+let u = document.getElementById("loginUser").value;
+let p = document.getElementById("loginPass").value;
+
+if(u == localStorage.getItem("user") && p == localStorage.getItem("pass")){
+document.getElementById("loginForm").style.display="none";
+document.getElementById("dashboard").style.display="block";
+}else{
+alert("Wrong login");
+}
+}
+
+function logout(){
+location.reload();
 }
 </script>
 
