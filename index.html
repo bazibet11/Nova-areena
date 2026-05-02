@@ -6,7 +6,12 @@
 <title>Bazi Bet</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
 
 body{
     height:100vh;
@@ -22,20 +27,27 @@ body{
     text-align:center;
 }
 
+/* LOGO */
 .logo{
-    font-size:45px;
-    margin-bottom:50px;
+    font-size:60px;
+    font-weight:700;
+    letter-spacing:2px;
+    margin-bottom:60px;
+    text-shadow:0 0 20px rgba(0,242,254,0.4);
 }
-.logo span{color:#00f2fe;}
+.logo span{
+    color:#00f2fe;
+}
 
+/* BUTTONS */
 .btn{
-    width:220px;
+    width:240px;
     padding:14px;
     margin:10px;
-    border-radius:10px;
+    border-radius:12px;
     cursor:pointer;
-    border:none;
     font-size:18px;
+    transition:0.3s;
 }
 
 .loginBtn{
@@ -47,28 +59,42 @@ body{
 .signupBtn{
     background:linear-gradient(45deg,#2ecc71,#00f2fe);
     color:#0f2027;
+    font-weight:bold;
 }
 
-/* FORM BOX */
+.btn:hover{
+    transform:scale(1.05);
+}
+
+/* FORM */
 .formBox{
     display:none;
     width:300px;
     text-align:center;
+    animation:fade 0.3s ease;
+}
+
+@keyframes fade{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;transform:translateY(0);}
 }
 
 input{
     width:100%;
     padding:12px;
     margin:8px 0;
-    border-radius:8px;
     border:none;
+    border-radius:8px;
 }
 
+/* SUBMIT */
 .submit{
     background:linear-gradient(45deg,#2ecc71,#00f2fe);
     color:#0f2027;
+    font-weight:bold;
 }
 
+/* LINK */
 .link{
     margin-top:10px;
     color:#00f2fe;
@@ -82,6 +108,7 @@ input{
 <!-- LANDING -->
 <div class="landing" id="landing">
     <div class="logo">Ba<span>z</span>i Bet</div>
+
     <button class="btn loginBtn" onclick="openForm('login')">Login</button>
     <button class="btn signupBtn" onclick="openForm('signup')">Sign Up</button>
 </div>
@@ -104,11 +131,13 @@ input{
 let mode="login";
 let captcha="";
 
+/* CAPTCHA */
 function generateCaptcha(){
     captcha = Math.floor(1000 + Math.random()*9000);
-    document.getElementById("captchaText").innerText="Captcha: "+captcha;
+    document.getElementById("captchaText").innerText = "Captcha: " + captcha;
 }
 
+/* OPEN FORM */
 function openForm(type){
     mode = type;
     document.getElementById("landing").style.display="none";
@@ -116,17 +145,24 @@ function openForm(type){
     generateCaptcha();
 }
 
+/* BACK */
 function back(){
     document.getElementById("landing").style.display="block";
     document.getElementById("formBox").style.display="none";
 }
 
+/* SUBMIT */
 function submit(){
     let u=document.getElementById("user").value;
     let p=document.getElementById("pass").value;
     let c=document.getElementById("captchaInput").value;
 
-    if(c!=captcha){
+    if(!u || !p){
+        alert("Fill all fields");
+        return;
+    }
+
+    if(c != captcha){
         alert("Wrong captcha");
         generateCaptcha();
         return;
@@ -134,12 +170,12 @@ function submit(){
 
     if(mode==="signup"){
         localStorage.setItem(u,p);
-        alert("Account Created");
+        alert("Account Created ✅");
     }else{
         if(localStorage.getItem(u)===p){
-            alert("Login Success");
+            alert("Login Success 🎉");
         }else{
-            alert("Wrong login");
+            alert("Wrong login ❌");
         }
     }
 }
