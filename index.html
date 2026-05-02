@@ -9,79 +9,39 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    height: 100vh;
-    overflow: hidden;
-
-    background: linear-gradient(270deg, #000000, #0f2027, #000000);
-    background-size: 600% 600%;
-    animation: bgMove 10s ease infinite;
-
+    background: radial-gradient(circle at top, #001f2f, #000);
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-@keyframes bgMove {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-}
-
-/* BACKGROUND EFFECTS */
-.bg-glow {
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, #00c6ff, transparent 70%);
-    filter: blur(120px);
-    z-index: -1;
-}
-
-.circle, .circle2 {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    z-index: -1;
-}
-
-.circle {
-    width: 200px;
-    height: 200px;
-    background: #00c6ff;
-    top: 10%;
-    left: 10%;
-}
-
-.circle2 {
-    width: 250px;
-    height: 250px;
-    background: #ff3c00;
-    bottom: 10%;
-    right: 10%;
+    height: 100vh;
 }
 
 /* CARD */
 .card {
     width: 95%;
     max-width: 400px;
-    padding: 30px;
+    padding: 20px;
     border-radius: 25px;
-    background: rgba(0,0,0,0.85);
-    box-shadow: 0 0 30px #00c6ff;
-    text-align: center;
+    background: #0a0a0a;
+    box-shadow: 0 0 40px rgba(0,198,255,0.6);
     color: white;
 }
 
-/* LOGO */
+/* LOGO IMAGE */
 .logo {
-    font-size: 38px;
-    font-weight: 900;
-    letter-spacing: 4px;
-    margin-bottom: 25px;
-    background: linear-gradient(45deg, #00c6ff, #00f2fe);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 15px rgba(0,198,255,0.8);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.logo img {
+    width: 140px;
+}
+
+/* BANNER */
+.banner {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 15px;
 }
 
 /* BUTTONS */
@@ -89,237 +49,202 @@ body {
     width: 100%;
     padding: 14px;
     margin-top: 12px;
-    border: none;
     border-radius: 12px;
-    font-size: 17px;
+    border: none;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
 }
 
-.login {
-    background: linear-gradient(45deg, #00c6ff, #0072ff);
-}
-
-.signup {
-    background: linear-gradient(45deg, #ff7b00, #ff3c00);
-}
+.login {background: linear-gradient(45deg,#00c6ff,#0072ff);}
+.signup {background: linear-gradient(45deg,#ff7b00,#ff3c00);}
 
 /* INPUT */
 .input-box {
-    margin-top: 10px;
-    text-align: left;
     position: relative;
+    margin-top: 10px;
 }
 
 .input-box input, select {
     width: 100%;
-    padding: 12px;
+    padding: 12px 40px 12px 12px;
     border-radius: 10px;
     border: none;
     background: #111;
     color: white;
 }
 
-/* EYE ICON */
+/* EYE FIX */
 .eye {
     position: absolute;
-    right: 10px;
-    top: 38px;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
     cursor: pointer;
 }
 
 /* FORM */
-.form-box {
-    display: none;
-}
+.form-box {display:none;}
 
 /* CAPTCHA */
 .captcha {
-    margin-top: 10px;
-    background: #111;
-    padding: 10px;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: bold;
+    background:#111;
+    padding:10px;
+    margin-top:10px;
+    border-radius:8px;
+    text-align:center;
 }
 
 /* BACK */
 .back {
-    margin-top: 10px;
-    text-align: center;
-    cursor: pointer;
+    text-align:center;
+    margin-top:10px;
+    cursor:pointer;
 }
 
-/* DASHBOARD */
-.dashboard {
-    display: none;
-}
+/* DASH */
+.dashboard {display:none;}
 </style>
 </head>
 
 <body>
 
-<div class="bg-glow"></div>
-<div class="circle"></div>
-<div class="circle2"></div>
-
 <div class="card">
 
-<div class="logo">BAZI BET</div>
+<!-- LOGO -->
+<div class="logo">
+<img src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png">
+</div>
+
+<!-- BANNER -->
+<img class="banner" src="https://images.unsplash.com/photo-1606813909355-d1b0c0b3bcd5">
 
 <div id="mainBtns">
-    <button class="btn login" onclick="showLogin()">LOGIN</button>
-    <button class="btn signup" onclick="showSignup()">SIGN UP</button>
+<button class="btn login" onclick="showLogin()">LOGIN</button>
+<button class="btn signup" onclick="showSignup()">SIGN UP</button>
 </div>
 
 <!-- LOGIN -->
 <div id="loginForm" class="form-box">
-    <div class="input-box">
-        <input type="text" id="luser" placeholder="Username">
-    </div>
+<div class="input-box">
+<input id="luser" placeholder="Username">
+</div>
 
-    <div class="input-box">
-        <input type="password" id="lpass" placeholder="Password">
-        <span class="eye" onclick="togglePass('lpass')">👁</span>
-    </div>
+<div class="input-box">
+<input type="password" id="lpass" placeholder="Password">
+<span class="eye" onclick="togglePass('lpass')">👁</span>
+</div>
 
-    <button class="btn login" onclick="login()">ENTER</button>
-    <div class="back" onclick="goBack()">⬅ Back</div>
+<button class="btn login" onclick="login()">ENTER</button>
+<div class="back" onclick="goBack()">⬅ Back</div>
 </div>
 
 <!-- SIGNUP -->
 <div id="signupForm" class="form-box">
 
-    <div class="input-box">
-        <input type="text" id="name" placeholder="Full Name">
-    </div>
+<div class="input-box">
+<input id="name" placeholder="Full Name">
+</div>
 
-    <div class="input-box">
-        <input type="text" id="user" placeholder="Username">
-    </div>
+<div class="input-box">
+<input id="user" placeholder="Username">
+</div>
 
-    <div class="input-box">
-        <select id="country">
-            <option value="+971">UAE (+971)</option>
-            <option value="+880">Bangladesh (+880)</option>
-            <option value="+91">India (+91)</option>
-            <option value="+92">Pakistan (+92)</option>
-        </select>
-    </div>
+<div class="input-box">
+<select id="country">
+<option value="+971">UAE (+971)</option>
+<option value="+880">Bangladesh (+880)</option>
+<option value="+91">India (+91)</option>
+<option value="+92">Pakistan (+92)</option>
+</select>
+</div>
 
-    <div class="input-box">
-        <input type="text" id="phone" placeholder="Phone Number">
-    </div>
+<div class="input-box">
+<input id="phone" placeholder="Phone Number">
+</div>
 
-    <div class="input-box">
-        <input type="password" id="pass" placeholder="Password">
-        <span class="eye" onclick="togglePass('pass')">👁</span>
-    </div>
+<div class="input-box">
+<input type="password" id="pass" placeholder="Password">
+<span class="eye" onclick="togglePass('pass')">👁</span>
+</div>
 
-    <div class="captcha" id="captchaQ"></div>
-    <input type="text" id="captchaInput" placeholder="Enter captcha">
+<div class="captcha" id="cap"></div>
+<input id="capInput" placeholder="Enter captcha">
 
-    <button class="btn signup" onclick="signup()">CREATE ACCOUNT</button>
-    <div class="back" onclick="goBack()">⬅ Back</div>
+<button class="btn signup" onclick="signup()">CREATE ACCOUNT</button>
+<div class="back" onclick="goBack()">⬅ Back</div>
 </div>
 
 <!-- DASHBOARD -->
 <div id="dashboard" class="dashboard">
-    <h2>Welcome 🎉</h2>
-    <p id="info"></p>
-    <button class="btn" onclick="logout()">Logout</button>
+<h2>Welcome 🎉</h2>
+<p id="info"></p>
+<button class="btn" onclick="logout()">Logout</button>
 </div>
 
 </div>
 
 <script>
-let answer = 0;
+let ans=0;
 
-function captchaGen() {
-    let a = Math.floor(Math.random()*10);
-    let b = Math.floor(Math.random()*10);
-    answer = a + b;
-    document.getElementById("captchaQ").innerText = a + " + " + b;
+function genCap(){
+let a=Math.floor(Math.random()*10);
+let b=Math.floor(Math.random()*10);
+ans=a+b;
+document.getElementById("cap").innerText=a+" + "+b;
 }
 
-function togglePass(id) {
-    let field = document.getElementById(id);
-    field.type = field.type === "password" ? "text" : "password";
+function togglePass(id){
+let x=document.getElementById(id);
+x.type=x.type==="password"?"text":"password";
 }
 
-function showLogin() {
-    hideAll();
-    document.getElementById("loginForm").style.display = "block";
+function showLogin(){
+hideAll();
+document.getElementById("loginForm").style.display="block";
 }
 
-function showSignup() {
-    hideAll();
-    document.getElementById("signupForm").style.display = "block";
-    captchaGen();
+function showSignup(){
+hideAll();
+document.getElementById("signupForm").style.display="block";
+genCap();
 }
 
-function signup() {
-    let name = document.getElementById("name").value;
-    let user = document.getElementById("user").value;
-    let country = document.getElementById("country").value;
-    let phone = document.getElementById("phone").value;
-    let pass = document.getElementById("pass").value;
-    let cap = document.getElementById("captchaInput").value;
+function signup(){
+let cap=document.getElementById("capInput").value;
+if(parseInt(cap)!==ans){alert("Wrong captcha");return;}
 
-    if (!name || !user || !phone || !pass || !cap) {
-        alert("Fill all fields");
-        return;
-    }
+localStorage.setItem("user",user.value);
+localStorage.setItem("pass",pass.value);
 
-    if (parseInt(cap) !== answer) {
-        alert("Wrong captcha");
-        captchaGen();
-        return;
-    }
-
-    localStorage.setItem("user", user);
-    localStorage.setItem("pass", pass);
-    localStorage.setItem("name", name);
-    localStorage.setItem("phone", country + phone);
-
-    alert("Signup Successful");
-    showLogin();
+alert("Signup done");
+showLogin();
 }
 
-function login() {
-    let u = document.getElementById("luser").value;
-    let p = document.getElementById("lpass").value;
-
-    if (u === localStorage.getItem("user") &&
-        p === localStorage.getItem("pass")) {
-
-        hideAll();
-        document.getElementById("dashboard").style.display = "block";
-
-        document.getElementById("info").innerText =
-            "Name: " + localStorage.getItem("name") +
-            "\nPhone: " + localStorage.getItem("phone");
-
-    } else {
-        alert("Wrong login");
-    }
+function login(){
+if(luser.value===localStorage.getItem("user") &&
+lpass.value===localStorage.getItem("pass")){
+hideAll();
+dashboard.style.display="block";
+}
+else alert("Wrong login");
 }
 
-function logout() {
-    hideAll();
-    document.getElementById("mainBtns").style.display = "block";
+function logout(){
+hideAll();
+mainBtns.style.display="block";
 }
 
-function goBack() {
-    hideAll();
-    document.getElementById("mainBtns").style.display = "block";
+function goBack(){
+hideAll();
+mainBtns.style.display="block";
 }
 
-function hideAll() {
-    document.getElementById("loginForm").style.display = "none";
-    document.getElementById("signupForm").style.display = "none";
-    document.getElementById("dashboard").style.display = "none";
-    document.getElementById("mainBtns").style.display = "none";
+function hideAll(){
+loginForm.style.display="none";
+signupForm.style.display="none";
+dashboard.style.display="none";
+mainBtns.style.display="none";
 }
 </script>
 
