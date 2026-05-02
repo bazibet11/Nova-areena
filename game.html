@@ -6,195 +6,151 @@
 <title>Bazi Bet Game</title>
 
 <style>
-body {
+body{
     margin:0;
-    font-family:sans-serif;
-    background: radial-gradient(circle at top, #001a22, #000);
+    font-family:Arial;
+    background:#0d0d0d;
     color:#fff;
 }
 
 /* HEADER */
-.header {
-    padding:15px;
-    text-align:center;
-    font-size:22px;
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px;
+    background:#111;
+}
+.logo{
+    font-size:20px;
     font-weight:bold;
-    background:#0a0a0a;
-    box-shadow:0 0 20px #00c6ff;
+    color:#00f2fe;
 }
 
-/* BALANCE */
-.balance {
+/* BANNER */
+.banner{
+    width:100%;
+    height:150px;
+    background:url("https://images.unsplash.com/photo-1606813909355-d1b0c0b3bcd5") center/cover;
+    border-radius:10px;
+    margin:10px 0;
+}
+
+/* CATEGORY */
+.categories{
+    display:flex;
+    overflow-x:auto;
+    padding:10px;
+    gap:10px;
+}
+.cat{
+    min-width:80px;
+    padding:10px;
+    background:#1a1a1a;
+    border-radius:10px;
     text-align:center;
-    margin-top:10px;
-    font-size:18px;
+    font-size:12px;
 }
 
-/* TIMER */
-.timer {
+/* GAMES GRID */
+.games{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    padding:10px;
+}
+.game{
+    background:#1a1a1a;
+    border-radius:12px;
+    overflow:hidden;
     text-align:center;
-    font-size:35px;
-    margin:15px 0;
-    color:#00c6ff;
+}
+.game img{
+    width:100%;
+    height:120px;
+    object-fit:cover;
+}
+.game p{
+    margin:5px;
+    font-size:13px;
 }
 
-/* COLORS */
-.colors {
+/* FOOTER MENU */
+.footer{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background:#111;
     display:flex;
     justify-content:space-around;
-    margin-top:25px;
+    padding:10px 0;
 }
-
-.box {
-    width:100px;
-    height:100px;
-    border-radius:15px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.box:hover {
-    transform: scale(1.1);
-}
-
-.red {background:#ff3c00;}
-.green {background:#00ff99;}
-.violet {background:#b300ff;}
-
-.active {
-    box-shadow:0 0 20px white;
-}
-
-/* BET */
-.bet {
+.footer div{
     text-align:center;
-    margin-top:25px;
-}
-
-.bet input {
-    padding:10px;
-    width:120px;
-    border:none;
-    border-radius:8px;
-}
-
-/* BUTTON */
-.btn {
-    margin-top:15px;
-    padding:12px 25px;
-    background:#00c6ff;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-/* RESULT */
-.result {
-    text-align:center;
-    margin-top:25px;
-    font-size:18px;
-}
-
-/* BACK */
-.back {
-    text-align:center;
-    margin-top:20px;
-    cursor:pointer;
-    opacity:0.7;
+    font-size:12px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">🎮 BAZI BET GAME</div>
-
-<div class="balance">Balance: ₹ <span id="bal">1000</span></div>
-
-<div class="timer" id="timer">30</div>
-
-<div class="colors">
-    <div id="red" class="box red" onclick="selectColor('red')">RED</div>
-    <div id="green" class="box green" onclick="selectColor('green')">GREEN</div>
-    <div id="violet" class="box violet" onclick="selectColor('violet')">VIOLET</div>
+<div class="header">
+<div class="logo">🎮 BAZI BET</div>
+<div>💰 1000</div>
 </div>
 
-<div class="bet">
-    <input type="number" id="amount" placeholder="Bet Amount">
-    <br>
-    <button class="btn" onclick="placeBet()">PLACE BET</button>
+<div class="banner"></div>
+
+<!-- CATEGORY -->
+<div class="categories">
+<div class="cat">👑 Popular</div>
+<div class="cat">🚀 Crash</div>
+<div class="cat">⚽ Sports</div>
+<div class="cat">🎰 Slots</div>
 </div>
 
-<div class="result" id="result"></div>
+<!-- GAMES -->
+<div class="games">
 
-<div class="back" onclick="goBack()">⬅ Back to Home</div>
+<div class="game">
+<img src="https://via.placeholder.com/200x120?text=Aviator">
+<p>Aviator</p>
+</div>
 
-<script>
-let balance = 1000;
-let selected = "";
-let time = 30;
+<div class="game">
+<img src="https://via.placeholder.com/200x120?text=Fortune">
+<p>Fortune 500</p>
+</div>
 
-/* SELECT COLOR */
-function selectColor(color){
-    selected = color;
+<div class="game">
+<img src="https://via.placeholder.com/200x120?text=Gems">
+<p>Fortune Gems</p>
+</div>
 
-    document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
-    document.getElementById(color).classList.add('active');
-}
+<div class="game">
+<img src="https://via.placeholder.com/200x120?text=Wheel">
+<p>Money Wheel</p>
+</div>
 
-/* PLACE BET */
-function placeBet(){
-    let amt = parseInt(document.getElementById("amount").value);
+<div class="game">
+<img src="https://via.placeholder.com/200x120?text=Money">
+<p>Money Coming</p>
+</div>
 
-    if(!selected){
-        alert("Select color first");
-        return;
-    }
+<div class="game">
+<img src="https://via.placeholder.com/200x120?text=Diva">
+<p>Diva Game</p>
+</div>
 
-    if(!amt || amt > balance){
-        alert("Invalid amount");
-        return;
-    }
+</div>
 
-    balance -= amt;
-    document.getElementById("bal").innerText = balance;
-
-    let colors = ["red","green","violet"];
-    let result = colors[Math.floor(Math.random()*3)];
-
-    if(result === selected){
-        let win = amt * 2;
-        balance += win;
-        document.getElementById("result").innerText =
-        "🎉 You Win! Color: " + result + " +" + win;
-    } else {
-        document.getElementById("result").innerText =
-        "❌ You Lose! Color: " + result;
-    }
-
-    document.getElementById("bal").innerText = balance;
-}
-
-/* TIMER LOOP */
-setInterval(()=>{
-    time--;
-    if(time <= 0){
-        time = 30;
-        document.getElementById("result").innerText = "New Round Started";
-    }
-    document.getElementById("timer").innerText = time;
-},1000);
-
-/* BACK */
-function goBack(){
-    window.location.href = "index.html";
-}
-</script>
+<!-- FOOTER -->
+<div class="footer">
+<div>🏠<br>Home</div>
+<div>🎮<br>Casino</div>
+<div>🎰<br>Slots</div>
+<div>🎁<br>Promo</div>
+</div>
 
 </body>
 </html>
