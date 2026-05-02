@@ -9,11 +9,55 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: radial-gradient(circle at top, #0f2027, #000);
+    height: 100vh;
+    overflow: hidden;
+
+    background: linear-gradient(270deg, #000000, #0f2027, #000000);
+    background-size: 600% 600%;
+    animation: bgMove 10s ease infinite;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+}
+
+@keyframes bgMove {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+/* BACKGROUND EFFECTS */
+.bg-glow {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #00c6ff, transparent 70%);
+    filter: blur(120px);
+    z-index: -1;
+}
+
+.circle, .circle2 {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+}
+
+.circle {
+    width: 200px;
+    height: 200px;
+    background: #00c6ff;
+    top: 10%;
+    left: 10%;
+}
+
+.circle2 {
+    width: 250px;
+    height: 250px;
+    background: #ff3c00;
+    bottom: 10%;
+    right: 10%;
 }
 
 /* CARD */
@@ -22,17 +66,22 @@ body {
     max-width: 400px;
     padding: 30px;
     border-radius: 25px;
-    background: rgba(0,0,0,0.7);
-    box-shadow: 0 0 25px #00c6ff;
+    background: rgba(0,0,0,0.85);
+    box-shadow: 0 0 30px #00c6ff;
     text-align: center;
     color: white;
 }
 
-h1 {
-    font-size: 36px;
+/* LOGO */
+.logo {
+    font-size: 38px;
     font-weight: 900;
-    margin-bottom: 20px;
-    color: #00c6ff;
+    letter-spacing: 4px;
+    margin-bottom: 25px;
+    background: linear-gradient(45deg, #00c6ff, #00f2fe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 15px rgba(0,198,255,0.8);
 }
 
 /* BUTTONS */
@@ -41,11 +90,10 @@ h1 {
     padding: 14px;
     margin-top: 12px;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 17px;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
 }
 
 .login {
@@ -56,44 +104,50 @@ h1 {
     background: linear-gradient(45deg, #ff7b00, #ff3c00);
 }
 
-.btn:hover {
-    transform: scale(1.05);
+/* INPUT */
+.input-box {
+    margin-top: 10px;
+    text-align: left;
+    position: relative;
 }
 
-/* INPUTS */
-input, select {
+.input-box input, select {
     width: 100%;
     padding: 12px;
-    margin-top: 10px;
     border-radius: 10px;
     border: none;
-    font-size: 14px;
+    background: #111;
+    color: white;
+}
+
+/* EYE ICON */
+.eye {
+    position: absolute;
+    right: 10px;
+    top: 38px;
+    cursor: pointer;
 }
 
 /* FORM */
-.form {
+.form-box {
     display: none;
 }
 
 /* CAPTCHA */
-.captcha-box {
+.captcha {
     margin-top: 10px;
     background: #111;
     padding: 10px;
     border-radius: 8px;
+    text-align: center;
     font-weight: bold;
-    letter-spacing: 2px;
 }
 
 /* BACK */
 .back {
     margin-top: 10px;
+    text-align: center;
     cursor: pointer;
-    opacity: 0.7;
-}
-
-.back:hover {
-    opacity: 1;
 }
 
 /* DASHBOARD */
@@ -105,42 +159,65 @@ input, select {
 
 <body>
 
+<div class="bg-glow"></div>
+<div class="circle"></div>
+<div class="circle2"></div>
+
 <div class="card">
 
-<h1>BAZI BET</h1>
+<div class="logo">BAZI BET</div>
 
-<!-- MAIN -->
 <div id="mainBtns">
     <button class="btn login" onclick="showLogin()">LOGIN</button>
     <button class="btn signup" onclick="showSignup()">SIGN UP</button>
 </div>
 
 <!-- LOGIN -->
-<div id="loginForm" class="form">
-    <input type="text" id="luser" placeholder="Username">
-    <input type="password" id="lpass" placeholder="Password">
+<div id="loginForm" class="form-box">
+    <div class="input-box">
+        <input type="text" id="luser" placeholder="Username">
+    </div>
+
+    <div class="input-box">
+        <input type="password" id="lpass" placeholder="Password">
+        <span class="eye" onclick="togglePass('lpass')">👁</span>
+    </div>
+
     <button class="btn login" onclick="login()">ENTER</button>
     <div class="back" onclick="goBack()">⬅ Back</div>
 </div>
 
 <!-- SIGNUP -->
-<div id="signupForm" class="form">
-    <input type="text" id="fullname" placeholder="Full Name">
-    <input type="text" id="username" placeholder="Username">
+<div id="signupForm" class="form-box">
 
-    <select id="country">
-        <option value="+971">UAE (+971)</option>
-        <option value="+880">Bangladesh (+880)</option>
-        <option value="+91">India (+91)</option>
-        <option value="+92">Pakistan (+92)</option>
-    </select>
+    <div class="input-box">
+        <input type="text" id="name" placeholder="Full Name">
+    </div>
 
-    <input type="text" id="phone" placeholder="Phone Number">
+    <div class="input-box">
+        <input type="text" id="user" placeholder="Username">
+    </div>
 
-    <input type="password" id="spass" placeholder="Password">
+    <div class="input-box">
+        <select id="country">
+            <option value="+971">UAE (+971)</option>
+            <option value="+880">Bangladesh (+880)</option>
+            <option value="+91">India (+91)</option>
+            <option value="+92">Pakistan (+92)</option>
+        </select>
+    </div>
 
-    <div class="captcha-box" id="captchaText"></div>
-    <input type="text" id="captchaInput" placeholder="Enter Captcha">
+    <div class="input-box">
+        <input type="text" id="phone" placeholder="Phone Number">
+    </div>
+
+    <div class="input-box">
+        <input type="password" id="pass" placeholder="Password">
+        <span class="eye" onclick="togglePass('pass')">👁</span>
+    </div>
+
+    <div class="captcha" id="captchaQ"></div>
+    <input type="text" id="captchaInput" placeholder="Enter captcha">
 
     <button class="btn signup" onclick="signup()">CREATE ACCOUNT</button>
     <div class="back" onclick="goBack()">⬅ Back</div>
@@ -149,20 +226,25 @@ input, select {
 <!-- DASHBOARD -->
 <div id="dashboard" class="dashboard">
     <h2>Welcome 🎉</h2>
-    <p id="userData"></p>
+    <p id="info"></p>
     <button class="btn" onclick="logout()">Logout</button>
 </div>
 
 </div>
 
 <script>
-let captchaAnswer = 0;
+let answer = 0;
 
-function generateCaptcha() {
-    let a = Math.floor(Math.random() * 10);
-    let b = Math.floor(Math.random() * 10);
-    captchaAnswer = a + b;
-    document.getElementById("captchaText").innerText = a + " + " + b;
+function captchaGen() {
+    let a = Math.floor(Math.random()*10);
+    let b = Math.floor(Math.random()*10);
+    answer = a + b;
+    document.getElementById("captchaQ").innerText = a + " + " + b;
+}
+
+function togglePass(id) {
+    let field = document.getElementById(id);
+    field.type = field.type === "password" ? "text" : "password";
 }
 
 function showLogin() {
@@ -173,25 +255,25 @@ function showLogin() {
 function showSignup() {
     hideAll();
     document.getElementById("signupForm").style.display = "block";
-    generateCaptcha();
+    captchaGen();
 }
 
 function signup() {
-    let name = document.getElementById("fullname").value.trim();
-    let user = document.getElementById("username").value.trim();
+    let name = document.getElementById("name").value;
+    let user = document.getElementById("user").value;
     let country = document.getElementById("country").value;
-    let phone = document.getElementById("phone").value.trim();
-    let pass = document.getElementById("spass").value.trim();
-    let captcha = document.getElementById("captchaInput").value.trim();
+    let phone = document.getElementById("phone").value;
+    let pass = document.getElementById("pass").value;
+    let cap = document.getElementById("captchaInput").value;
 
-    if (!name || !user || !phone || !pass || !captcha) {
-        alert("Fill all fields!");
+    if (!name || !user || !phone || !pass || !cap) {
+        alert("Fill all fields");
         return;
     }
 
-    if (parseInt(captcha) !== captchaAnswer) {
-        alert("Wrong captcha!");
-        generateCaptcha();
+    if (parseInt(cap) !== answer) {
+        alert("Wrong captcha");
+        captchaGen();
         return;
     }
 
@@ -200,28 +282,26 @@ function signup() {
     localStorage.setItem("name", name);
     localStorage.setItem("phone", country + phone);
 
-    alert("Signup Successful!");
+    alert("Signup Successful");
     showLogin();
 }
 
 function login() {
-    let u = document.getElementById("luser").value.trim();
-    let p = document.getElementById("lpass").value.trim();
+    let u = document.getElementById("luser").value;
+    let p = document.getElementById("lpass").value;
 
-    let su = localStorage.getItem("user");
-    let sp = localStorage.getItem("pass");
+    if (u === localStorage.getItem("user") &&
+        p === localStorage.getItem("pass")) {
 
-    if (u === su && p === sp) {
         hideAll();
         document.getElementById("dashboard").style.display = "block";
 
-        let name = localStorage.getItem("name");
-        let phone = localStorage.getItem("phone");
+        document.getElementById("info").innerText =
+            "Name: " + localStorage.getItem("name") +
+            "\nPhone: " + localStorage.getItem("phone");
 
-        document.getElementById("userData").innerText =
-            "Name: " + name + "\nPhone: " + phone;
     } else {
-        alert("Wrong Login!");
+        alert("Wrong login");
     }
 }
 
