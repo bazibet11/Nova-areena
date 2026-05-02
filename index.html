@@ -7,99 +7,92 @@
 
 <style>
 body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    height: 100vh;
-    background: radial-gradient(circle at top, #001a22, #000);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin:0;
+    font-family:monospace;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background: 
+    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+    url("https://images.unsplash.com/photo-1606813909355-d1b0c0b3bcd5");
+    background-size:cover;
 }
 
 /* CARD */
 .card {
-    width: 95%;
-    max-width: 400px;
-    padding: 25px;
-    border-radius: 25px;
-    background: #0a0a0a;
-    box-shadow: 0 0 40px rgba(0,255,255,0.5);
-    color: white;
+    width:92%;
+    max-width:400px;
+    padding:25px;
+    border-radius:25px;
+    background:#0a0a0a;
+    box-shadow:0 0 40px #00f2fe;
+    color:#fff;
 }
 
-/* LOGO (GAMING STYLE) */
+/* LOGO */
 .logo {
-    text-align: center;
-    font-size: 38px;
-    font-weight: 900;
-    letter-spacing: 4px;
-    margin-bottom: 20px;
-
-    background: linear-gradient(45deg, #00f2fe, #00c6ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    text-shadow:
-        0 0 10px #00f2fe,
-        0 0 20px #00c6ff,
-        0 0 40px #00c6ff;
+    text-align:center;
+    font-size:36px;
+    font-weight:bold;
+    letter-spacing:4px;
+    margin-bottom:20px;
+    color:#00f2fe;
+    text-shadow:0 0 15px #00f2fe;
 }
 
-/* BUTTONS */
+/* BUTTON */
 .btn {
-    width: 100%;
-    padding: 14px;
-    margin-top: 12px;
-    border-radius: 12px;
-    border: none;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+    width:100%;
+    padding:14px;
+    margin-top:12px;
+    border:none;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.login {
-    background: linear-gradient(45deg,#00c6ff,#0072ff);
-}
-
-.signup {
-    background: linear-gradient(45deg,#ff7b00,#ff3c00);
-}
+.login {background:linear-gradient(45deg,#00c6ff,#0072ff);}
+.signup {background:linear-gradient(45deg,#ff7b00,#ff3c00);}
 
 /* INPUT */
 .input-box {
-    position: relative;
-    margin-top: 12px;
+    position:relative;
+    margin-top:12px;
 }
 
 .input-box input, select {
-    width: 100%;
-    padding: 12px 40px 12px 12px;
-    border-radius: 10px;
-    border: none;
-    background: #111;
-    color: #fff;
+    width:100%;
+    padding:12px 40px 12px 12px;
+    border-radius:10px;
+    border:none;
+    background:#111;
+    color:#fff;
+    box-sizing:border-box;
 }
 
-/* FIXED EYE */
+/* EYE */
 .eye {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
 }
-
-/* FORM */
-.form-box {display:none;}
 
 /* CAPTCHA */
 .captcha {
-    background:#111;
-    padding:10px;
     margin-top:10px;
+    padding:10px;
+    background:#111;
     border-radius:8px;
     text-align:center;
 }
+
+/* FORMS */
+.form-box {display:none;}
+.dashboard {display:none;}
 
 /* BACK */
 .back {
@@ -108,9 +101,6 @@ body {
     cursor:pointer;
     opacity:0.7;
 }
-
-/* DASHBOARD */
-.dashboard {display:none;}
 </style>
 </head>
 
@@ -127,6 +117,7 @@ body {
 
 <!-- LOGIN -->
 <div id="loginForm" class="form-box">
+
 <div class="input-box">
 <input id="luser" placeholder="Username">
 </div>
@@ -135,6 +126,9 @@ body {
 <input type="password" id="lpass" placeholder="Password">
 <span class="eye" onclick="togglePass('lpass')">👁</span>
 </div>
+
+<div class="captcha" id="loginCap"></div>
+<input id="loginCapInput" placeholder="Enter captcha">
 
 <button class="btn login" onclick="login()">ENTER</button>
 <div class="back" onclick="goBack()">⬅ Back</div>
@@ -153,10 +147,10 @@ body {
 
 <div class="input-box">
 <select id="country">
+<option value="+92">Pakistan (+92)</option>
+<option value="+91">India (+91)</option>
 <option value="+971">UAE (+971)</option>
 <option value="+880">Bangladesh (+880)</option>
-<option value="+91">India (+91)</option>
-<option value="+92">Pakistan (+92)</option>
 </select>
 </div>
 
@@ -169,49 +163,68 @@ body {
 <span class="eye" onclick="togglePass('pass')">👁</span>
 </div>
 
-<div class="captcha" id="cap"></div>
-<input id="capInput" placeholder="Enter captcha">
+<div class="captcha" id="signCap"></div>
+<input id="signCapInput" placeholder="Enter captcha">
 
 <button class="btn signup" onclick="signup()">CREATE ACCOUNT</button>
 <div class="back" onclick="goBack()">⬅ Back</div>
 </div>
 
-<!-- DASH -->
+<!-- DASHBOARD -->
 <div id="dashboard" class="dashboard">
+
 <h2>🎮 Welcome Player</h2>
-<button class="btn" onclick="logout()">Logout</button>
+
+<button onclick="window.location.href='game.html'" class="btn login">
+🎮 PLAY GAME
+</button>
+
+<button class="btn signup" onclick="logout()">Logout</button>
+
 </div>
 
 </div>
 
 <script>
-let ans=0;
+let cap1=0, cap2=0;
 
-function genCap(){
+/* CAPTCHA */
+function genLoginCap(){
 let a=Math.floor(Math.random()*10);
 let b=Math.floor(Math.random()*10);
-ans=a+b;
-cap.innerText=a+" + "+b;
+cap1=a+b;
+loginCap.innerText=a+" + "+b;
 }
 
+function genSignCap(){
+let a=Math.floor(Math.random()*10);
+let b=Math.floor(Math.random()*10);
+cap2=a+b;
+signCap.innerText=a+" + "+b;
+}
+
+/* TOGGLE */
 function togglePass(id){
 let x=document.getElementById(id);
 x.type=x.type==="password"?"text":"password";
 }
 
+/* SHOW */
 function showLogin(){
 hideAll();
 loginForm.style.display="block";
+genLoginCap();
 }
 
 function showSignup(){
 hideAll();
 signupForm.style.display="block";
-genCap();
+genSignCap();
 }
 
+/* SIGNUP */
 function signup(){
-if(parseInt(capInput.value)!==ans){
+if(parseInt(signCapInput.value)!==cap2){
 alert("Wrong captcha"); return;
 }
 localStorage.setItem("user",user.value);
@@ -220,7 +233,12 @@ alert("Account Created");
 showLogin();
 }
 
+/* LOGIN */
 function login(){
+if(parseInt(loginCapInput.value)!==cap1){
+alert("Wrong captcha"); return;
+}
+
 if(luser.value===localStorage.getItem("user") &&
 lpass.value===localStorage.getItem("pass")){
 hideAll();
@@ -229,16 +247,19 @@ dashboard.style.display="block";
 else alert("Wrong login");
 }
 
+/* LOGOUT */
 function logout(){
 hideAll();
 mainBtns.style.display="block";
 }
 
+/* BACK */
 function goBack(){
 hideAll();
 mainBtns.style.display="block";
 }
 
+/* HIDE */
 function hideAll(){
 loginForm.style.display="none";
 signupForm.style.display="none";
