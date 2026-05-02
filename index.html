@@ -19,8 +19,8 @@ body {
     justify-content: center;
     align-items: center;
 
-    /* UNIQUE SHADE */
-    background: linear-gradient(135deg, #16c79a, #0f9b8e, #2af598);
+    /* PREMIUM DARK GRADIENT */
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
 }
 
 /* Container */
@@ -31,39 +31,40 @@ body {
 /* LOGO */
 .logo {
     font-size: 60px;
-    font-weight: bold;
+    font-weight: 600;
     color: white;
-    margin-bottom: 60px;
+    margin-bottom: 70px;
     letter-spacing: 1px;
 }
 
 .logo span {
-    color: #ff3b3b;
+    color: #00f2fe; /* unique glow accent */
 }
 
 /* Buttons */
 .btn {
     width: 260px;
-    padding: 16px;
+    padding: 15px;
     margin: 12px;
     font-size: 18px;
-    border-radius: 14px;
+    border-radius: 12px;
     cursor: pointer;
     border: none;
     transition: 0.3s;
 }
 
-/* Login button */
+/* Login */
 .login {
     background: transparent;
-    border: 2px solid rgba(255,255,255,0.8);
+    border: 2px solid rgba(255,255,255,0.6);
     color: white;
 }
 
-/* Signup button */
+/* Signup */
 .signup {
-    background: linear-gradient(45deg, #ff9a00, #ffd000);
-    color: white;
+    background: linear-gradient(45deg, #2ecc71, #00f2fe);
+    color: #0f2027;
+    font-weight: bold;
 }
 
 /* Hover */
@@ -71,8 +72,9 @@ body {
     transform: scale(1.05);
 }
 
+/* Glow effect */
 .signup:hover {
-    box-shadow: 0 0 25px rgba(255, 200, 0, 0.8);
+    box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
 }
 </style>
 </head>
