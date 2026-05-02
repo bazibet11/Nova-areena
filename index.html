@@ -3,185 +3,171 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Bazi Bet</title>
 
 <style>
-body{
-  margin:0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:white;
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-/* Landing */
-.landing{
-  text-align:center;
+/* GLASS CARD */
+.card {
+    width: 320px;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    text-align: center;
+    color: white;
 }
 
-.logo{
-  font-size:40px;
-  font-weight:800;
-  margin-bottom:30px;
+h1 {
+    margin-bottom: 20px;
+    font-size: 32px;
+    letter-spacing: 2px;
 }
 
-.logo span{
-  color:#00e6ff;
+/* BUTTONS */
+.btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-/* Buttons */
-.btn{
-  width:220px;
-  padding:14px;
-  margin:10px;
-  border-radius:30px;
-  font-size:18px;
-  font-weight:bold;
-  cursor:pointer;
-  border:none;
-  transition:0.3s;
+.login {
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
 }
 
-.loginBtn{
-  background:transparent;
-  border:2px solid white;
-  color:white;
+.signup {
+    background: linear-gradient(45deg, #ff7b00, #ff3c00);
 }
 
-.loginBtn:hover{
-  background:white;
-  color:black;
+.btn:hover {
+    transform: scale(1.05);
 }
 
-.signupBtn{
-  background: linear-gradient(45deg,#00c6ff,#00ffcc);
-  color:black;
+/* INPUTS */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
 }
 
-.signupBtn:hover{
-  opacity:0.8;
+/* HIDE FORMS */
+.form {
+    display: none;
 }
 
-/* Form */
-.formBox{
-  display:none;
-  width:90%;
-  max-width:350px;
+/* DASHBOARD */
+.dashboard {
+    display: none;
 }
 
-input{
-  width:100%;
-  padding:14px;
-  margin:10px 0;
-  border-radius:10px;
-  border:none;
-  outline:none;
-  font-size:16px;
-}
-
-/* Submit button */
-.submit{
-  background: linear-gradient(45deg,#00c6ff,#00ffcc);
-  color:black;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* Back */
-.link{
-  margin-top:10px;
-  text-align:center;
-  cursor:pointer;
-  color:#00e6ff;
+.big-text {
+    font-size: 22px;
+    margin-top: 20px;
 }
 </style>
 
 </head>
-
 <body>
 
-<!-- LANDING -->
-<div class="landing" id="landing">
-  <div class="logo">Ba<span>z</span>i Bet</div>
+<div class="card">
 
-  <button class="btn loginBtn" onclick="openForm('login')">Login</button>
-  <button class="btn signupBtn" onclick="openForm('signup')">Sign Up</button>
-</div>
+    <h1>BAZI BET</h1>
 
-<!-- FORM -->
-<div class="formBox" id="formBox">
+    <div id="mainBtns">
+        <button class="btn login" onclick="showLogin()">Login</button>
+        <button class="btn signup" onclick="showSignup()">Sign Up</button>
+    </div>
 
-  <div class="logo">Ba<span>z</span>i Bet</div>
+    <!-- LOGIN -->
+    <div id="loginForm" class="form">
+        <input type="text" id="luser" placeholder="Username">
+        <input type="password" id="lpass" placeholder="Password">
+        <button class="btn login" onclick="login()">Enter</button>
+    </div>
 
-  <!-- Login Fields -->
-  <div id="loginFields">
-    <input type="text" placeholder="Username">
-    <input type="password" placeholder="Password">
-  </div>
+    <!-- SIGNUP -->
+    <div id="signupForm" class="form">
+        <input type="text" id="suser" placeholder="Username">
+        <input type="password" id="spass" placeholder="Password">
+        <button class="btn signup" onclick="signup()">Create Account</button>
+    </div>
 
-  <!-- Signup Fields -->
-  <div id="signupFields">
-    <input type="text" placeholder="Username">
-    <input type="text" placeholder="Phone Number">
-    <input type="password" placeholder="Password">
-  </div>
-
-  <!-- Captcha -->
-  <div id="captchaText"></div>
-  <input type="text" id="captchaInput" placeholder="Enter Captcha">
-
-  <button class="btn submit" onclick="submit()">Submit 🚀</button>
-
-  <div class="link" onclick="back()">← Back</div>
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="dashboard">
+        <div class="big-text">🎉 Welcome</div>
+        <p id="name"></p>
+        <button class="btn" onclick="logout()">Logout</button>
+    </div>
 
 </div>
 
 <script>
-
-let mode = "login";
-let captcha = "";
-
-function generateCaptcha(){
-  captcha = Math.floor(1000 + Math.random()*9000);
-  document.getElementById("captchaText").innerText = "Captcha: " + captcha;
+function showLogin() {
+    hideAll();
+    document.getElementById("loginForm").style.display = "block";
 }
 
-function openForm(type){
-  mode = type;
-
-  document.getElementById("landing").style.display="none";
-  document.getElementById("formBox").style.display="block";
-
-  if(type === "login"){
-    document.getElementById("loginFields").style.display="block";
-    document.getElementById("signupFields").style.display="none";
-  }else{
-    document.getElementById("loginFields").style.display="none";
-    document.getElementById("signupFields").style.display="block";
-  }
-
-  generateCaptcha();
+function showSignup() {
+    hideAll();
+    document.getElementById("signupForm").style.display = "block";
 }
 
-function back(){
-  document.getElementById("landing").style.display="block";
-  document.getElementById("formBox").style.display="none";
+function signup() {
+    let u = document.getElementById("suser").value;
+    let p = document.getElementById("spass").value;
+
+    localStorage.setItem("user", u);
+    localStorage.setItem("pass", p);
+
+    alert("Account Created!");
+    showLogin();
 }
 
-function submit(){
-  let userCaptcha = document.getElementById("captchaInput").value;
+function login() {
+    let u = document.getElementById("luser").value;
+    let p = document.getElementById("lpass").value;
 
-  if(userCaptcha != captcha){
-    alert("Wrong Captcha ❌");
-  }else{
-    alert(mode.toUpperCase() + " Success ✅");
-  }
+    let su = localStorage.getItem("user");
+    let sp = localStorage.getItem("pass");
+
+    if (u === su && p === sp) {
+        hideAll();
+        document.getElementById("dashboard").style.display = "block";
+        document.getElementById("name").innerText = u;
+    } else {
+        alert("Wrong details!");
+    }
 }
 
+function logout() {
+    hideAll();
+    document.getElementById("mainBtns").style.display = "block";
+}
+
+function hideAll() {
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("signupForm").style.display = "none";
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("mainBtns").style.display = "none";
+}
 </script>
 
 </body>
