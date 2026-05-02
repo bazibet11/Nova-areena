@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bazi Bet Game</title>
+<title>Bazi Bet</title>
 
 <style>
 body{
     margin:0;
     font-family:Arial;
-    background:#0d0d0d;
+    background:#0a0a0a;
     color:#fff;
 }
 
@@ -17,46 +17,44 @@ body{
 .header{
     display:flex;
     justify-content:space-between;
-    align-items:center;
-    padding:10px;
+    padding:12px;
     background:#111;
 }
 .logo{
-    font-size:20px;
-    font-weight:bold;
     color:#00f2fe;
+    font-weight:bold;
+    font-size:20px;
 }
 
-/* BANNER */
+/* SLIDER */
 .banner{
-    width:100%;
-    height:150px;
-    background:url("https://images.unsplash.com/photo-1606813909355-d1b0c0b3bcd5") center/cover;
-    border-radius:10px;
-    margin:10px 0;
+    width:95%;
+    height:140px;
+    margin:10px auto;
+    border-radius:12px;
+    background:url("https://images.unsplash.com/photo-1511512578047-dfb367046420") center/cover;
 }
 
 /* CATEGORY */
 .categories{
     display:flex;
-    overflow-x:auto;
-    padding:10px;
     gap:10px;
+    padding:10px;
+    overflow-x:auto;
 }
 .cat{
-    min-width:80px;
-    padding:10px;
     background:#1a1a1a;
-    border-radius:10px;
-    text-align:center;
+    padding:10px 15px;
+    border-radius:20px;
     font-size:12px;
+    white-space:nowrap;
 }
 
 /* GAMES GRID */
 .games{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:10px;
+    gap:12px;
     padding:10px;
 }
 .game{
@@ -71,11 +69,10 @@ body{
     object-fit:cover;
 }
 .game p{
-    margin:5px;
-    font-size:13px;
+    margin:6px;
 }
 
-/* FOOTER MENU */
+/* FOOTER */
 .footer{
     position:fixed;
     bottom:0;
@@ -86,19 +83,21 @@ body{
     padding:10px 0;
 }
 .footer div{
-    text-align:center;
     font-size:12px;
+    text-align:center;
 }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <div class="header">
 <div class="logo">🎮 BAZI BET</div>
 <div>💰 1000</div>
 </div>
 
+<!-- BANNER -->
 <div class="banner"></div>
 
 <!-- CATEGORY -->
@@ -112,33 +111,33 @@ body{
 <!-- GAMES -->
 <div class="games">
 
-<div class="game">
-<img src="https://via.placeholder.com/200x120?text=Aviator">
+<div class="game" onclick="openGame('Aviator')">
+<img src="https://picsum.photos/200/120?random=1">
 <p>Aviator</p>
 </div>
 
-<div class="game">
-<img src="https://via.placeholder.com/200x120?text=Fortune">
+<div class="game" onclick="openGame('Fortune 500')">
+<img src="https://picsum.photos/200/120?random=2">
 <p>Fortune 500</p>
 </div>
 
-<div class="game">
-<img src="https://via.placeholder.com/200x120?text=Gems">
+<div class="game" onclick="openGame('Fortune Gems')">
+<img src="https://picsum.photos/200/120?random=3">
 <p>Fortune Gems</p>
 </div>
 
-<div class="game">
-<img src="https://via.placeholder.com/200x120?text=Wheel">
+<div class="game" onclick="openGame('Money Wheel')">
+<img src="https://picsum.photos/200/120?random=4">
 <p>Money Wheel</p>
 </div>
 
-<div class="game">
-<img src="https://via.placeholder.com/200x120?text=Money">
+<div class="game" onclick="openGame('Money Coming')">
+<img src="https://picsum.photos/200/120?random=5">
 <p>Money Coming</p>
 </div>
 
-<div class="game">
-<img src="https://via.placeholder.com/200x120?text=Diva">
+<div class="game" onclick="openGame('Diva Game')">
+<img src="https://picsum.photos/200/120?random=6">
 <p>Diva Game</p>
 </div>
 
@@ -151,6 +150,12 @@ body{
 <div>🎰<br>Slots</div>
 <div>🎁<br>Promo</div>
 </div>
+
+<script>
+function openGame(name){
+    alert("Opening " + name);
+}
+</script>
 
 </body>
 </html>
