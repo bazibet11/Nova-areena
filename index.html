@@ -16,61 +16,85 @@ body {
     height: 100vh;
 }
 
-/* GLASS CARD */
+/* MAIN CARD */
 .card {
-    width: 320px;
-    padding: 30px;
-    border-radius: 20px;
+    width: 90%;
+    max-width: 380px;
+    padding: 35px;
+    border-radius: 25px;
     background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 40px rgba(0,0,0,0.6);
     text-align: center;
     color: white;
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
 }
 
 h1 {
-    margin-bottom: 20px;
-    font-size: 32px;
-    letter-spacing: 2px;
+    font-size: 38px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
 }
 
 /* BUTTONS */
 .btn {
     width: 100%;
-    padding: 12px;
-    margin-top: 10px;
+    padding: 15px;
+    margin-top: 15px;
     border: none;
-    border-radius: 10px;
-    font-size: 15px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
 
 .login {
     background: linear-gradient(45deg, #00c6ff, #0072ff);
+    color: white;
 }
 
 .signup {
     background: linear-gradient(45deg, #ff7b00, #ff3c00);
+    color: white;
 }
 
 .btn:hover {
-    transform: scale(1.05);
+    transform: scale(1.06);
 }
 
 /* INPUTS */
 input {
     width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 8px;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 10px;
     border: none;
-    outline: none;
+    font-size: 15px;
 }
 
-/* HIDE FORMS */
+/* FORMS */
 .form {
     display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.back {
+    margin-top: 15px;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.back:hover {
+    opacity: 1;
 }
 
 /* DASHBOARD */
@@ -79,8 +103,8 @@ input {
 }
 
 .big-text {
-    font-size: 22px;
-    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
 }
 </style>
 
@@ -91,23 +115,26 @@ input {
 
     <h1>BAZI BET</h1>
 
+    <!-- MAIN BUTTONS -->
     <div id="mainBtns">
-        <button class="btn login" onclick="showLogin()">Login</button>
-        <button class="btn signup" onclick="showSignup()">Sign Up</button>
+        <button class="btn login" onclick="showLogin()">LOGIN</button>
+        <button class="btn signup" onclick="showSignup()">SIGN UP</button>
     </div>
 
     <!-- LOGIN -->
     <div id="loginForm" class="form">
         <input type="text" id="luser" placeholder="Username">
         <input type="password" id="lpass" placeholder="Password">
-        <button class="btn login" onclick="login()">Enter</button>
+        <button class="btn login" onclick="login()">ENTER</button>
+        <div class="back" onclick="goBack()">⬅ Back</div>
     </div>
 
     <!-- SIGNUP -->
     <div id="signupForm" class="form">
         <input type="text" id="suser" placeholder="Username">
         <input type="password" id="spass" placeholder="Password">
-        <button class="btn signup" onclick="signup()">Create Account</button>
+        <button class="btn signup" onclick="signup()">CREATE ACCOUNT</button>
+        <div class="back" onclick="goBack()">⬅ Back</div>
     </div>
 
     <!-- DASHBOARD -->
@@ -131,19 +158,24 @@ function showSignup() {
 }
 
 function signup() {
-    let u = document.getElementById("suser").value;
-    let p = document.getElementById("spass").value;
+    let u = document.getElementById("suser").value.trim();
+    let p = document.getElementById("spass").value.trim();
+
+    if (u === "" || p === "") {
+        alert("Fill all fields!");
+        return;
+    }
 
     localStorage.setItem("user", u);
     localStorage.setItem("pass", p);
 
-    alert("Account Created!");
+    alert("Account Created Successfully!");
     showLogin();
 }
 
 function login() {
-    let u = document.getElementById("luser").value;
-    let p = document.getElementById("lpass").value;
+    let u = document.getElementById("luser").value.trim();
+    let p = document.getElementById("lpass").value.trim();
 
     let su = localStorage.getItem("user");
     let sp = localStorage.getItem("pass");
@@ -151,13 +183,18 @@ function login() {
     if (u === su && p === sp) {
         hideAll();
         document.getElementById("dashboard").style.display = "block";
-        document.getElementById("name").innerText = u;
+        document.getElementById("name").innerText = "User: " + u;
     } else {
-        alert("Wrong details!");
+        alert("Wrong Username or Password!");
     }
 }
 
 function logout() {
+    hideAll();
+    document.getElementById("mainBtns").style.display = "block";
+}
+
+function goBack() {
     hideAll();
     document.getElementById("mainBtns").style.display = "block";
 }
