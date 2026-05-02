@@ -3,173 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bazi Style Login</title>
+<title>Bazi Bet</title>
 
 <style>
-body {
+* {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #1abc9c;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-/* Landing */
-.landing {
+body {
     height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    /* UNIQUE SHADE */
+    background: linear-gradient(135deg, #16c79a, #0f9b8e, #2af598);
 }
 
+/* Container */
+.container {
+    text-align: center;
+}
+
+/* LOGO */
 .logo {
     font-size: 60px;
+    font-weight: bold;
     color: white;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
+    letter-spacing: 1px;
 }
 
+.logo span {
+    color: #ff3b3b;
+}
+
+/* Buttons */
 .btn {
-    width: 220px;
-    padding: 15px;
-    margin: 10px;
-    border: none;
+    width: 260px;
+    padding: 16px;
+    margin: 12px;
     font-size: 18px;
+    border-radius: 14px;
     cursor: pointer;
-    border-radius: 8px;
+    border: none;
     transition: 0.3s;
 }
 
-.login-btn {
+/* Login button */
+.login {
     background: transparent;
-    color: white;
-    border: 2px solid white;
-}
-
-.signup-btn {
-    background: linear-gradient(45deg, orange, yellow);
+    border: 2px solid rgba(255,255,255,0.8);
     color: white;
 }
 
+/* Signup button */
+.signup {
+    background: linear-gradient(45deg, #ff9a00, #ffd000);
+    color: white;
+}
+
+/* Hover */
 .btn:hover {
     transform: scale(1.05);
 }
 
-/* Form */
-.form-container {
-    display: none;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-}
-
-.form-box {
-    background: #0f3c4c;
-    padding: 30px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 350px;
-    color: white;
-    text-align: center;
-}
-
-input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 6px;
-    border: none;
-}
-
-.submit-btn {
-    background: #00c896;
-    color: white;
-}
-
-.switch {
-    margin-top: 10px;
-    cursor: pointer;
-    color: #00c896;
+.signup:hover {
+    box-shadow: 0 0 25px rgba(255, 200, 0, 0.8);
 }
 </style>
-
 </head>
+
 <body>
 
-<!-- Landing -->
-<div class="landing" id="landing">
-    <div class="logo">bj | baji</div>
-    <button class="btn login-btn" onclick="showForm('login')">Login</button>
-    <button class="btn signup-btn" onclick="showForm('signup')">Sign Up</button>
+<div class="container">
+    <div class="logo">Ba<span>z</span>i Bet</div>
+
+    <button class="btn login">Login</button>
+    <button class="btn signup">Sign Up</button>
 </div>
-
-<!-- Form -->
-<div class="form-container" id="formContainer">
-    <div class="form-box">
-        <h2 id="formTitle">Login</h2>
-
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-
-        <div id="captchaText"></div>
-        <input type="text" id="captchaInput" placeholder="Enter Captcha">
-
-        <button class="btn submit-btn" onclick="submitForm()">Submit</button>
-
-        <div class="switch" onclick="switchForm()">Create Account</div>
-    </div>
-</div>
-
-<script>
-let currentForm = "login";
-let captcha = "";
-
-function showForm(type) {
-    currentForm = type;
-    document.getElementById("landing").style.display = "none";
-    document.getElementById("formContainer").style.display = "flex";
-    document.getElementById("formTitle").innerText = type === "login" ? "Login" : "Sign Up";
-    generateCaptcha();
-}
-
-function switchForm() {
-    currentForm = currentForm === "login" ? "signup" : "login";
-    document.getElementById("formTitle").innerText = currentForm === "login" ? "Login" : "Sign Up";
-    generateCaptcha();
-}
-
-function generateCaptcha() {
-    captcha = Math.floor(1000 + Math.random() * 9000);
-    document.getElementById("captchaText").innerText = "Captcha: " + captcha;
-}
-
-function submitForm() {
-    let user = document.getElementById("username").value;
-    let pass = document.getElementById("password").value;
-    let cap = document.getElementById("captchaInput").value;
-
-    if (!user || !pass) {
-        alert("Fill all fields");
-        return;
-    }
-
-    if (cap != captcha) {
-        alert("Wrong captcha");
-        generateCaptcha();
-        return;
-    }
-
-    if (currentForm === "signup") {
-        localStorage.setItem(user, pass);
-        alert("Account created!");
-    } else {
-        let savedPass = localStorage.getItem(user);
-        if (savedPass === pass) {
-            alert("Login successful!");
-        } else {
-            alert("Invalid login");
-        }
-    }
-}
-</script>
 
 </body>
 </html>
