@@ -9,39 +9,40 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: radial-gradient(circle at top, #001f2f, #000);
+    height: 100vh;
+    background: radial-gradient(circle at top, #001a22, #000);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 /* CARD */
 .card {
     width: 95%;
     max-width: 400px;
-    padding: 20px;
+    padding: 25px;
     border-radius: 25px;
     background: #0a0a0a;
-    box-shadow: 0 0 40px rgba(0,198,255,0.6);
+    box-shadow: 0 0 40px rgba(0,255,255,0.5);
     color: white;
 }
 
-/* LOGO IMAGE */
+/* LOGO (GAMING STYLE) */
 .logo {
     text-align: center;
-    margin-bottom: 10px;
-}
+    font-size: 38px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
 
-.logo img {
-    width: 140px;
-}
+    background: linear-gradient(45deg, #00f2fe, #00c6ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 
-/* BANNER */
-.banner {
-    width: 100%;
-    border-radius: 15px;
-    margin-bottom: 15px;
+    text-shadow:
+        0 0 10px #00f2fe,
+        0 0 20px #00c6ff,
+        0 0 40px #00c6ff;
 }
 
 /* BUTTONS */
@@ -56,13 +57,18 @@ body {
     cursor: pointer;
 }
 
-.login {background: linear-gradient(45deg,#00c6ff,#0072ff);}
-.signup {background: linear-gradient(45deg,#ff7b00,#ff3c00);}
+.login {
+    background: linear-gradient(45deg,#00c6ff,#0072ff);
+}
+
+.signup {
+    background: linear-gradient(45deg,#ff7b00,#ff3c00);
+}
 
 /* INPUT */
 .input-box {
     position: relative;
-    margin-top: 10px;
+    margin-top: 12px;
 }
 
 .input-box input, select {
@@ -71,10 +77,10 @@ body {
     border-radius: 10px;
     border: none;
     background: #111;
-    color: white;
+    color: #fff;
 }
 
-/* EYE FIX */
+/* FIXED EYE */
 .eye {
     position: absolute;
     right: 12px;
@@ -100,9 +106,10 @@ body {
     text-align:center;
     margin-top:10px;
     cursor:pointer;
+    opacity:0.7;
 }
 
-/* DASH */
+/* DASHBOARD */
 .dashboard {display:none;}
 </style>
 </head>
@@ -111,13 +118,7 @@ body {
 
 <div class="card">
 
-<!-- LOGO -->
-<div class="logo">
-<img src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png">
-</div>
-
-<!-- BANNER -->
-<img class="banner" src="https://images.unsplash.com/photo-1606813909355-d1b0c0b3bcd5">
+<div class="logo">BAZI BET</div>
 
 <div id="mainBtns">
 <button class="btn login" onclick="showLogin()">LOGIN</button>
@@ -175,10 +176,9 @@ body {
 <div class="back" onclick="goBack()">⬅ Back</div>
 </div>
 
-<!-- DASHBOARD -->
+<!-- DASH -->
 <div id="dashboard" class="dashboard">
-<h2>Welcome 🎉</h2>
-<p id="info"></p>
+<h2>🎮 Welcome Player</h2>
 <button class="btn" onclick="logout()">Logout</button>
 </div>
 
@@ -191,7 +191,7 @@ function genCap(){
 let a=Math.floor(Math.random()*10);
 let b=Math.floor(Math.random()*10);
 ans=a+b;
-document.getElementById("cap").innerText=a+" + "+b;
+cap.innerText=a+" + "+b;
 }
 
 function togglePass(id){
@@ -201,23 +201,22 @@ x.type=x.type==="password"?"text":"password";
 
 function showLogin(){
 hideAll();
-document.getElementById("loginForm").style.display="block";
+loginForm.style.display="block";
 }
 
 function showSignup(){
 hideAll();
-document.getElementById("signupForm").style.display="block";
+signupForm.style.display="block";
 genCap();
 }
 
 function signup(){
-let cap=document.getElementById("capInput").value;
-if(parseInt(cap)!==ans){alert("Wrong captcha");return;}
-
+if(parseInt(capInput.value)!==ans){
+alert("Wrong captcha"); return;
+}
 localStorage.setItem("user",user.value);
 localStorage.setItem("pass",pass.value);
-
-alert("Signup done");
+alert("Account Created");
 showLogin();
 }
 
