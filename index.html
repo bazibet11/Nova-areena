@@ -6,71 +6,88 @@
 <title>Bazi Bet</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
 
 body{
-    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
     height:100vh;
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
     display:flex;
     justify-content:center;
     align-items:center;
     color:white;
 }
 
-/* CONTAINER */
-.box{
-    width:90%;
-    max-width:350px;
+/* LANDING */
+.landing{
     text-align:center;
 }
 
-/* LOGO */
 .logo{
-    font-size:40px;
-    margin-bottom:30px;
+    font-size:45px;
+    margin-bottom:50px;
 }
 .logo span{color:#00f2fe;}
 
-/* INPUTS */
+.btn{
+    width:220px;
+    padding:14px;
+    margin:10px;
+    border-radius:10px;
+    cursor:pointer;
+    border:none;
+    font-size:18px;
+}
+
+.loginBtn{
+    background:transparent;
+    border:2px solid white;
+    color:white;
+}
+
+.signupBtn{
+    background:linear-gradient(45deg,#2ecc71,#00f2fe);
+    color:#0f2027;
+}
+
+/* FORM BOX */
+.formBox{
+    display:none;
+    width:300px;
+    text-align:center;
+}
+
 input{
     width:100%;
     padding:12px;
     margin:8px 0;
-    border:none;
     border-radius:8px;
+    border:none;
 }
 
-/* BUTTON */
-.btn{
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
+.submit{
     background:linear-gradient(45deg,#2ecc71,#00f2fe);
     color:#0f2027;
-    font-weight:bold;
 }
 
-/* LINK */
 .link{
     margin-top:10px;
-    cursor:pointer;
     color:#00f2fe;
-}
-
-/* DASHBOARD */
-.dashboard{
-    display:none;
-    text-align:center;
+    cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<div class="box" id="authBox">
+<!-- LANDING -->
+<div class="landing" id="landing">
+    <div class="logo">Ba<span>z</span>i Bet</div>
+    <button class="btn loginBtn" onclick="openForm('login')">Login</button>
+    <button class="btn signupBtn" onclick="openForm('signup')">Sign Up</button>
+</div>
+
+<!-- FORM -->
+<div class="formBox" id="formBox">
     <div class="logo">Ba<span>z</span>i Bet</div>
 
     <input id="user" placeholder="Username">
@@ -79,17 +96,54 @@ input{
     <div id="captchaText"></div>
     <input id="captchaInput" placeholder="Enter Captcha">
 
-    <button class="btn" onclick="submit()">Login</button>
-    <div class="link" onclick="switchMode()">Create Account</div>
+    <button class="btn submit" onclick="submit()">Submit</button>
+    <div class="link" onclick="back()">⬅ Back</div>
 </div>
 
-<!-- DASHBOARD -->
-<div class="box dashboard" id="dashboard">
-    <h2>Welcome 🎉</h2>
-    <p id="welcomeUser"></p>
-    <button class="btn" onclick="logout()">Logout</button>
-</div>
+<script>
+let mode="login";
+let captcha="";
 
-<script src="app.js"></script>
+function generateCaptcha(){
+    captcha = Math.floor(1000 + Math.random()*9000);
+    document.getElementById("captchaText").innerText="Captcha: "+captcha;
+}
+
+function openForm(type){
+    mode = type;
+    document.getElementById("landing").style.display="none";
+    document.getElementById("formBox").style.display="block";
+    generateCaptcha();
+}
+
+function back(){
+    document.getElementById("landing").style.display="block";
+    document.getElementById("formBox").style.display="none";
+}
+
+function submit(){
+    let u=document.getElementById("user").value;
+    let p=document.getElementById("pass").value;
+    let c=document.getElementById("captchaInput").value;
+
+    if(c!=captcha){
+        alert("Wrong captcha");
+        generateCaptcha();
+        return;
+    }
+
+    if(mode==="signup"){
+        localStorage.setItem(u,p);
+        alert("Account Created");
+    }else{
+        if(localStorage.getItem(u)===p){
+            alert("Login Success");
+        }else{
+            alert("Wrong login");
+        }
+    }
+}
+</script>
+
 </body>
 </html>
