@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bazi Bet Game</title>
+
+<style>
+body {
+    margin:0;
+    font-family:sans-serif;
+    background: radial-gradient(circle at top, #001a22, #000);
+    color:#fff;
+}
+
+/* HEADER */
+.header {
+    padding:15px;
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+    background:#0a0a0a;
+    box-shadow:0 0 20px #00c6ff;
+}
+
+/* BALANCE */
+.balance {
+    text-align:center;
+    margin-top:10px;
+    font-size:18px;
+}
+
+/* TIMER */
+.timer {
+    text-align:center;
+    font-size:35px;
+    margin:15px 0;
+    color:#00c6ff;
+}
+
+/* COLORS */
+.colors {
+    display:flex;
+    justify-content:space-around;
+    margin-top:25px;
+}
+
+.box {
+    width:100px;
+    height:100px;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.box:hover {
+    transform: scale(1.1);
+}
+
+.red {background:#ff3c00;}
+.green {background:#00ff99;}
+.violet {background:#b300ff;}
+
+.active {
+    box-shadow:0 0 20px white;
+}
+
+/* BET */
+.bet {
+    text-align:center;
+    margin-top:25px;
+}
+
+.bet input {
+    padding:10px;
+    width:120px;
+    border:none;
+    border-radius:8px;
+}
+
+/* BUTTON */
+.btn {
+    margin-top:15px;
+    padding:12px 25px;
+    background:#00c6ff;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* RESULT */
+.result {
+    text-align:center;
+    margin-top:25px;
+    font-size:18px;
+}
+
+/* BACK */
+.back {
+    text-align:center;
+    margin-top:20px;
+    cursor:pointer;
+    opacity:0.7;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">🎮 BAZI BET GAME</div>
+
+<div class="balance">Balance: ₹ <span id="bal">1000</span></div>
+
+<div class="timer" id="timer">30</div>
+
+<div class="colors">
+    <div id="red" class="box red" onclick="selectColor('red')">RED</div>
+    <div id="green" class="box green" onclick="selectColor('green')">GREEN</div>
+    <div id="violet" class="box violet" onclick="selectColor('violet')">VIOLET</div>
+</div>
+
+<div class="bet">
+    <input type="number" id="amount" placeholder="Bet Amount">
+    <br>
+    <button class="btn" onclick="placeBet()">PLACE BET</button>
+</div>
+
+<div class="result" id="result"></div>
+
+<div class="back" onclick="goBack()">⬅ Back to Home</div>
+
+<script>
+let balance = 1000;
+let selected = "";
+let time = 30;
+
+/* SELECT COLOR */
+function selectColor(color){
+    selected = color;
+
+    document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
+    document.getElementById(color).classList.add('active');
+}
+
+/* PLACE BET */
+function placeBet(){
+    let amt = parseInt(document.getElementById("amount").value);
+
+    if(!selected){
+        alert("Select color first");
+        return;
+    }
+
+    if(!amt || amt > balance){
+        alert("Invalid amount");
+        return;
+    }
+
+    balance -= amt;
+    document.getElementById("bal").innerText = balance;
+
+    let colors = ["red","green","violet"];
+    let result = colors[Math.floor(Math.random()*3)];
+
+    if(result === selected){
+        let win = amt * 2;
+        balance += win;
+        document.getElementById("result").innerText =
+        "🎉 You Win! Color: " + result + " +" + win;
+    } else {
+        document.getElementById("result").innerText =
+        "❌ You Lose! Color: " + result;
+    }
+
+    document.getElementById("bal").innerText = balance;
+}
+
+/* TIMER LOOP */
+setInterval(()=>{
+    time--;
+    if(time <= 0){
+        time = 30;
+        document.getElementById("result").innerText = "New Round Started";
+    }
+    document.getElementById("timer").innerText = time;
+},1000);
+
+/* BACK */
+function goBack(){
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
