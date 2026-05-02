@@ -9,86 +9,85 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    background: radial-gradient(circle at top, #0f2027, #000);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-/* MAIN CARD */
+/* CARD */
 .card {
-    width: 90%;
-    max-width: 380px;
-    padding: 35px;
+    width: 95%;
+    max-width: 400px;
+    padding: 30px;
     border-radius: 25px;
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(15px);
-    box-shadow: 0 0 40px rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.7);
+    box-shadow: 0 0 25px #00c6ff;
     text-align: center;
     color: white;
-    animation: fadeIn 0.6s ease;
-}
-
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(20px);}
-    to {opacity: 1; transform: translateY(0);}
 }
 
 h1 {
-    font-size: 38px;
+    font-size: 36px;
     font-weight: 900;
-    letter-spacing: 3px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    color: #00c6ff;
 }
 
 /* BUTTONS */
 .btn {
     width: 100%;
-    padding: 15px;
-    margin-top: 15px;
+    padding: 14px;
+    margin-top: 12px;
     border: none;
-    border-radius: 12px;
-    font-size: 18px;
+    border-radius: 10px;
+    font-size: 17px;
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
 
 .login {
     background: linear-gradient(45deg, #00c6ff, #0072ff);
-    color: white;
 }
 
 .signup {
     background: linear-gradient(45deg, #ff7b00, #ff3c00);
-    color: white;
 }
 
 .btn:hover {
-    transform: scale(1.06);
+    transform: scale(1.05);
 }
 
 /* INPUTS */
-input {
+input, select {
     width: 100%;
     padding: 12px;
-    margin-top: 12px;
+    margin-top: 10px;
     border-radius: 10px;
     border: none;
-    font-size: 15px;
+    font-size: 14px;
 }
 
-/* FORMS */
+/* FORM */
 .form {
     display: none;
-    animation: fadeIn 0.4s ease;
 }
 
+/* CAPTCHA */
+.captcha-box {
+    margin-top: 10px;
+    background: #111;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* BACK */
 .back {
-    margin-top: 15px;
-    font-size: 14px;
+    margin-top: 10px;
     cursor: pointer;
     opacity: 0.7;
 }
@@ -101,52 +100,71 @@ input {
 .dashboard {
     display: none;
 }
-
-.big-text {
-    font-size: 24px;
-    font-weight: bold;
-}
 </style>
-
 </head>
+
 <body>
 
 <div class="card">
 
-    <h1>BAZI BET</h1>
+<h1>BAZI BET</h1>
 
-    <!-- MAIN BUTTONS -->
-    <div id="mainBtns">
-        <button class="btn login" onclick="showLogin()">LOGIN</button>
-        <button class="btn signup" onclick="showSignup()">SIGN UP</button>
-    </div>
+<!-- MAIN -->
+<div id="mainBtns">
+    <button class="btn login" onclick="showLogin()">LOGIN</button>
+    <button class="btn signup" onclick="showSignup()">SIGN UP</button>
+</div>
 
-    <!-- LOGIN -->
-    <div id="loginForm" class="form">
-        <input type="text" id="luser" placeholder="Username">
-        <input type="password" id="lpass" placeholder="Password">
-        <button class="btn login" onclick="login()">ENTER</button>
-        <div class="back" onclick="goBack()">⬅ Back</div>
-    </div>
+<!-- LOGIN -->
+<div id="loginForm" class="form">
+    <input type="text" id="luser" placeholder="Username">
+    <input type="password" id="lpass" placeholder="Password">
+    <button class="btn login" onclick="login()">ENTER</button>
+    <div class="back" onclick="goBack()">⬅ Back</div>
+</div>
 
-    <!-- SIGNUP -->
-    <div id="signupForm" class="form">
-        <input type="text" id="suser" placeholder="Username">
-        <input type="password" id="spass" placeholder="Password">
-        <button class="btn signup" onclick="signup()">CREATE ACCOUNT</button>
-        <div class="back" onclick="goBack()">⬅ Back</div>
-    </div>
+<!-- SIGNUP -->
+<div id="signupForm" class="form">
+    <input type="text" id="fullname" placeholder="Full Name">
+    <input type="text" id="username" placeholder="Username">
 
-    <!-- DASHBOARD -->
-    <div id="dashboard" class="dashboard">
-        <div class="big-text">🎉 Welcome</div>
-        <p id="name"></p>
-        <button class="btn" onclick="logout()">Logout</button>
-    </div>
+    <select id="country">
+        <option value="+971">UAE (+971)</option>
+        <option value="+880">Bangladesh (+880)</option>
+        <option value="+91">India (+91)</option>
+        <option value="+92">Pakistan (+92)</option>
+    </select>
+
+    <input type="text" id="phone" placeholder="Phone Number">
+
+    <input type="password" id="spass" placeholder="Password">
+
+    <div class="captcha-box" id="captchaText"></div>
+    <input type="text" id="captchaInput" placeholder="Enter Captcha">
+
+    <button class="btn signup" onclick="signup()">CREATE ACCOUNT</button>
+    <div class="back" onclick="goBack()">⬅ Back</div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="dashboard">
+    <h2>Welcome 🎉</h2>
+    <p id="userData"></p>
+    <button class="btn" onclick="logout()">Logout</button>
+</div>
 
 </div>
 
 <script>
+let captchaAnswer = 0;
+
+function generateCaptcha() {
+    let a = Math.floor(Math.random() * 10);
+    let b = Math.floor(Math.random() * 10);
+    captchaAnswer = a + b;
+    document.getElementById("captchaText").innerText = a + " + " + b;
+}
+
 function showLogin() {
     hideAll();
     document.getElementById("loginForm").style.display = "block";
@@ -155,21 +173,34 @@ function showLogin() {
 function showSignup() {
     hideAll();
     document.getElementById("signupForm").style.display = "block";
+    generateCaptcha();
 }
 
 function signup() {
-    let u = document.getElementById("suser").value.trim();
-    let p = document.getElementById("spass").value.trim();
+    let name = document.getElementById("fullname").value.trim();
+    let user = document.getElementById("username").value.trim();
+    let country = document.getElementById("country").value;
+    let phone = document.getElementById("phone").value.trim();
+    let pass = document.getElementById("spass").value.trim();
+    let captcha = document.getElementById("captchaInput").value.trim();
 
-    if (u === "" || p === "") {
+    if (!name || !user || !phone || !pass || !captcha) {
         alert("Fill all fields!");
         return;
     }
 
-    localStorage.setItem("user", u);
-    localStorage.setItem("pass", p);
+    if (parseInt(captcha) !== captchaAnswer) {
+        alert("Wrong captcha!");
+        generateCaptcha();
+        return;
+    }
 
-    alert("Account Created Successfully!");
+    localStorage.setItem("user", user);
+    localStorage.setItem("pass", pass);
+    localStorage.setItem("name", name);
+    localStorage.setItem("phone", country + phone);
+
+    alert("Signup Successful!");
     showLogin();
 }
 
@@ -183,9 +214,14 @@ function login() {
     if (u === su && p === sp) {
         hideAll();
         document.getElementById("dashboard").style.display = "block";
-        document.getElementById("name").innerText = "User: " + u;
+
+        let name = localStorage.getItem("name");
+        let phone = localStorage.getItem("phone");
+
+        document.getElementById("userData").innerText =
+            "Name: " + name + "\nPhone: " + phone;
     } else {
-        alert("Wrong Username or Password!");
+        alert("Wrong Login!");
     }
 }
 
