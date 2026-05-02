@@ -6,87 +6,90 @@
 <title>Bazi Bet</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+
+body{
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
 }
 
-body {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    /* PREMIUM DARK GRADIENT */
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-}
-
-/* Container */
-.container {
-    text-align: center;
+/* CONTAINER */
+.box{
+    width:90%;
+    max-width:350px;
+    text-align:center;
 }
 
 /* LOGO */
-.logo {
-    font-size: 60px;
-    font-weight: 600;
-    color: white;
-    margin-bottom: 70px;
-    letter-spacing: 1px;
+.logo{
+    font-size:40px;
+    margin-bottom:30px;
+}
+.logo span{color:#00f2fe;}
+
+/* INPUTS */
+input{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border:none;
+    border-radius:8px;
 }
 
-.logo span {
-    color: #00f2fe; /* unique glow accent */
+/* BUTTON */
+.btn{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:linear-gradient(45deg,#2ecc71,#00f2fe);
+    color:#0f2027;
+    font-weight:bold;
 }
 
-/* Buttons */
-.btn {
-    width: 260px;
-    padding: 15px;
-    margin: 12px;
-    font-size: 18px;
-    border-radius: 12px;
-    cursor: pointer;
-    border: none;
-    transition: 0.3s;
+/* LINK */
+.link{
+    margin-top:10px;
+    cursor:pointer;
+    color:#00f2fe;
 }
 
-/* Login */
-.login {
-    background: transparent;
-    border: 2px solid rgba(255,255,255,0.6);
-    color: white;
-}
-
-/* Signup */
-.signup {
-    background: linear-gradient(45deg, #2ecc71, #00f2fe);
-    color: #0f2027;
-    font-weight: bold;
-}
-
-/* Hover */
-.btn:hover {
-    transform: scale(1.05);
-}
-
-/* Glow effect */
-.signup:hover {
-    box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
+/* DASHBOARD */
+.dashboard{
+    display:none;
+    text-align:center;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="box" id="authBox">
     <div class="logo">Ba<span>z</span>i Bet</div>
 
-    <button class="btn login">Login</button>
-    <button class="btn signup">Sign Up</button>
+    <input id="user" placeholder="Username">
+    <input id="pass" type="password" placeholder="Password">
+
+    <div id="captchaText"></div>
+    <input id="captchaInput" placeholder="Enter Captcha">
+
+    <button class="btn" onclick="submit()">Login</button>
+    <div class="link" onclick="switchMode()">Create Account</div>
 </div>
 
+<!-- DASHBOARD -->
+<div class="box dashboard" id="dashboard">
+    <h2>Welcome 🎉</h2>
+    <p id="welcomeUser"></p>
+    <button class="btn" onclick="logout()">Logout</button>
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
